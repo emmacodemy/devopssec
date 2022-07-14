@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { MuiThemeProvider } from "@mui/core"
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
+import { theme } from "./theme/theme"
 import store from "./Store/configureStore";
 import App from './App';
 
