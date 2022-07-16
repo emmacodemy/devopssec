@@ -1,16 +1,12 @@
 import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import NavBar from "./Components/Navbar/NavBar";
 import HistoryPage from "./Components/Pages/History Page/HistoryPage";
 import StatisticsPage from "./Components/Pages/Statistics Page/StatisticsPage";
 import ItemsPage from "./Components/Pages/Items Page/ItemsPage";
 import LoginPage from "./Components/Sessions/LoginPage";
 import RegisterPage from "./Components/Sessions/RegisterPage";
-// import SideBar from "./Components/SideBar";
-// import AddItem from "./Components/Add Item/AddItem";
-// import Cart from "./Components/Cart/Cart";
-// import ItemDetails from "./Components/Item Details/ItemDetails";
+import Main from "./Components/Pages/Main";
 
 function App() {
   const [sideDisplay, setSideDisplay] = useState({
@@ -20,70 +16,42 @@ function App() {
   });
 
   const handleSideBar = (view) => {
-    setSideDisplay(view);
+    setSideDisplay((prevState) => {
+      const newState = { ...prevState };
+      Object.keys(newState).forEach((v) =>
+        v === view ? (newState[v] = true) : (newState[v] = false)
+      );
+      return newState;
+    });
   };
   return (
     <div className="App">
       <div>
         <Routes>
-          <Route path="/" exact element={<NavBar />}>
-            <Route
-              index
-              element={
-                <ItemsPage
-                  changeView={handleSideBar}
-                  cart={sideDisplay.cart}
-                  details={sideDisplay.itemDetails}
-                  addItem={sideDisplay.addItem}
-                />
-              }
-            />
+          <Route
+            path="/"
+            exact
+            element={
+              <Main
+                cart={sideDisplay.cart}
+                details={sideDisplay.itemDetails}
+                addItem={sideDisplay.addItem}
+                changeView={handleSideBar}
+              />
+            }
+          >
+            <Route index element={<ItemsPage changeView={handleSideBar} />} />
             <Route
               path="items"
-              element={
-                <ItemsPage
-                  changeView={handleSideBar}
-                  cart={sideDisplay.cart}
-                  details={sideDisplay.itemDetails}
-                  addItem={sideDisplay.addItem}
-                />
-              }
+              element={<ItemsPage changeView={handleSideBar} />}
             />
-            <Route
-              path="history"
-              element={
-                <HistoryPage
-                  cart={sideDisplay.cart}
-                  details={sideDisplay.itemDetails}
-                  addItem={sideDisplay.addItem}
-                  changeView={handleSideBar}
-                />
-              }
-            />
-            <Route
-              path="stat"
-              element={
-                <StatisticsPage
-                  cart={sideDisplay.cart}
-                  details={sideDisplay.itemDetails}
-                  addItem={sideDisplay.addItem}
-                  changeView={handleSideBar}
-                />
-              }
-            />
+            <Route path="history" element={<HistoryPage />} />
+            <Route path="statistics" element={<StatisticsPage />} />
           </Route>
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
         </Routes>
       </div>
-      {/* <div>
-        <SideBar
-          cart={sideDisplay.cart}
-          details={sideDisplay.itemDetails}
-          addItem={sideDisplay.addItem}
-          changeView={handleSideBar}
-        />
-      </div> */}
     </div>
   );
 }

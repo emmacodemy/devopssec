@@ -6,7 +6,7 @@ const AddItem = ({ changeView }) => {
       <h1>AddItem Page</h1>
       <button
         onClick={() =>
-          changeView({ cart: true, itemDetails: false, addItem: false })
+          changeView('cart')
         }
       >
         {" "}
