@@ -3,7 +3,7 @@ import { Box } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { IconButton } from "@mui/material";
 import { Login, ShoppingCart } from "@mui/icons-material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assests/logo.svg";
 import NavLinks from "./NavLinks";
 
@@ -18,7 +18,7 @@ const useStyles = makeStyles(() => ({
     alignItems: "center",
   },
   logo: {
-    marginTop: 50
+    marginTop: 30
   },
   navLinks: {
     height: "40%",
@@ -46,6 +46,8 @@ const useStyles = makeStyles(() => ({
 
 const NavBar = ({changeView}) => {
   const classes = useStyles();
+
+  const navigate = useNavigate()
 
   const [borderLink, setBorderLink] = useState(0);
 
@@ -87,7 +89,7 @@ const NavBar = ({changeView}) => {
         ))}
       </Box>
       <Box className={classes.cartCont}>
-        <IconButton>
+        <IconButton onClick={() => navigate('/login')}>
           <Login />
         </IconButton>
         <Box className={classes.cart}>

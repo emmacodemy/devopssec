@@ -20,11 +20,12 @@ const useStyles = makeStyles(() => ({
   },
 
   main: {
-    width: '60%',
-    height: '100%'
+    width: '70%',
+    height: '100%',
+    backgroundColor: '#fafafe'
   },
   nav: {
-    width: '10%',
+    width: '5%',
     height: '100%',
     backgroundColor: "#fff",
     position: 'relative',
@@ -33,7 +34,7 @@ const useStyles = makeStyles(() => ({
     bottom: 0,
   },
   sideBar: {
-    width: '30%',
+    width: '25%',
     height: '100%'
   }
 }))

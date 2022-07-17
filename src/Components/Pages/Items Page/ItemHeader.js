@@ -1,24 +1,21 @@
 import React from "react";
 import { Box, IconButton, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import Input from "./Input";
 import { Search } from "@mui/icons-material";
 
 const useStyles = makeStyles(() => ({
   header: {
     width: "90%",
-    paddingTop: '5px',
+    marginTop: 30,
     display: "flex",
     height: '10%',
     margin: '0 auto',
-    border: '2px solid yellow'
   },
 
   titleCont: {
     width: '60%',
     height: '100%',
     display: 'flex',
-    border: '2px solid green',
     alignItems: 'center',
     justifyContent: 'center',
     "& .MuiTypography-root": {
@@ -35,11 +32,27 @@ const useStyles = makeStyles(() => ({
 
   searchBar: {
     width: '40%',
-    border: '2px solid red'
+    position: "relative"
   },
 
+  search: {
+    width:'60%',
+    position: "relative",
+    height: '55%',
+    paddingLeft: 50,
+    backgroundColor: '#fff',
+    display: 'flex',
+    margin: '0 auto',
+    boxShadow: '0px 2px 12px rgba(0, 0, 0, 0.04)',
+    borderRadius: '12px',
+    border: 'none',
+    outline: 'none'
+},
+
   searchIcon: {
-    position: 'absolute'
+    position: 'absolute',
+    top:'-52%',
+    left: '13%',
 
   }
 }));
@@ -55,10 +68,10 @@ const ItemHeader = () => {
         </Typography>
       </Box>
       <Box className={classes.searchBar}>
-        <Input
-          className="search"
+        <input
+          className={classes.search}
           label="search"
-          ariaLabel="search"
+          aria-label="search"
           name="search"
           type="text"
           placeholder="search"
