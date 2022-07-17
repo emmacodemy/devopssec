@@ -1,8 +1,10 @@
 import React from "react";
+import ItemHeader from "./ItemHeader"
 
 const ItemsPage = ({changeView }) => {
   return (
     <div>
+      <ItemHeader />
       <h1>ItemsPage</h1>
       <button
         onClick={() =>

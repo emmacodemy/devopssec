@@ -2,8 +2,7 @@ import { createTheme } from "@mui/material/styles";
 
 export const theme = createTheme({
   typography: {
-    fontFamily: "Quicksand",
-    fontSize: 14,
+    fontSize: 24,
     // button: {
     //   textTransform: "none",
     //   letterSpacing: 0,
