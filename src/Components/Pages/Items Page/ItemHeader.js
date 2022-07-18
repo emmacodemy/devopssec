@@ -21,6 +21,7 @@ const useStyles = makeStyles(() => ({
     "& .MuiTypography-root": {
         fontSize: 26,
         color: "#34333a",
+        fontWeight: 500,
         fontFamily: "Quicksand, sans-serif",
 
 
@@ -51,8 +52,8 @@ const useStyles = makeStyles(() => ({
 
   searchIcon: {
     position: 'absolute',
-    top:'-52%',
-    left: '13%',
+    top:'-55%',
+    left: '12%',
 
   }
 }));
@@ -74,7 +75,7 @@ const ItemHeader = () => {
           aria-label="search"
           name="search"
           type="text"
-          placeholder="search"
+          placeholder="search item"
         />
         <IconButton className={classes.searchIcon}>
           <Search />

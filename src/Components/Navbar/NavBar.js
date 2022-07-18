@@ -39,6 +39,8 @@ const useStyles = makeStyles(() => ({
   cart: {
     backgroundColor: '#f9a109',
     borderRadius:'100%',
+    width: 42,
+    height:42,
   
 
   }
