@@ -1,9 +1,15 @@
 import React from "react";
+import { Box } from "@mui/material"
+import { makeStyles } from "@mui/styles"
 import ItemHeader from "./ItemHeader"
+
+const useStyles = makeStyles(() => ({
+
+}))
 
 const ItemsPage = ({changeView }) => {
   return (
-    <div>
+    <Box>
       <ItemHeader />
       <h1>ItemsPage</h1>
       <button
@@ -13,7 +19,7 @@ const ItemsPage = ({changeView }) => {
       >
         view details
       </button>
-    </div>
+    </Box>
   );
 };
 
