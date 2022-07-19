@@ -7,6 +7,7 @@ import Item from "./Item"
 const useStyles = makeStyles(() => ({
     container: {
         width: '90%',
+        margin: '0 auto',
         position: 'relative',
         display: 'flex',
         flexDirection: 'column',
@@ -15,12 +16,12 @@ const useStyles = makeStyles(() => ({
     }
 }))
 
-const CategoryItem = ({name, list}) => {
+const CategoryItem = ({name, list, changeView}) => {
   const classes = useStyles()
   return (
     <Box className={classes.container}>
         <CategoryName name={name} />
-        <Item itemList={list} />
+        <Item itemList={list} changeView={changeView} />
     </Box>
   )
 }

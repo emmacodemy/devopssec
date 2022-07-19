@@ -8,9 +8,10 @@ const useStyles = makeStyles(() => ({
         width: '100%',
         "& .MuiTypography-root": {
             fontFamily: 'QuickSand, sans-serif',
-            fontWeight: 500,
+            fontWeight: 'bold',
             fontSize: '18px',
-            color: '#000000'
+            color: '#000000',
+            textTransform: 'capitalize'
         }
     },
 }))

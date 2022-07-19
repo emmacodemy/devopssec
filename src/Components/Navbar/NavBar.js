@@ -91,14 +91,14 @@ const NavBar = ({changeView}) => {
         ))}
       </Box>
       <Box className={classes.cartCont}>
-        <IconButton onClick={() => navigate('/login')}>
-          <Login />
-        </IconButton>
         <Box className={classes.cart}>
           <IconButton onClick={() => changeView('cart')}>
             <ShoppingCart style={{color: '#fff'}} />
           </IconButton>
         </Box>
+        <IconButton onClick={() => navigate('/login')}>
+          <Login />
+        </IconButton>
       </Box>
     </Box>
   );

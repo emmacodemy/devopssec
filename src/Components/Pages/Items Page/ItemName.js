@@ -3,32 +3,40 @@ import { makeStyles } from "@mui/styles"
 import { IconButton, Box, Typography } from "@mui/material"
 import { Add } from "@mui/icons-material"
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
     itemCont: {
-        width: '182px',
+        width: '22%',
+        position: 'relative',
         backgroundColor: '#fff',
         padding: 5,
         boxShadow: "0px 2px 12px rgba(0, 0, 0, 0.05)",
         borderRadius: '12px',
+        cursor: 'pointer',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'flex-start',
-        "& .Mui-Typography-root": {
-            width: '70%',
+        "& .MuiTypography-root": {
+            width: '75%',
+            height: '100%',
+            overflow: 'hidden',
+            textTransform: 'capitalize',
             fontFamily: 'QuickSand, sans-serif',
             fontSize: 16,
-            fontWeight: 500,
+            fontWeight: 'normal',
             color: '#000000',
-            textAlign: 'center'
+            textAlign: 'left'
+        },
+        [theme.breakpoints.down('md')]: {
+          width: '45%'
         }
     }
 }))
 
-const ItemName = ({itemName}) => {
+const ItemName = ({ itemName, unit, changeView }) => {
   const classes = useStyles()
   return (
     <Box className={classes.itemCont}>
-        <Typography>{itemName}</Typography>
+        <Typography onClick={() => changeView('itemDetails')}>{`${itemName} ${unit}`}</Typography>
         <IconButton> <Add /></IconButton>
     </Box>
   )

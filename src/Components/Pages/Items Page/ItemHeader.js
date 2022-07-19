@@ -3,13 +3,16 @@ import { Box, IconButton, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { Search } from "@mui/icons-material";
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   header: {
     width: "90%",
     marginTop: 30,
     display: "flex",
     height: '10%',
     margin: '0 auto',
+    [theme.breakpoints.down('md')]: {
+      height: '5%'
+    }
   },
 
   titleCont: {
@@ -22,9 +25,10 @@ const useStyles = makeStyles(() => ({
         fontSize: 26,
         color: "#34333a",
         fontWeight: 500,
-        fontFamily: "Quicksand, sans-serif",
-
-
+        fontFamily: "QuickSand, sans-serif",
+    },
+    [theme.breakpoints.down('md')]: {
+      display: 'none'
     }
   },
   title: {
@@ -33,28 +37,38 @@ const useStyles = makeStyles(() => ({
 
   searchBar: {
     width: '40%',
-    position: "relative"
+    position: "relative",
+    [theme.breakpoints.down('md')]: {
+      width: '80%'
+    }
   },
 
   search: {
     width:'60%',
     position: "relative",
     height: '55%',
-    paddingLeft: 50,
+    padding: "7px 0px 0px 50px",
     backgroundColor: '#fff',
     display: 'flex',
     margin: '0 auto',
     boxShadow: '0px 2px 12px rgba(0, 0, 0, 0.04)',
     borderRadius: '12px',
     border: 'none',
-    outline: 'none'
+    outline: 'none',
+    [theme.breakpoints.down('md')]: {
+      width: '100%',
+      height: '80%',
+    }
 },
 
   searchIcon: {
     position: 'absolute',
-    top:'-55%',
+    top:'-70%',
     left: '12%',
-
+    [theme.breakpoints.down('md')]: {
+      top:'-115%',
+      left: '2%',
+    }
   }
 }));
 

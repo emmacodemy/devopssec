@@ -1,6 +1,6 @@
 import React from 'react'
 import { Box } from '@mui/material';
-import { makeStyles } from "@mui/material";
+import { makeStyles } from "@mui/styles";
 import ItemName from "./ItemName";
 
 const useStyles = makeStyles(() => ({
@@ -9,17 +9,17 @@ const useStyles = makeStyles(() => ({
         position:'relative',
         display: 'flex',
         flexWrap: 'wrap',
-        rowGap: 50,
-        justifyContent: 'space-evenly'
+        rowGap: 25,
+        justifyContent: 'space-between',
     }
 }))
 
-const Item = ({ itemList }) => {
+const Item = ({ itemList, changeView }) => {
   const classes = useStyles()
   return (
     <Box className={classes.listCont}>
         {
-            itemList.map((item) => <ItemName />)
+            itemList.map((item) => <ItemName changeView={changeView} key ={item.name} itemName={item.name} unit={item.measurement_unit} />)
         }
     </Box>
   )
