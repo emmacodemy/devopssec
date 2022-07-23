@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
+import { useSelector } from "react-redux";
 import "./App.css";
 import HistoryPage from "./Components/Pages/History Page/HistoryPage";
 import StatisticsPage from "./Components/Pages/Statistics Page/StatisticsPage";
@@ -24,6 +25,11 @@ function App() {
       return newState;
     });
   };
+
+  const sessionDetails = useSelector((state) => state.sessions);
+
+  const { isLoading, isSignedUp, isSignedIn, message } = sessionDetails
+
   return (
     <div className="App">
       <div>
@@ -48,8 +54,8 @@ function App() {
             <Route path="history" element={<HistoryPage />} />
             <Route path="statistics" element={<StatisticsPage />} />
           </Route>
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/login" element={<LoginPage loading={isLoading} signedIn={isSignedIn} />} />
+          <Route path="/register" element={<RegisterPage loading={isLoading} signedUp={isSignedUp} />} />
         </Routes>
       </div>
     </div>

@@ -14,15 +14,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Input = ({ ariaLabel, label, name, type, placeholder }) => {
+const Input = ({ ariaLabel, label, name, type, placeholder, handle }) => {
   const classes = useStyles();
+
   return (
     <Box>
       <FormControl margin="normal" className={classes.search}>
         <TextField
           inputProps={{
             style: {
-              padding: 10
+              padding: 10,
             },
           }}
           aria-label={ariaLabel}
@@ -30,6 +31,8 @@ const Input = ({ ariaLabel, label, name, type, placeholder }) => {
           name={name}
           type={type}
           placeholder={placeholder}
+          required
+          onInput={(e) => handle(e)}
         />
       </FormControl>
     </Box>

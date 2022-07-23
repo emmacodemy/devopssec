@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@mui/styles";
+import { useDispatch } from "react-redux";
+import { handleSignUp } from "../../Store/Sessions/thunkCreators";
 import { useNavigate } from "react-router-dom";
 import {
   Grid,
@@ -17,79 +19,109 @@ import Title from "./Title";
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
-    flexDirection: 'column',
+    flexDirection: "column",
     margin: 0,
     position: "relative",
-    width: '100vw',
-    height: 'auto',
-    backgroundColor: '#fff',
-    [theme.breakpoints.up('lg')]: {
-      flexDirection:'row',
-      height:'100vh'
-    }
+    width: "100vw",
+    height: "auto",
+    backgroundColor: "#fff",
+    [theme.breakpoints.up("lg")]: {
+      flexDirection: "row",
+      height: "100vh",
+    },
   },
   formCont: {
-    width: '100%',
-    height: '70vh',
-    display: 'flex',
-    flexDirection: 'column',
+    width: "100%",
+    height: "70vh",
+    display: "flex",
+    flexDirection: "column",
     marginTop: 5,
     rowGap: 20,
-    [theme.breakpoints.up('lg')]: {
-      width: '58%',
-      height: '95%',
-    }
+    [theme.breakpoints.up("lg")]: {
+      width: "58%",
+      height: "95%",
+    },
   },
   form: {
-    position: 'relative',
-    width: '90%',
-    margin: '0 auto',
-    [theme.breakpoints.up('md')]: {
-      width: '55%',
+    position: "relative",
+    width: "90%",
+    margin: "0 auto",
+    [theme.breakpoints.up("md")]: {
+      width: "55%",
       padding: 15,
-    }
+    },
   },
   input: {
-    position: 'relative',
-    width: '100%',
+    position: "relative",
+    width: "100%",
     marginBottom: 8,
     "& .MuiFilledInput-root": {
-      backgroundColor: '#fff',
-      color: '#000000',
+      backgroundColor: "#fff",
+      color: "#000000",
     },
-    [theme.breakpoints.up('lg')]: {
+    [theme.breakpoints.up("lg")]: {
       marginBottom: 15,
     },
     "& .MuiFormLabel-root": {
-      fontFamily: 'QuickSand, sans-serif',
-      fontStyle: 'normal',
+      fontFamily: "QuickSand, sans-serif",
+      fontStyle: "normal",
       fontWeight: 300,
       fontSize: 20,
     },
     "& .MuiTypography-root": {
-      position: 'absolute',
+      position: "absolute",
       right: 0,
-      bottom: '35%',
-      color: '#f9a109',
-      fontFamily: 'QuickSand, sans-serif',
-      fontStyle: 'normal',
+      bottom: "35%",
+      color: "#f9a109",
+      fontFamily: "QuickSand, sans-serif",
+      fontStyle: "normal",
       fontWeight: 600,
       fontSize: 12,
     },
   },
-}))
+}));
 
-const RegisterPage = () => {
+const RegisterPage = ({ loading, signedUp }) => {
   const classes = useStyles();
   const [formErrorMessage, setFormErrorMessage] = useState({});
 
-  const handleRegister = async (event) => {
+  const dispatch = useDispatch();
 
-    // if (password !== confirmPassword) {
-    //   setFormErrorMessage({ confirmPassword: "Passwords must match" });
-    //   return;
-    // }
+  const navigate = useNavigate();
+
+  const [userDetails, setUserDetails] = useState({
+    userName: "",
+    password: "",
+    email: "",
+    confirmPassword: "",
+  });
+
+  const handleInput = (e) => {
+    const { name, value } = e.target;
+    setUserDetails({ ...userDetails, [name]: value });
   };
+
+  const handleRegister = async (e) => {
+    e.preventDefault();
+    if (userDetails.password !== userDetails.confirmPassword) {
+      setFormErrorMessage({ confirmPassword: "Passwords must match" });
+      return;
+    }
+    dispatch(
+      handleSignUp(
+        userDetails.userName,
+        userDetails.email,
+        userDetails.password
+      )
+    );
+    signedUp && navigate("/login");
+  };
+
+  useEffect(() => {
+    setTimeout(() => {
+      setFormErrorMessage({});
+    }, 5000);
+  }, [formErrorMessage]);
 
   return (
     <Grid container className={classes.root}>
@@ -106,14 +138,16 @@ const RegisterPage = () => {
             <Input
               ariaLabel="username"
               label="Username"
-              name="username"
+              name="userName"
               type="text"
+              handle={handleInput}
             />
             <Input
               label="E-mail address"
               ariaLabel="e-mail address"
               type="email"
               name="email"
+              handle={handleInput}
             />
             <Grid>
               <FormControl
@@ -126,6 +160,7 @@ const RegisterPage = () => {
                   type="password"
                   inputProps={{ minLength: 6 }}
                   name="password"
+                  onChange={(e) => handleInput(e)}
                   required
                 />
                 <FormHelperText>
@@ -145,13 +180,14 @@ const RegisterPage = () => {
                   inputProps={{ minLength: 6 }}
                   name="confirmPassword"
                   required
+                  onChange={(e) => handleInput(e)}
                 />
                 <FormHelperText>
                   {formErrorMessage.confirmPassword}
                 </FormHelperText>
               </FormControl>
             </Grid>
-            <Submit title="Register" />
+            <Submit title="Register" loading={loading} />
           </Grid>
         </form>
       </Box>
@@ -159,4 +195,4 @@ const RegisterPage = () => {
   );
 };
 
-export default RegisterPage
+export default RegisterPage;
