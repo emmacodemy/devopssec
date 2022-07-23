@@ -28,7 +28,7 @@ function App() {
 
   const sessionDetails = useSelector((state) => state.sessions);
 
-  const { isLoading, isSignedUp, isSignedIn, message } = sessionDetails
+  const { isLoading, isSignedUp, isSignedIn, message } = sessionDetails;
 
   return (
     <div className="App">
@@ -54,8 +54,14 @@ function App() {
             <Route path="history" element={<HistoryPage />} />
             <Route path="statistics" element={<StatisticsPage />} />
           </Route>
-          <Route path="/login" element={<LoginPage loading={isLoading} signedIn={isSignedIn} />} />
-          <Route path="/register" element={<RegisterPage loading={isLoading} signedUp={isSignedUp} />} />
+          <Route
+            path="/login"
+            element={<LoginPage loading={isLoading} signedIn={isSignedIn} />}
+          />
+          <Route
+            path="/register"
+            element={<RegisterPage loading={isLoading} signedUp={isSignedUp} />}
+          />
         </Routes>
       </div>
     </div>
