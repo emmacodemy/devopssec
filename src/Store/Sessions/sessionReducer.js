@@ -1,5 +1,4 @@
-import { getToken } from "../utils/session"
-
+import { getToken } from "../utils/session";
 
 const SIGN_UP = "store/sessions/USER_SIGN_UP";
 const SIGN_IN = "store/sessions/USER_SIGN_IN";
@@ -29,28 +28,28 @@ export const userSignIn = (message, status) => ({
 });
 
 const sessionReducer = (state = initialState, action) => {
-    switch(action.type) {
-        case FETCHING_STATUS: 
-            return {
-                ...state,
-                isLoading: action.payload
-            }
-        case SIGN_UP:
-            return {
-                ...state,
-                message: action.payload.message,
-                isSignedUp: action.payload.status
-            }
-        case SIGN_IN: {
-            return {
-                ...state,
-                message: action.payload.message,
-                isSignedIn: action.payload.status
-            }
-        }
-        default:
-          return state
+  switch (action.type) {
+    case FETCHING_STATUS:
+      return {
+        ...state,
+        isLoading: action.payload,
+      };
+    case SIGN_UP:
+      return {
+        ...state,
+        message: action.payload.message,
+        isSignedUp: action.payload.status,
+      };
+    case SIGN_IN: {
+      return {
+        ...state,
+        message: action.payload.message,
+        isSignedIn: action.payload.status,
+      };
     }
-}
+    default:
+      return state;
+  }
+};
 
-export default sessionReducer
+export default sessionReducer;

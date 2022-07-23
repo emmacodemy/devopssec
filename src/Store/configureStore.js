@@ -1,12 +1,12 @@
-import { combineReducers, applyMiddleware, createStore  } from "redux";
-import logger  from 'redux-logger'
+import { combineReducers, applyMiddleware, createStore } from "redux";
+import logger from "redux-logger";
 import thunk from "redux-thunk";
-import sessionReducer from "./Sessions/sessionReducer"
+import sessionReducer from "./Sessions/sessionReducer";
 
 const reducer = combineReducers({
-    sessions: sessionReducer
-})
+  sessions: sessionReducer,
+});
 
-const store = createStore(reducer, applyMiddleware(thunk, logger))
+const store = createStore(reducer, applyMiddleware(thunk, logger));
 
-export default store
+export default store;
