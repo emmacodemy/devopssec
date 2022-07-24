@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { Box } from "@mui/material";
+import { useDispatch } from "react-redux";
 import { makeStyles } from "@mui/styles";
 import { IconButton } from "@mui/material";
-import { Login, ShoppingCart } from "@mui/icons-material";
+import { Login, ShoppingCart, PowerSettingsNew } from "@mui/icons-material";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assests/logo.svg";
 import NavLinks from "./NavLinks";
+import { handleSignOut } from "../../Store/Sessions/thunkCreators";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -18,7 +20,7 @@ const useStyles = makeStyles(() => ({
     alignItems: "center",
   },
   logo: {
-    marginTop: 30
+    marginTop: 30,
   },
   navLinks: {
     height: "40%",
@@ -37,24 +39,29 @@ const useStyles = makeStyles(() => ({
   },
 
   cart: {
-    backgroundColor: '#f9a109',
-    borderRadius:'100%',
+    backgroundColor: "#f9a109",
+    borderRadius: "100%",
     width: 42,
-    height:42,
-  
-
-  }
+    height: 42,
+  },
 }));
 
-const NavBar = ({changeView}) => {
+const NavBar = ({ changeView, signedIn, signedOut }) => {
   const classes = useStyles();
 
-  const navigate = useNavigate()
+  const dispatch = useDispatch();
+
+  const navigate = useNavigate();
 
   const [borderLink, setBorderLink] = useState(0);
 
   const handleLink = (index) => {
     setBorderLink(index);
+  };
+
+  const signOut = async () => {
+    await dispatch(handleSignOut());
+    navigate("/login");
   };
 
   const navLinks = [
@@ -92,13 +99,21 @@ const NavBar = ({changeView}) => {
       </Box>
       <Box className={classes.cartCont}>
         <Box className={classes.cart}>
-          <IconButton onClick={() => changeView('cart')}>
-            <ShoppingCart style={{color: '#fff'}} />
+          <IconButton onClick={() => changeView("cart")}>
+            <ShoppingCart style={{ color: "#fff" }} />
           </IconButton>
         </Box>
-        <IconButton onClick={() => navigate('/login')}>
-          <Login />
-        </IconButton>
+        <Box>
+          {signedIn ? (
+            <IconButton onClick={() => signOut()}>
+              <PowerSettingsNew style={{ color: "#f9a109" }} />
+            </IconButton>
+          ) : (
+            <IconButton onClick={() => navigate("/login")}>
+              <Login style={{ color: "#f9a109" }} />
+            </IconButton>
+          )}
+        </Box>
       </Box>
     </Box>
   );

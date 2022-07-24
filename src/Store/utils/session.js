@@ -4,7 +4,7 @@ const getToken = () => {
 };
 
 const clearSession = () => {
-  localStorage.setItem("session-status", false);
+  localStorage.setItem("session", false);
   localStorage.removeItem("user-token");
 };
 

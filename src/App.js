@@ -28,7 +28,7 @@ function App() {
 
   const sessionDetails = useSelector((state) => state.sessions);
 
-  const { isLoading, isSignedUp, isSignedIn, message } = sessionDetails;
+  const { isLoading, isSignedUp, isSignedIn, isSignedOut, message } = sessionDetails;
 
   return (
     <div className="App">
@@ -43,6 +43,8 @@ function App() {
                 details={sideDisplay.itemDetails}
                 addItem={sideDisplay.addItem}
                 changeView={handleSideBar}
+                signedIn={isSignedIn}
+                signedOut={isSignedOut}
               />
             }
           >

@@ -107,14 +107,14 @@ const RegisterPage = ({ loading, signedUp }) => {
       setFormErrorMessage({ confirmPassword: "Passwords must match" });
       return;
     }
-    dispatch(
+    await dispatch(
       handleSignUp(
         userDetails.userName,
         userDetails.email,
         userDetails.password
       )
     );
-    signedUp && navigate("/login");
+    navigate("/login");
   };
 
   useEffect(() => {

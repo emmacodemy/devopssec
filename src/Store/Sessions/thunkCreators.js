@@ -1,4 +1,5 @@
-import { handleLoading, userSignIn, userSignUp } from "./sessionReducer";
+import { handleLoading, userSignIn, userSignUp, userSignOut } from "./sessionReducer";
+import { clearSession, getToken } from "../utils/session"
 
 const baseURL = "http://localhost:3000";
 
@@ -43,3 +44,21 @@ export const handleSignUp = (username, email, password) => async (dispatch) => {
   }
   dispatch(handleLoading(false));
 };
+
+export const handleSignOut = () => async (dispatch) => {
+  const userToken = getToken()
+  dispatch(handleLoading(true))
+  const details = await fetch(`${baseURL}/users/sign_out`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: userToken
+    },
+  });
+  const response = await details.json()
+  if (response.status === 200 ) {
+    dispatch(userSignOut(response.message))
+    clearSession()
+  }
+  dispatch(handleLoading(false))
+}
