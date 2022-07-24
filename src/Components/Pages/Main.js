@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Main = ({ cart, details, changeView, addItem, signedIn, signedOut }) => {
+const Main = ({ cart, details, changeView, addItem, signedIn }) => {
   const classes = useStyles();
 
   const theme = useTheme();
@@ -68,7 +68,7 @@ const Main = ({ cart, details, changeView, addItem, signedIn, signedOut }) => {
       }
     >
       <nav className={classes.nav}>
-        <NavBar changeView={changeView} signedIn={signedIn} signedOut={signedOut} />
+        <NavBar changeView={changeView} signedIn={signedIn} />
       </nav>
       <main className={classes.main}>
         <Outlet />

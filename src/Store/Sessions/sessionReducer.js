@@ -57,7 +57,7 @@ const sessionReducer = (state = initialState, action) => {
       return {
         ...state,
         message: action.payload,
-        isSignedOut: true,
+        isSignedIn: false,
       };
     }
     default:

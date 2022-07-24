@@ -46,7 +46,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const NavBar = ({ changeView, signedIn, signedOut }) => {
+const NavBar = ({ changeView, signedIn }) => {
   const classes = useStyles();
 
   const dispatch = useDispatch();
