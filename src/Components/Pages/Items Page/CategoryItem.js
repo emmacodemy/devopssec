@@ -16,12 +16,12 @@ const useStyles = makeStyles(() => ({
     }
 }))
 
-const CategoryItem = ({name, list, changeView}) => {
+const CategoryItem = ({name, list, changeView, control}) => {
   const classes = useStyles()
   return (
     <Box className={classes.container}>
         <CategoryName name={name} />
-        <Item itemList={list} changeView={changeView} />
+        <Item itemList={list} changeView={changeView} category={name} sidecontrol={control} />
     </Box>
   )
 }

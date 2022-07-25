@@ -22,3 +22,7 @@
 .display-main aside {
   display: none;
 }
+
+.display-side main {
+  display: none;
+}

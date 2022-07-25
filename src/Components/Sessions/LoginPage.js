@@ -95,7 +95,7 @@ const LoginPage = ({ loading, signedIn }) => {
   const signIn = async (e) => {
     e.preventDefault();
     await dispatch(handleSignIn(userDetails.userName, userDetails.password));
-    navigate("/");
+    signedIn && navigate("/");
   };
 
   useEffect(() => {

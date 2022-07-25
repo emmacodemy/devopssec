@@ -1,41 +1,67 @@
 import React from "react";
-import { Box } from "@mui/material"
-import { makeStyles } from "@mui/styles"
-import ItemHeader from "./ItemHeader"
-import CategoryItem from "./CategoryItem"
+import { Box } from "@mui/material";
+import { makeStyles } from "@mui/styles";
+import ItemHeader from "./ItemHeader";
+import CategoryItem from "./CategoryItem";
+import { useSelector } from "react-redux";
+import { useOutletContext } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   itemsPage: {
-    width: '100%',
-    height: '100%',
-    display: 'flex',
-    flexDirection: 'column',
+    width: "100%",
+    height: "100%",
+    display: "flex",
+    flexDirection: "column",
     rowGap: 50,
   },
+  itemsCont: {
+    position: "relative",
+    width: "100%",
+    height: "75%",
+    overflow: "scroll",
+    [theme.breakpoints.down("md")]: {
+      height: "90%",
+    },
+  },
+
   items: {
-    position: 'relative',
-    display: 'flex',
-    flexDirection: 'column',
+    position: "relative",
+    display: "flex",
+    flexDirection: "column",
     rowGap: 25,
-    width: '100%',
-    height: '75%',
-    overflow: 'scroll',
-    [theme.breakpoints.down('md')]: {
-      height: '90%'
-    }
-  }
-}))
+    width: "100%",
+    height: "100%",
+  },
+}));
 
 const ItemsPage = ({ changeView }) => {
-  const classes= useStyles()
-  const list = [{category:'meat', items:[{name: 'Chicken and chips', measurement_unit:'kg'},{name: 'meat', measurement_unit:'kg'},{name: 'meat', measurement_unit:'kg'}, {name: 'meat', measurement_unit:'kg'},{name: 'meat', measurement_unit:'kg'},{name: 'meat', measurement_unit:'kg'},{name: 'meat', measurement_unit:'kg'},{name: 'meat', measurement_unit:'kg'},{name: 'meat', measurement_unit:'kg'},{name: 'meat', measurement_unit:'kg'},{name: 'meat', measurement_unit:'kg'},]}, {category:'meat', items:[{name: 'meat', measurement_unit:'kg'},{name: 'meat', measurement_unit:'kg'},{name: 'meat', measurement_unit:'kg'}]}, {category:'meat', items:[{name: 'meat', measurement_unit:'kg'},{name: 'meat', measurement_unit:'kg'},{name: 'meat', measurement_unit:'kg'}]}, {category:'meat', items:[{name: 'meat', measurement_unit:'kg'},{name: 'meat', measurement_unit:'kg'},{name: 'meat', measurement_unit:'kg'}]}]
+  const classes = useStyles();
+
+  const all_items = useSelector((state) => state.items);
+
+  const { isLoading, list } = all_items;
+
+  const handleAside = useOutletContext()
+
   return (
     <Box className={classes.itemsPage}>
       <ItemHeader />
-      <Box className={classes.items}>
-        {
-          list.map((listItem) => <CategoryItem key={listItem.category} name={listItem.category} list={listItem.items} changeView={changeView} />)
-        }
+      <Box className={classes.itemsCont}>
+        {isLoading ? (
+          <h1>Loading...</h1>
+        ) : (
+          <Box className={classes.items}>
+            {list.map((listItem) => (
+              <CategoryItem
+                key={listItem.category}
+                name={listItem.category}
+                list={listItem.items}
+                changeView={changeView}
+                control={handleAside}
+              />
+            ))}
+          </Box>
+        )}
       </Box>
     </Box>
   );

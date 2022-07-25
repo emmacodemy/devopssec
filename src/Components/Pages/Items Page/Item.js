@@ -14,12 +14,12 @@ const useStyles = makeStyles(() => ({
     }
 }))
 
-const Item = ({ itemList, changeView }) => {
+const Item = ({ itemList, changeView, category, sidecontrol }) => {
   const classes = useStyles()
   return (
     <Box className={classes.listCont}>
         {
-            itemList.map((item) => <ItemName changeView={changeView} key ={item.name} itemName={item.name} unit={item.measurement_unit} />)
+            itemList.map((item) => <ItemName changeView={changeView} key ={`${item.name}${category}`} itemName={item.name} unit={item.measurement_unit} control={sidecontrol} />)
         }
     </Box>
   )

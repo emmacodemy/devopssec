@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import NavBar from "../Navbar/NavBar";
 import { useTheme, useMediaQuery, Grid } from "@mui/material";
+import { fetchItems } from "../../Store/itemspagereducer/thunkCreators"
 import { makeStyles } from "@mui/styles";
+import { useDispatch } from "react-redux";
 import { Outlet } from "react-router-dom";
 import SideBar from "../SideBar";
 
@@ -23,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
     height: "100%",
     backgroundColor: "#fafafe",
     [theme.breakpoints.down("md")]: {
-      width: "79%",
+      width: "81.5%",
     },
   },
   nav: {
@@ -35,14 +37,14 @@ const useStyles = makeStyles((theme) => ({
     left: 0,
     bottom: 0,
     [theme.breakpoints.down("md")]: {
-      width: "20%",
+      width: "17.5%",
     },
   },
   sideBar: {
     width: "25%",
     height: "100%",
     [theme.breakpoints.down("md")]: {
-      width: "79%",
+      width: "81.5%",
     },
   },
 }));
@@ -52,7 +54,17 @@ const Main = ({ cart, details, changeView, addItem, signedIn }) => {
 
   const theme = useTheme();
 
+  const dispatch = useDispatch()
+
   const [displayMain, setDisplayMain] = useState(true);
+
+  const handleAside = (status) => {
+    setDisplayMain(status)
+  }
+
+  useEffect(() => {
+    dispatch(fetchItems())
+  }, [])
 
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
@@ -68,10 +80,10 @@ const Main = ({ cart, details, changeView, addItem, signedIn }) => {
       }
     >
       <nav className={classes.nav}>
-        <NavBar changeView={changeView} signedIn={signedIn} />
+        <NavBar changeView={changeView} signedIn={signedIn} sidecontrol={handleAside} />
       </nav>
       <main className={classes.main}>
-        <Outlet />
+        <Outlet context={handleAside} />
       </main>
       <aside className={classes.sideBar}>
         <SideBar

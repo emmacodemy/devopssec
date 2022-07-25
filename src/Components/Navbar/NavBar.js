@@ -46,7 +46,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const NavBar = ({ changeView, signedIn }) => {
+const NavBar = ({ changeView, signedIn, sidecontrol }) => {
   const classes = useStyles();
 
   const dispatch = useDispatch();
@@ -81,7 +81,13 @@ const NavBar = ({ changeView, signedIn }) => {
   return (
     <Box className={classes.root}>
       <Box className={classes.logo}>
-        <Link to="/items" onClick={() => handleLink(0)}>
+        <Link
+          to="/items"
+          onClick={() => {
+            handleLink(0);
+            sidecontrol(true);
+          }}
+        >
           <img src={logo} alt="logo" />
         </Link>
       </Box>
@@ -94,12 +100,18 @@ const NavBar = ({ changeView, signedIn }) => {
             index={index}
             display={handleLink}
             key={nav.path}
+            control={sidecontrol}
           />
         ))}
       </Box>
       <Box className={classes.cartCont}>
         <Box className={classes.cart}>
-          <IconButton onClick={() => changeView("cart")}>
+          <IconButton
+            onClick={() => {
+              changeView("cart");
+              sidecontrol(false);
+            }}
+          >
             <ShoppingCart style={{ color: "#fff" }} />
           </IconButton>
         </Box>
