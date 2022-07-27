@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import { useSelector } from "react-redux";
 import "./App.css";
@@ -8,13 +8,23 @@ import ItemsPage from "./Components/Pages/Items Page/ItemsPage";
 import LoginPage from "./Components/Sessions/LoginPage";
 import RegisterPage from "./Components/Sessions/RegisterPage";
 import Main from "./Components/Pages/Main";
+import Alert from "./Components/Alert";
 
 function App() {
+  const sessionDetails = useSelector((state) => state.sessions);
+
+  const { isLoading, isSignedUp, isSignedIn, isSignedOut, message } =
+    sessionDetails;
+
   const [sideDisplay, setSideDisplay] = useState({
     cart: true,
     addItem: false,
     itemDetails: false,
   });
+
+  const [alertDisplay, setAlertDisplay] = useState(false);
+
+  const [alertMessage, setAlertMessage] = useState("");
 
   const handleSideBar = (view) => {
     setSideDisplay((prevState) => {
@@ -26,12 +36,20 @@ function App() {
     });
   };
 
-  const sessionDetails = useSelector((state) => state.sessions);
+  const controlAlertMessage = (message) => {
+    setAlertMessage(message);
+  };
 
-  const { isLoading, isSignedUp, isSignedIn, isSignedOut, message } = sessionDetails;
+  useEffect(() => {
+    setAlertDisplay(true);
+    setTimeout(() => {
+      setAlertDisplay(false);
+    }, 5000);
+  }, [alertMessage]);
 
   return (
     <div className="App">
+      <Alert message={alertMessage} display={alertDisplay} />
       <div>
         <Routes>
           <Route
@@ -58,11 +76,25 @@ function App() {
           </Route>
           <Route
             path="/login"
-            element={<LoginPage loading={isLoading} signedIn={isSignedIn} />}
+            element={
+              <LoginPage
+                loading={isLoading}
+                signedIn={isSignedIn}
+                alert={controlAlertMessage}
+                message={message}
+              />
+            }
           />
           <Route
             path="/register"
-            element={<RegisterPage loading={isLoading} signedUp={isSignedUp} />}
+            element={
+              <RegisterPage
+                loading={isLoading}
+                signedUp={isSignedUp}
+                alert={controlAlertMessage}
+                message={message}
+              />
+            }
           />
         </Routes>
       </div>

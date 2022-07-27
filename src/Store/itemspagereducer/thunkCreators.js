@@ -1,15 +1,23 @@
 import { getToken } from "../utils/session";
-import { getItems, handleLoading } from "./pageReducer";
+import { getItems, handleLoading, getItemDetails } from "./pageReducer";
 
 const baseURL = "http://localhost:3000";
 
 export const fetchItems = () => async (dispatch) => {
   const token = getToken();
   dispatch(handleLoading(true));
-  const all_items = await fetch(`${baseURL}/api/v1/item_category`, {
+  const allItems = await fetch(`${baseURL}/api/v1/item_category`, {
     headers: { Authorization: token },
   });
-  const response = await all_items.json();
+  const response = await allItems.json();
   dispatch(getItems(response.data));
+  dispatch(handleLoading(false));
+};
+
+export const fetchItemDetails = (id) => async (dispatch) => {
+  dispatch(handleLoading(true));
+  const itemDetails = await fetch(`${baseURL}/api/v1/item_category/${id}`);
+  const response = await itemDetails.json();
+  dispatch(getItemDetails(response.data));
   dispatch(handleLoading(false));
 };

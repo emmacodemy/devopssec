@@ -75,7 +75,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const LoginPage = ({ loading, signedIn }) => {
+const LoginPage = ({ loading, signedIn, message, alert }) => {
   const classes = useStyles();
 
   const dispatch = useDispatch();
@@ -95,6 +95,7 @@ const LoginPage = ({ loading, signedIn }) => {
   const signIn = async (e) => {
     e.preventDefault();
     await dispatch(handleSignIn(userDetails.userName, userDetails.password));
+    alert(message);
     signedIn && navigate("/");
   };
 
