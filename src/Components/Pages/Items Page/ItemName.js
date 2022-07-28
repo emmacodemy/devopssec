@@ -1,5 +1,7 @@
 import React from "react";
 import { makeStyles } from "@mui/styles";
+import { fetchItemDetails } from "../../../Store/itemspagereducer/thunkCreators";
+import { useDispatch } from "react-redux";
 import { IconButton, Box, Typography } from "@mui/material";
 import { Add } from "@mui/icons-material";
 
@@ -31,17 +33,23 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ItemName = ({ itemName, unit, changeView, control }) => {
+const ItemName = ({ itemName, unit, changeView, control, id }) => {
   const classes = useStyles();
+
+  const dispatch = useDispatch()
+
+  const viewItemDetails = (id) => {
+    dispatch(fetchItemDetails(id))
+    changeView("itemDetails");
+    control(false);
+    
+  }
 
   const useUnit = unit !== null ? unit : "";
   return (
     <Box className={classes.itemCont}>
       <Typography
-        onClick={() => {
-          changeView("itemDetails");
-          control(false);
-        }}
+        onClick={() => viewItemDetails(id)}
       >{`${itemName} ${useUnit}`}</Typography>
       <IconButton>
         {" "}

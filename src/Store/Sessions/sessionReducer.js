@@ -9,8 +9,7 @@ const initialState = {
   isLoading: false,
   isSignedUp: false,
   isSignedIn: !!getToken(),
-  isSignedOut: true,
-  status: '',
+  isSignedOut: false,
   message: "",
 };
 
@@ -24,15 +23,15 @@ export const userSignUp = (message, status) => ({
   payload: { status, message },
 });
 
-export const userSignIn = (message, status) => ({
+export const userSignIn = (message) => ({
   type: SIGN_IN,
-  payload: {message, status},
+  payload: message,
 });
 
-export const userSignOut = (message, status) => ({
+export const userSignOut = (message) => ({
   type: SIGN_OUT,
-  payload: {message, status}
-})
+  payload: message,
+});
 
 const sessionReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -50,8 +49,7 @@ const sessionReducer = (state = initialState, action) => {
     case SIGN_IN: {
       return {
         ...state,
-        message: action.payload.message,
-        status: action.payload.status,
+        message: action.payload,
         isSignedIn: !!getToken(),
       };
     }
@@ -59,7 +57,6 @@ const sessionReducer = (state = initialState, action) => {
       return {
         ...state,
         message: action.payload,
-        status: action.payload.status,
         isSignedOut: true,
         isSignedIn: false,
       };

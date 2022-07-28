@@ -42,6 +42,7 @@ function App() {
 
   useEffect(() => {
     setAlertDisplay(true);
+    console.log(alertMessage)
     setTimeout(() => {
       setAlertDisplay(false);
     }, 5000);

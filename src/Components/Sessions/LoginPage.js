@@ -95,7 +95,6 @@ const LoginPage = ({ loading, signedIn, message, alert }) => {
   const signIn = async (e) => {
     e.preventDefault();
     await dispatch(handleSignIn(userDetails.userName, userDetails.password));
-    alert(message);
     signedIn && navigate("/");
   };
 

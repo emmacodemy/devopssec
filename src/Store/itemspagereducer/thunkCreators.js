@@ -1,5 +1,5 @@
 import { getToken } from "../utils/session";
-import { getItems, handleLoading, getItemDetails } from "./pageReducer";
+import { getItems, handleLoading, getItemDetails, loadingDetails } from "./pageReducer";
 
 const baseURL = "http://localhost:3000";
 
@@ -15,9 +15,9 @@ export const fetchItems = () => async (dispatch) => {
 };
 
 export const fetchItemDetails = (id) => async (dispatch) => {
-  dispatch(handleLoading(true));
+  dispatch(loadingDetails(true));
   const itemDetails = await fetch(`${baseURL}/api/v1/item_category/${id}`);
   const response = await itemDetails.json();
   dispatch(getItemDetails(response.data));
-  dispatch(handleLoading(false));
+  dispatch(loadingDetails(false));
 };

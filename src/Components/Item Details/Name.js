@@ -21,11 +21,13 @@ const useStyles = makeStyles(() => ({
   },
   name: {
     color: '#000',
-    fontSize: 24
+    fontSize: 24,
+    textTransform: 'capitalize',
   },
   category: {
     color: '#000',
-    fontSize: 18
+    fontSize: 18,
+    textTransform: 'capitalize',
   },
   text: {
     fontSize: 12,
@@ -56,7 +58,7 @@ const Name = ({itemName, categoryName, description}) => {
       </Box>
       <Box className={classes.cont}>
         <p className={classes.text}>note</p>
-        <h3 className={classes.desc}>{ description }</h3>
+        <h3 className={classes.desc}>{ description && description }</h3>
       </Box>
     </Box>
   );

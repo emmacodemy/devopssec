@@ -1,5 +1,5 @@
 import React from "react";
-import { Box } from "@mui/material";
+import { Box, CircularProgress } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import ItemHeader from "./ItemHeader";
 import CategoryItem from "./CategoryItem";
@@ -13,6 +13,14 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     rowGap: 50,
+  },
+  loading: {
+    position: "relative",
+    width: "100%",
+    height: "100%",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
   },
   itemsCont: {
     position: "relative",
@@ -41,14 +49,17 @@ const ItemsPage = ({ changeView }) => {
 
   const { isLoading, list } = all_items;
 
-  const handleAside = useOutletContext()
+  const handleAside = useOutletContext();
 
   return (
     <Box className={classes.itemsPage}>
       <ItemHeader />
       <Box className={classes.itemsCont}>
         {isLoading ? (
-          <h1>Loading...</h1>
+          <Box className={classes.loading}>
+            {" "}
+            <CircularProgress style={{ style: "#f9a109" }} />
+          </Box>
         ) : (
           <Box className={classes.items}>
             {list.map((listItem) => (

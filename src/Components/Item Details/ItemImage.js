@@ -21,7 +21,7 @@ const ItemImage = ({ image }) => {
   const classes = useStyles();
   return (
     <Box className={classes.imageCont}>
-      <img src={image} alt="item-img" className={classes.img} />
+      <img src={image && image} alt="item-img" className={classes.img} />
     </Box>
   );
 };
