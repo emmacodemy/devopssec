@@ -1,5 +1,5 @@
 import { getToken } from "../utils/session";
-import { getItems, handleLoading, getItemDetails, loadingDetails } from "./pageReducer";
+import { getItems, handleLoading, getItemDetails, deleteItem, loadingDetails } from "./pageReducer";
 
 const baseURL = "http://localhost:3000";
 
@@ -20,4 +20,20 @@ export const fetchItemDetails = (id) => async (dispatch) => {
   const response = await itemDetails.json();
   dispatch(getItemDetails(response.data));
   dispatch(loadingDetails(false));
+};
+
+export const deleteItemFromAPI = (category, id) => async (dispatch) => {
+  dispatch(loadingDetails(true));
+  const itemDetails = await fetch(`${baseURL}/api/v1/items/${id}`,  {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    }, 
+  });
+  const response = await itemDetails.json();
+  if(response.status === 200) {
+    dispatch(deleteItem(category, id))
+  }
+  dispatch(loadingDetails(false))
+  
 };

@@ -2,12 +2,21 @@ const GET_ITEMS = "store/itemsreducer/GET_ITEMS";
 const FETCH_ITEMS_STATUS = "store/itemsreducer/FETCH_ITEMS_STATUS";
 const GET_ITEM_DETAILS = "store/itemsreducer/GET_ITEMS_DETAILS";
 const FETCHING_DETAILS = "store/sessions/FETCHING_DETAILS";
+const DELETE_ITEM = "store/sessions/DELETE_ITEM";
 
 const initialState = {
   isLoading: false,
   loadingItems: false,
   list: [],
   itemDetails: {},
+};
+
+const handleDeleteItem = (state, payload) => {
+  // const item = state.list.find(
+  //   (item) => item.category.toLowerCase() === payload.category.toLowerCase()
+  // );
+  // item.items.filter((item) => item.id !== payload.id);
+  // return state;
 };
 
 export const handleLoading = (status) => ({
@@ -28,6 +37,11 @@ export const getItems = (items) => ({
 export const getItemDetails = (details) => ({
   type: GET_ITEM_DETAILS,
   payload: details,
+});
+
+export const deleteItem = (category, id) => ({
+  type: DELETE_ITEM,
+  payload: { category, id },
 });
 
 const itemsReducer = (state = initialState, action) => {
@@ -52,6 +66,13 @@ const itemsReducer = (state = initialState, action) => {
         ...state,
         itemDetails: action.payload,
       };
+    case DELETE_ITEM:
+      const itemIndex = state.list.findIndex(
+        (item) => item.category.toLowerCase() === action.payload.category.toLowerCase()
+      );
+      const newItem = state.list[itemIndex].items.filter((item) => item.id !== action.payload.id)
+      state.list[itemIndex].items = newItem
+      return state;
     default:
       return state;
   }

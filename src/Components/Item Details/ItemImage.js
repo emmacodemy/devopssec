@@ -6,7 +6,7 @@ const useStyles = makeStyles(() => ({
   imageCont: {
     position: "relative",
     width: "100%",
-    height: "20vh",
+    height: "25vh",
   },
   img: {
     position: "relative",

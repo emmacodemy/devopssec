@@ -10,7 +10,8 @@ const useStyles = makeStyles(() => ({
     display: "flex",
     flexWrap: "wrap",
     rowGap: 25,
-    justifyContent: "space-between",
+    columnGap: 15,
+    justifyContent: "flex-start",
   },
 }));
 

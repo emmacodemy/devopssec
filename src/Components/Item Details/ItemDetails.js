@@ -5,6 +5,7 @@ import { makeStyles } from "@mui/styles";
 import ItemControl from "./ItemControl";
 import ItemImage from "./ItemImage";
 import Name from "./Name";
+import ButtonControl from "./ButtonControl";
 
 const useStyles = makeStyles(() => ({
   container: {
@@ -58,6 +59,7 @@ const ItemDetails = ({ changeView }) => {
             description={item_details.description}
             categoryName={cat_name}
           />
+          <ButtonControl change={changeView} cat_name={cat_name} id={item_details.id} load={loadingItems}/>
         </Box>
       )}
     </Box>

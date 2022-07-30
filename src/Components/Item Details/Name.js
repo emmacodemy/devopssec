@@ -6,17 +6,16 @@ const useStyles = makeStyles(() => ({
     root: {
         position: 'relative',
         width:'100%',
-        maxHeight:'45%',
+        maxHeight:'60%',
         display: 'flex',
         flexDirection: 'column',
-        rowGap: 25,
-        border: '2px solid yellow'
+        rowGap: 10,
   },
   cont: {
     position: 'relative',
     display: 'flex',
     flexDirection:'column',
-    rowGap: 10,
+    rowGap: 5,
 
   },
   name: {
@@ -36,9 +35,8 @@ const useStyles = makeStyles(() => ({
   desc: {
     position:'relative',
     textOverflow:'clip',
-    border: '2px solid green',
     overflowWrap: 'break-word',
-    maxHeight: '25vh',
+    maxHeight: '22vh',
     overflowY: 'scroll',
     width:'100%',
   }
