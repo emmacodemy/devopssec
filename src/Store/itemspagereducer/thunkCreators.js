@@ -1,5 +1,5 @@
 import { getToken } from "../utils/session";
-import { getItems, handleLoading, getItemDetails, deleteItem, loadingDetails } from "./pageReducer";
+import { getItems, handleLoading, getItemDetails, deleteItem, loadingDetails, addItem } from "./pageReducer";
 
 const baseURL = "http://localhost:3000";
 
@@ -35,5 +35,23 @@ export const deleteItemFromAPI = (category, id) => async (dispatch) => {
     dispatch(deleteItem(category, id))
   }
   dispatch(loadingDetails(false))
-  
 };
+
+export const addNewItem = (name, image, description, category_id) => async ( dispatch ) => {
+    dispatch(loadingDetails(true));
+    const userToken = getToken()
+    const new_item = { name, image, description }
+    const newItemParams = { category_id, new_item }
+    const addItem = await fetch(`${baseURL}/api/v1/item_category`, {
+      method: "POST",
+      body: JSON.stringify(newItemParams),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: userToken
+      },
+    })
+    const response = await addItem.json()
+    if(response.status === 200) {
+      dispatch(addItem(response.data))
+    }
+  }

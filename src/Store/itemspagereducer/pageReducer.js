@@ -3,6 +3,7 @@ const FETCH_ITEMS_STATUS = "store/itemsreducer/FETCH_ITEMS_STATUS";
 const GET_ITEM_DETAILS = "store/itemsreducer/GET_ITEMS_DETAILS";
 const FETCHING_DETAILS = "store/sessions/FETCHING_DETAILS";
 const DELETE_ITEM = "store/sessions/DELETE_ITEM";
+const ADD_NEW_ITEM = "store/sessions/ADD_NEW_ITEM";
 
 const initialState = {
   isLoading: false,
@@ -44,6 +45,11 @@ export const deleteItem = (category, id) => ({
   payload: { category, id },
 });
 
+export const AddItem = (newItem) => ({
+  type: ADD_NEW_ITEM,
+  payload: newItem,
+});
+
 const itemsReducer = (state = initialState, action) => {
   switch (action.type) {
     case FETCH_ITEMS_STATUS:
@@ -51,28 +57,57 @@ const itemsReducer = (state = initialState, action) => {
         ...state,
         isLoading: action.payload,
       };
+      
     case FETCHING_DETAILS:
       return {
         ...state,
         loadingItems: action.payload,
       };
+
     case GET_ITEMS:
       return {
         ...state,
         list: [...action.payload],
       };
+
     case GET_ITEM_DETAILS:
       return {
         ...state,
         itemDetails: action.payload,
       };
+
     case DELETE_ITEM:
       const itemIndex = state.list.findIndex(
-        (item) => item.category.toLowerCase() === action.payload.category.toLowerCase()
+        (item) =>
+          item.category.toLowerCase() === action.payload.category.toLowerCase()
       );
-      const newItem = state.list[itemIndex].items.filter((item) => item.id !== action.payload.id)
-      state.list[itemIndex].items = newItem
+      const newItem = state.list[itemIndex].items.filter(
+        (item) => item.id !== action.payload.id
+      );
+      state.list[itemIndex].items = newItem;
       return state;
+
+    case ADD_NEW_ITEM:
+      const findCategoryIndex = state.list.findIndex(
+        (item) =>
+          item.category.toLowerCase() === action.payload.category.toLowerCase()
+      );
+      if (findCategoryIndex) {
+        const existingItems = state.list[findCategoryIndex].items;
+        const newItems = [...existingItems, action.payload.item];
+        state.list[findCategoryIndex].items = newItems;
+        return state;
+      } else {
+        const list = state.list;
+        const newList = [
+          ...list,
+          {
+            category: action.payload.category,
+            items: [action.payload.item],
+          },
+        ];
+        return newList;
+      }
     default:
       return state;
   }
