@@ -1,13 +1,15 @@
 const GET_ITEMS = "store/itemsreducer/GET_ITEMS";
 const FETCH_ITEMS_STATUS = "store/itemsreducer/FETCH_ITEMS_STATUS";
 const GET_ITEM_DETAILS = "store/itemsreducer/GET_ITEMS_DETAILS";
-const FETCHING_DETAILS = "store/sessions/FETCHING_DETAILS";
-const DELETE_ITEM = "store/sessions/DELETE_ITEM";
-const ADD_NEW_ITEM = "store/sessions/ADD_NEW_ITEM";
+const FETCHING_DETAILS = "store/itemsreducer/FETCHING_DETAILS";
+const DELETE_ITEM = "store/itemsreducer/DELETE_ITEM";
+const ADD_NEW_ITEM = "store/itemsreducer/ADD_NEW_ITEM";
+const FETCH_CATEGORY = "store/itemsreducer/FETCH_CATEGORY"
 
 const initialState = {
   isLoading: false,
   loadingItems: false,
+  categories: [],
   list: [],
   itemDetails: {},
 };
@@ -50,6 +52,11 @@ export const AddItem = (newItem) => ({
   payload: newItem,
 });
 
+export const fetchCategories =(categories) => ({
+  type: FETCH_CATEGORY,
+  payload: categories,
+})
+
 const itemsReducer = (state = initialState, action) => {
   switch (action.type) {
     case FETCH_ITEMS_STATUS:
@@ -57,7 +64,7 @@ const itemsReducer = (state = initialState, action) => {
         ...state,
         isLoading: action.payload,
       };
-      
+
     case FETCHING_DETAILS:
       return {
         ...state,
@@ -107,6 +114,11 @@ const itemsReducer = (state = initialState, action) => {
           },
         ];
         return newList;
+      }
+    case FETCH_CATEGORY:
+      return {
+        ...state,
+        categories: action.payload
       }
     default:
       return state;

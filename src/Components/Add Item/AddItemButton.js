@@ -2,7 +2,6 @@ import React from 'react'
 import { Box } from "@mui/material"
 import { makeStyles } from "@mui/styles"
 import { useDispatch } from "react-redux"
-import { deleteItemFromAPI } from "../../Store/itemspagereducer/thunkCreators"
 
 const useStyles = makeStyles(()=> ({
     btnCont: {
@@ -16,7 +15,7 @@ const useStyles = makeStyles(()=> ({
         alignItems: 'center',
 
     },
-    addBtn: {
+    saveBtn: {
         backgroundColor: '#f9a109',
         color: '#fff',
         padding: "12px 8px",
@@ -26,7 +25,7 @@ const useStyles = makeStyles(()=> ({
         fontWeight: 700,
         cursor: 'pointer',
     },
-    deleteBtn: {
+    cancelBtn: {
         backgroundColor: 'transparent',
         color: '#34333a',
         padding: "12px 8px",
@@ -38,25 +37,25 @@ const useStyles = makeStyles(()=> ({
     }
 }))
 
-const ButtonControl = ({cat_name, id, change, load}) => {
+const AddItemButton = ({change}) => {
     const classes = useStyles()
 
     const dispatch = useDispatch()
 
-    const handleDeleteItem =  async (category, id) => {
-     await dispatch(deleteItemFromAPI(category, id))
-     change('cart')
-    }
+    // const handleDeleteItem =  async (category, id) => {
+    //  await dispatch(deleteItemFromAPI(category, id))
+    //  change('cart')
+    // }
   return (
     <Box className={classes.btnCont}>
-        <button onClick={() => handleDeleteItem(cat_name, id)} className={classes.deleteBtn}>
-            delete
+        <button onClick={() => change('cart')} className={classes.cancelBtn}>
+            cancel
         </button>
-        <button className={classes.addBtn}>
-            Add to list
+        <button className={classes.saveBtn}>
+            save
         </button>
     </Box>
   )
 }
 
-export default ButtonControl
+export default AddItemButton

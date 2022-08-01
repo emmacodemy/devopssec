@@ -1,5 +1,5 @@
 import { getToken } from "../utils/session";
-import { getItems, handleLoading, getItemDetails, deleteItem, loadingDetails, addItem } from "./pageReducer";
+import { getItems, handleLoading, getItemDetails, deleteItem, loadingDetails, addItem, fetchCategories } from "./pageReducer";
 
 const baseURL = "http://localhost:3000";
 
@@ -53,5 +53,13 @@ export const addNewItem = (name, image, description, category_id) => async ( dis
     const response = await addItem.json()
     if(response.status === 200) {
       dispatch(addItem(response.data))
+    }
+  }
+
+  export const getAllCategory = () => async ( dispatch ) => {
+    const category = await fetch(`${baseURL}/api/v1/categories`)
+    const response = await category.json()
+    if(response.status === 200) {
+      dispatch(fetchCategories(response.data))
     }
   }

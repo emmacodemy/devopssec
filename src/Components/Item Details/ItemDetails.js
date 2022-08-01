@@ -1,11 +1,13 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { Box, CircularProgress } from "@mui/material";
+import { Box } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import ItemControl from "./ItemControl";
 import ItemImage from "./ItemImage";
 import Name from "./Name";
 import ButtonControl from "./ButtonControl";
+import Loading from "../Loading";
+
 
 const useStyles = makeStyles(() => ({
   container: {
@@ -13,14 +15,6 @@ const useStyles = makeStyles(() => ({
     height: "100%",
     position: "relative",
     margin: "0 auto",
-  },
-  loading: {
-    position: "relative",
-    width: "100%",
-    height: "100%",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
   },
   detailsCont: {
     position: "relative",
@@ -46,10 +40,7 @@ const ItemDetails = ({ changeView }) => {
   return (
     <Box className={classes.container}>
       {loadingItems ? (
-        <Box className={classes.loading}>
-          {" "}
-          <CircularProgress style={{ style: "#f9a109" }} />
-        </Box>
+        <Loading />
       ) : (
         <Box className={classes.detailsCont}>
           <ItemControl control={changeView} />
