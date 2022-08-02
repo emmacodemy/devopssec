@@ -37,11 +37,11 @@ export const deleteItemFromAPI = (category, id) => async (dispatch) => {
   dispatch(loadingDetails(false))
 };
 
-export const addNewItem = (name, image, description, category_id) => async ( dispatch ) => {
+export const addNewItem = (name, image, description, category_name) => async ( dispatch ) => {
     dispatch(loadingDetails(true));
     const userToken = getToken()
     const new_item = { name, image, description }
-    const newItemParams = { category_id, new_item }
+    const newItemParams = { category_name, new_item }
     const addItem = await fetch(`${baseURL}/api/v1/item_category`, {
       method: "POST",
       body: JSON.stringify(newItemParams),

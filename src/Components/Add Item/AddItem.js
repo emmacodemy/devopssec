@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React, { useState, useEffect, useMemo, useCallback } from "react";
+import { useSelector } from "react-redux";
+import DatalistInput, { useComboboxControls } from "react-datalist-input";
 import axios from "axios";
 import { Box } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import AddInput from "./AddInput";
 import AddItemButton from "./AddItemButton";
 import AddHeader from "./AddHeader";
-import { getAllCategory } from "../../Store/itemspagereducer/thunkCreators";
+// import 'react-datalist-input/dist/styles.css';
+
 
 const useStyles = makeStyles(() => ({
   addItem: {
@@ -21,16 +23,37 @@ const useStyles = makeStyles(() => ({
     position: "relative",
     margin: "0 auto",
   },
+  formInput: {
+    width: "100%",
+    display: "flex",
+    flexDirection: "column",
+    rowGap: 10,
+  },
 }));
 
 const instance = axios.create();
 
 const AddItem = ({ changeView }) => {
+
   const [image, setImage] = useState("");
+
+  const { setValue, value } = useComboboxControls({ initialValue: '' });
 
   const category = useSelector((state) => state.items.categories);
 
-  const dispatch = useDispatch();
+  const onSelect = useCallback((selectedItem) => {
+    setValue(selectedItem.value);
+  }, []);
+
+  const items = useMemo(
+    () =>
+      category.map((option) => ({
+        id: option.id,
+        value: option.name,
+        ...option, 
+      })),
+    [value]
+  );
 
   const [itemDetails, setItemDetails] = useState({
     name: "",
@@ -88,9 +111,13 @@ const AddItem = ({ changeView }) => {
     setItemDetails((prevState) => ({ ...prevState, [id]: value }));
   };
 
+  const submititemDetails = () => {
+    
+  }
+
   useEffect(() => {
-    dispatch(getAllCategory());
-  }, []);
+    console.log(value)
+  }, [value]);
 
   return (
     <Box className={classes.addItem}>
@@ -108,6 +135,14 @@ const AddItem = ({ changeView }) => {
                 imgUpload={handleUpload}
               />
             ))}
+            <DatalistInput
+              label="Category"
+              placeholder="Select or choose a category"
+              items={items}
+              onSelect={onSelect}
+              value={value}
+              setValue={setValue}
+            />
           </Box>
         </form>
         <AddItemButton change={changeView} />

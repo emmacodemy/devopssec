@@ -6,10 +6,11 @@ import "./input.css";
 
 const useStyles = makeStyles(() => ({
   imgCont: {
-    position: "relative",
+    position: "absolute",
+    top: 27,
     display: "flex",
     width: "100%",
-    justifyContent: "center",
+    justifyContent: "flex-end",
     alignItems: "center",
   },
   inputText: {
@@ -22,7 +23,7 @@ const useStyles = makeStyles(() => ({
 const AddInput = ({ name, type, placeholder, handle, id, imgUpload }) => {
   const classes = useStyles();
   return (
-    <Box clasName={classes.inputText}>
+    <Box className={classes.inputText}>
       <label htmlFor={id}>{name}</label>
       <Box>
         {id === "note" ? (

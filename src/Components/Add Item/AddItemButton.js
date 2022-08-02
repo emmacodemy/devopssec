@@ -9,7 +9,7 @@ const useStyles = makeStyles(()=> ({
         bottom: 0,
         width: '100%',
         height: '12vh',
-        backgroundColor: '#fff',
+        backgroundColor: "#fafafe",
         display: 'flex',
         justifyContent: 'space-around',
         alignItems: 'center',
@@ -18,7 +18,7 @@ const useStyles = makeStyles(()=> ({
     saveBtn: {
         backgroundColor: '#f9a109',
         color: '#fff',
-        padding: "12px 8px",
+        padding: "12px",
         borderRadius: 12,
         border:'none',
         outline: 'none',

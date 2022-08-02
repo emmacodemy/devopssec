@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Box, CircularProgress } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import ItemHeader from "./ItemHeader";
 import CategoryItem from "./CategoryItem";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useOutletContext } from "react-router-dom";
+import { getAllCategory } from "../../../Store/itemspagereducer/thunkCreators"
 
 const useStyles = makeStyles((theme) => ({
   itemsPage: {
@@ -47,9 +48,15 @@ const ItemsPage = ({ changeView }) => {
 
   const all_items = useSelector((state) => state.items);
 
+  const dispatch = useDispatch();
+
   const { isLoading, list } = all_items;
 
   const handleAside = useOutletContext();
+
+  useEffect(() => {
+    dispatch(getAllCategory());
+  }, []);
 
   return (
     <Box className={classes.itemsPage}>
