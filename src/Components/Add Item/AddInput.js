@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, IconButton } from "@mui/material";
+import { Box } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { Upload } from "@mui/icons-material";
 import "./input.css";
@@ -32,7 +32,7 @@ const AddInput = ({ name, type, placeholder, handle, id, imgUpload }) => {
             name={name}
             type={type}
             placeholder={placeholder}
-            onClick={(e) => handle(e)}
+            onInput={(e) => handle(e)}
           />
         ) : (
           <input
@@ -40,7 +40,7 @@ const AddInput = ({ name, type, placeholder, handle, id, imgUpload }) => {
             name={name}
             type={type}
             placeholder={placeholder}
-            onClick={(e) => handle(e)}
+            onInput={(e) => handle(e)}
           />
         )}
         {id === "img" && (

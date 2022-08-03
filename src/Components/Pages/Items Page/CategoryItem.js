@@ -16,7 +16,7 @@ const useStyles = makeStyles(() => ({
     width: '100%',
     display: "flex",
     flexDirection: "column",
-    rowGap: 30,
+    rowGap: 15,
   }
 }));
 

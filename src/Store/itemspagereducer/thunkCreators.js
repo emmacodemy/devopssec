@@ -1,5 +1,13 @@
 import { getToken } from "../utils/session";
-import { getItems, handleLoading, getItemDetails, deleteItem, loadingDetails, addItem, fetchCategories } from "./pageReducer";
+import {
+  getItems,
+  handleLoading,
+  getItemDetails,
+  deleteItem,
+  loadingDetails,
+  addItem,
+  fetchCategories,
+} from "./pageReducer";
 
 const baseURL = "http://localhost:3000";
 
@@ -24,42 +32,45 @@ export const fetchItemDetails = (id) => async (dispatch) => {
 
 export const deleteItemFromAPI = (category, id) => async (dispatch) => {
   dispatch(loadingDetails(true));
-  const itemDetails = await fetch(`${baseURL}/api/v1/items/${id}`,  {
+  const itemDetails = await fetch(`${baseURL}/api/v1/items/${id}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
-    }, 
+    },
   });
   const response = await itemDetails.json();
-  if(response.status === 200) {
-    dispatch(deleteItem(category, id))
+  if (response.status === 200) {
+    dispatch(deleteItem(category, id));
   }
-  dispatch(loadingDetails(false))
+  dispatch(loadingDetails(false));
 };
 
-export const addNewItem = (name, image, description, category_name) => async ( dispatch ) => {
+export const addNewItem =
+  (name, image, description, measurement_unit, category_name) =>
+  async (dispatch) => {
     dispatch(loadingDetails(true));
-    const userToken = getToken()
-    const new_item = { name, image, description }
-    const newItemParams = { category_name, new_item }
-    const addItem = await fetch(`${baseURL}/api/v1/item_category`, {
+    const userToken = getToken();
+    const new_item = { name, image, description, measurement_unit };
+    const newItemParams = { category_name, new_item };
+    const postItem = await fetch(`${baseURL}/api/v1/item_category`, {
       method: "POST",
       body: JSON.stringify(newItemParams),
       headers: {
         "Content-Type": "application/json",
-        Authorization: userToken
+        Authorization: userToken,
       },
-    })
-    const response = await addItem.json()
-    if(response.status === 200) {
-      dispatch(addItem(response.data))
+    });
+    const response = await postItem.json();
+    if (response.status === 201) {
+      dispatch(addItem(response.data));
     }
-  }
+    dispatch(loadingDetails(false));
+  };
 
-  export const getAllCategory = () => async ( dispatch ) => {
-    const category = await fetch(`${baseURL}/api/v1/categories`)
-    const response = await category.json()
-    if(response.status === 200) {
-      dispatch(fetchCategories(response.data))
-    }
+export const getAllCategory = () => async (dispatch) => {
+  const category = await fetch(`${baseURL}/api/v1/categories`);
+  const response = await category.json();
+  if (response.status === 200) {
+    dispatch(fetchCategories(response.data));
   }
+};

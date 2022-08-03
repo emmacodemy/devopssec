@@ -14,13 +14,13 @@ const initialState = {
   itemDetails: {},
 };
 
-const handleDeleteItem = (state, payload) => {
-  // const item = state.list.find(
-  //   (item) => item.category.toLowerCase() === payload.category.toLowerCase()
-  // );
-  // item.items.filter((item) => item.id !== payload.id);
-  // return state;
-};
+// const handleDeleteItem = (state, payload) => {
+//   // const item = state.list.find(
+//   //   (item) => item.category.toLowerCase() === payload.category.toLowerCase()
+//   // );
+//   // item.items.filter((item) => item.id !== payload.id);
+//   // return state;
+// };
 
 export const handleLoading = (status) => ({
   type: FETCH_ITEMS_STATUS,
@@ -47,7 +47,7 @@ export const deleteItem = (category, id) => ({
   payload: { category, id },
 });
 
-export const AddItem = (newItem) => ({
+export const addItem = (newItem) => ({
   type: ADD_NEW_ITEM,
   payload: newItem,
 });
@@ -99,9 +99,9 @@ const itemsReducer = (state = initialState, action) => {
         (item) =>
           item.category.toLowerCase() === action.payload.category.toLowerCase()
       );
-      if (findCategoryIndex) {
+      if (findCategoryIndex > 0) {
         const existingItems = state.list[findCategoryIndex].items;
-        const newItems = [...existingItems, action.payload.item];
+        const newItems = [...existingItems, action.payload.items];
         state.list[findCategoryIndex].items = newItems;
         return state;
       } else {
@@ -110,10 +110,13 @@ const itemsReducer = (state = initialState, action) => {
           ...list,
           {
             category: action.payload.category,
-            items: [action.payload.item],
+            items: [action.payload.items],
           },
         ];
-        return newList;
+        return {
+          ...state,
+          list: newList,
+        };
       }
     case FETCH_CATEGORY:
       return {

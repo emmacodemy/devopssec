@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo, useCallback } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import DatalistInput, { useComboboxControls } from "react-datalist-input";
 import axios from "axios";
 import { Box } from "@mui/material";
@@ -7,6 +7,7 @@ import { makeStyles } from "@mui/styles";
 import AddInput from "./AddInput";
 import AddItemButton from "./AddItemButton";
 import AddHeader from "./AddHeader";
+import { addNewItem } from "../../Store/itemspagereducer/thunkCreators"
 // import 'react-datalist-input/dist/styles.css';
 
 
@@ -37,9 +38,13 @@ const AddItem = ({ changeView }) => {
 
   const [image, setImage] = useState("");
 
-  const { setValue, value } = useComboboxControls({ initialValue: '' });
+  const dispatch = useDispatch()
 
-  const category = useSelector((state) => state.items.categories);
+  const { setValue, value } = useComboboxControls({ initialValue: 'Cereal' });
+
+  const category = useSelector((state) => state.items);
+
+  const { categories, loadingItems } = category
 
   const onSelect = useCallback((selectedItem) => {
     setValue(selectedItem.value);
@@ -47,7 +52,7 @@ const AddItem = ({ changeView }) => {
 
   const items = useMemo(
     () =>
-      category.map((option) => ({
+      categories.map((option) => ({
         id: option.id,
         value: option.name,
         ...option, 
@@ -111,13 +116,21 @@ const AddItem = ({ changeView }) => {
     setItemDetails((prevState) => ({ ...prevState, [id]: value }));
   };
 
-  const submititemDetails = () => {
-    
+  const submitItemDetails = async () => {
+    const { name, unit, note } = itemDetails
+    await dispatch(addNewItem(name, image, note, unit, value))
+    setItemDetails({name: '', note:'', unit:''})
+    setImage('')
+    changeView('cart')
   }
 
   useEffect(() => {
     console.log(value)
   }, [value]);
+
+    useEffect(() => {
+    console.log(itemDetails.name)
+  }, [itemDetails]);
 
   return (
     <Box className={classes.addItem}>
@@ -127,6 +140,7 @@ const AddItem = ({ changeView }) => {
           <Box className={classes.formInput}>
             {input.map((el) => (
               <AddInput
+              key={el.name}
                 name={el.name}
                 placeholder={el.placeholder}
                 type={el.type}
@@ -145,7 +159,7 @@ const AddItem = ({ changeView }) => {
             />
           </Box>
         </form>
-        <AddItemButton change={changeView} />
+        <AddItemButton change={changeView} submit={submitItemDetails} loading={loadingItems} />
       </Box>
     </Box>
   );

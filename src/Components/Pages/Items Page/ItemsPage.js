@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
     position: "relative",
     display: "flex",
     flexDirection: "column",
-    rowGap: 25,
+    rowGap: 10,
     width: "100%",
     height: "100%",
   },
