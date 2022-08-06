@@ -49,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Main = ({ cart, details, changeView, addItem, signedIn }) => {
+const Main = ({ cart, details, changeView, addItem, signedIn, alert }) => {
   const classes = useStyles();
 
   const theme = useTheme();
@@ -91,6 +91,7 @@ const Main = ({ cart, details, changeView, addItem, signedIn }) => {
           details={details}
           changeView={changeView}
           addItem={addItem}
+          message={alert}
         />
       </aside>
     </Grid>

@@ -4,8 +4,8 @@ const GET_ITEM_DETAILS = "store/itemsreducer/GET_ITEMS_DETAILS";
 const FETCHING_DETAILS = "store/itemsreducer/FETCHING_DETAILS";
 const DELETE_ITEM = "store/itemsreducer/DELETE_ITEM";
 const ADD_NEW_ITEM = "store/itemsreducer/ADD_NEW_ITEM";
-const FETCH_CATEGORY = "store/itemsreducer/FETCH_CATEGORY"
-
+const FETCH_CATEGORY = "store/itemsreducer/FETCH_CATEGORY";
+const SEARCH_ITEM = "store/itemsreducer/SEARCH_ITEM"
 const initialState = {
   isLoading: false,
   loadingItems: false,
@@ -42,20 +42,25 @@ export const getItemDetails = (details) => ({
   payload: details,
 });
 
-export const deleteItem = (category, id) => ({
+export const deleteItem = (category, id, message) => ({
   type: DELETE_ITEM,
-  payload: { category, id },
+  payload: { category, id, message },
 });
 
-export const addItem = (newItem) => ({
+export const addItem = (data) => ({
   type: ADD_NEW_ITEM,
-  payload: newItem,
+  payload: data,
 });
 
-export const fetchCategories =(categories) => ({
+export const fetchCategories = (categories) => ({
   type: FETCH_CATEGORY,
   payload: categories,
-})
+});
+
+export const searchItem = (itemName) => ({
+  type: SEARCH_ITEM,
+  payload: itemName,
+});
 
 const itemsReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -74,7 +79,7 @@ const itemsReducer = (state = initialState, action) => {
     case GET_ITEMS:
       return {
         ...state,
-        list: [...action.payload],
+        list: action.payload.sort((a, b) => a.category.localeCompare(b.category)),
       };
 
     case GET_ITEM_DETAILS:
@@ -92,37 +97,56 @@ const itemsReducer = (state = initialState, action) => {
         (item) => item.id !== action.payload.id
       );
       state.list[itemIndex].items = newItem;
-      return state;
+      return {
+        ...state,
+        message: action.payload.message
+      };
 
     case ADD_NEW_ITEM:
       const findCategoryIndex = state.list.findIndex(
         (item) =>
-          item.category.toLowerCase() === action.payload.category.toLowerCase()
+          item.category.toLowerCase() === action.payload.data.category.toLowerCase()
       );
       if (findCategoryIndex > 0) {
         const existingItems = state.list[findCategoryIndex].items;
-        const newItems = [...existingItems, action.payload.items];
+        const newItems = [...existingItems, action.payload.data.items];
         state.list[findCategoryIndex].items = newItems;
-        return state;
+        return {
+          ...state,
+          message: action.payload.message
+        };
       } else {
         const list = state.list;
         const newList = [
           ...list,
           {
-            category: action.payload.category,
-            items: [action.payload.items],
+            category: action.payload.data.category,
+            items: [action.payload.data.items],
           },
         ];
         return {
           ...state,
           list: newList,
+          message: action.payload.message,
         };
       }
     case FETCH_CATEGORY:
       return {
         ...state,
-        categories: action.payload
-      }
+        categories: action.payload.sort((a, b) => a.name.localeCompare(b.name)),
+      };
+    case SEARCH_ITEM:
+      const g = state.list.forEach((item) => {
+        const y = item.items.filter((el) => el.name.toLowerCase() === action.payload.toLowerCase())
+        if(y.length >=1) {
+          console.log(item)
+        }
+      })     
+       console.log(g)
+        return {
+          ...state,
+          list: state.list.filter((item)=> item.items.some((el) => el.name.toLowerCase() === action.payload.toLowerCase())),
+        };
     default:
       return state;
   }

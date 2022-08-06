@@ -1,7 +1,9 @@
 import React from "react";
 import { Box, IconButton, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
+import { useDispatch } from "react-redux"
 import { Search } from "@mui/icons-material";
+import { searchItem } from "../../../Store/itemspagereducer/pageReducer";
 
 const useStyles = makeStyles((theme) => ({
   header: {
@@ -74,6 +76,13 @@ const useStyles = makeStyles((theme) => ({
 
 const ItemHeader = () => {
   const classes = useStyles()
+
+  const dispatch = useDispatch()
+
+  const handleSearch = (e) => {
+    e.target.value.length > 2 && dispatch(searchItem(e.target.value))
+  }
+
   return (
     <Box className={classes.header}>
       <Box className={classes.titleCont}>
@@ -90,6 +99,7 @@ const ItemHeader = () => {
           name="search"
           type="text"
           placeholder="search item"
+          onInput={(e) => handleSearch(e)}
         />
         <IconButton className={classes.searchIcon}>
           <Search />

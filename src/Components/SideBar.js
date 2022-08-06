@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Box } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import AddItem from "./Add Item/AddItem";
@@ -14,13 +14,13 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const SideBar = ({ cart, addItem, details, changeView }) => {
+const SideBar = ({ cart, addItem, details, changeView, message }) => {
   const classes = useStyles();
   return (
     <Box className={classes.sideBar}>
       {cart && <Cart changeSideView={changeView} />}
-      {addItem && <AddItem changeView={changeView} />}
-      {details && <ItemDetails changeView={changeView} />}
+      {addItem && <AddItem changeView={changeView} alertMessage={message} />}
+      {details && <ItemDetails changeView={changeView} alertMessage={message} />}
     </Box>
   );
 };

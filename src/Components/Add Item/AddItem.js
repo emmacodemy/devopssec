@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useCallback } from "react";
+import React, { useState, useMemo, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import DatalistInput, { useComboboxControls } from "react-datalist-input";
 import axios from "axios";
@@ -7,9 +7,9 @@ import { makeStyles } from "@mui/styles";
 import AddInput from "./AddInput";
 import AddItemButton from "./AddItemButton";
 import AddHeader from "./AddHeader";
-import { addNewItem } from "../../Store/itemspagereducer/thunkCreators"
+import { addNewItem } from "../../Store/itemspagereducer/thunkCreators";
+import Loading from "../Loading"
 // import 'react-datalist-input/dist/styles.css';
-
 
 const useStyles = makeStyles(() => ({
   addItem: {
@@ -34,17 +34,16 @@ const useStyles = makeStyles(() => ({
 
 const instance = axios.create();
 
-const AddItem = ({ changeView }) => {
-
+const AddItem = ({ changeView, alertMessage }) => {
   const [image, setImage] = useState("");
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const { setValue, value } = useComboboxControls({ initialValue: 'Cereal' });
+  const { setValue, value } = useComboboxControls({ initialValue: "Cereal" });
 
   const category = useSelector((state) => state.items);
 
-  const { categories, loadingItems } = category
+  const { categories, loadingItems, message, isLoading } = category;
 
   const onSelect = useCallback((selectedItem) => {
     setValue(selectedItem.value);
@@ -55,7 +54,7 @@ const AddItem = ({ changeView }) => {
       categories.map((option) => ({
         id: option.id,
         value: option.name,
-        ...option, 
+        ...option,
       })),
     [value]
   );
@@ -109,6 +108,7 @@ const AddItem = ({ changeView }) => {
     let img = images[0];
     const response = await uploadPicture(img);
     setImage(response.url);
+    response.url !== "" && alertMessage("Image successfully uploaded");
   };
 
   const handleInput = (e) => {
@@ -117,50 +117,56 @@ const AddItem = ({ changeView }) => {
   };
 
   const submitItemDetails = async () => {
-    const { name, unit, note } = itemDetails
-    await dispatch(addNewItem(name, image, note, unit, value))
-    setItemDetails({name: '', note:'', unit:''})
-    setImage('')
-    changeView('cart')
-  }
+    const { name, unit, note } = itemDetails;
+    if (name === "") {
+      alertMessage("Item name cannot be empty ");
+      return;
+    }
+    await dispatch(addNewItem(name, image, note, unit, value));
+    setItemDetails({ name: "", note: "", unit: "" });
+    setImage("");
+    alertMessage(message);
+    changeView("cart");
+  };
 
-  useEffect(() => {
-    console.log(value)
-  }, [value]);
-
-    useEffect(() => {
-    console.log(itemDetails.name)
-  }, [itemDetails]);
 
   return (
     <Box className={classes.addItem}>
-      <Box className={classes.root}>
-        <AddHeader />
-        <form>
-          <Box className={classes.formInput}>
-            {input.map((el) => (
-              <AddInput
-              key={el.name}
-                name={el.name}
-                placeholder={el.placeholder}
-                type={el.type}
-                id={el.id}
-                handle={handleInput}
-                imgUpload={handleUpload}
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <Box className={classes.root}>
+          <AddHeader />
+          <form>
+            <Box className={classes.formInput}>
+              {input.map((el) => (
+                <AddInput
+                  key={el.name}
+                  name={el.name}
+                  placeholder={el.placeholder}
+                  type={el.type}
+                  id={el.id}
+                  handle={handleInput}
+                  imgUpload={handleUpload}
+                />
+              ))}
+              <DatalistInput
+                label="Category"
+                placeholder="Select or choose a category"
+                items={items}
+                onSelect={onSelect}
+                value={value}
+                setValue={setValue}
               />
-            ))}
-            <DatalistInput
-              label="Category"
-              placeholder="Select or choose a category"
-              items={items}
-              onSelect={onSelect}
-              value={value}
-              setValue={setValue}
-            />
-          </Box>
-        </form>
-        <AddItemButton change={changeView} submit={submitItemDetails} loading={loadingItems} />
-      </Box>
+            </Box>
+          </form>
+          <AddItemButton
+            change={changeView}
+            submit={submitItemDetails}
+            loading={loadingItems}
+          />
+        </Box>
+      )}
     </Box>
   );
 };

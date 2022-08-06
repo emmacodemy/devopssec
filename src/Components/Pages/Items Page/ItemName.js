@@ -4,6 +4,7 @@ import { fetchItemDetails } from "../../../Store/itemspagereducer/thunkCreators"
 import { useDispatch } from "react-redux";
 import { IconButton, Box, Typography } from "@mui/material";
 import { Add } from "@mui/icons-material";
+import { addItemToCart } from "../../../Store/cartreducer/cartreducer";
 
 const useStyles = makeStyles((theme) => ({
   itemCont: {
@@ -20,11 +21,11 @@ const useStyles = makeStyles((theme) => ({
     "& .MuiTypography-root": {
       width: "75%",
       overflowWrap: 'break-word',
-      textTransform: "capitalize",
       fontFamily: "QuickSand, sans-serif",
       fontSize: 16,
       fontWeight: "bold",
-      color: "#000000",
+      textTransform: 'capitalize',
+      color: "#000",
       textAlign: "left",
     },
     [theme.breakpoints.down("md")]: {
@@ -33,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ItemName = ({ itemName, unit, changeView, control, id }) => {
+const ItemName = ({ itemName, unit, changeView, control, id, catName }) => {
   const classes = useStyles();
 
   const dispatch = useDispatch()
@@ -42,7 +43,11 @@ const ItemName = ({ itemName, unit, changeView, control, id }) => {
     dispatch(fetchItemDetails(id))
     changeView("itemDetails");
     control(false);
-    
+  }
+
+  const addToCart = () => {
+    dispatch(addItemToCart(catName, id, itemName))
+    changeView('cart')
   }
 
   const useUnit = unit !== null ? unit : "";
@@ -51,9 +56,9 @@ const ItemName = ({ itemName, unit, changeView, control, id }) => {
       <Typography
         onClick={() => viewItemDetails(id)}
       >{`${itemName} ${useUnit}`}</Typography>
-      <IconButton>
+      <IconButton onClick={() => addToCart()}>
         {" "}
-        <Add />
+        <Add  />
       </IconButton>
     </Box>
   );

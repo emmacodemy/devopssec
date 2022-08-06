@@ -53,7 +53,7 @@ const AddItemButton = ({ change, submit, loading }) => {
       <button
         onClick={() => submit()}
         className={classes.saveBtn}
-        disabled={loading && true}
+        disabled={loading ? true : false}
       >
         save
       </button>

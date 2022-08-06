@@ -7,12 +7,18 @@ const useStyles = makeStyles(() => ({
     position: "absolute",
     bottom: "5%",
     left: "5%",
-    height: "10vh",
-    width: "50%",
+    height: "150px",
+    borderRadius: 8,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    boxShadow: '0 2px 8px #f2f2f2',
+    width: "300px",
     borderBottom: "2px solid #f9a109",
+    borderTop: "2px solid #f9a109",
     transform: "translateX(-150%)",
     transition: "all 1s",
-    backgroundColor: 'black',
+    backgroundColor: '#fff',
     zIndex: 100
   },
 
@@ -27,12 +33,12 @@ const Alert = ({ message, display }) => {
     <Box
       className={
         display
-          ? `${classes.alertMessage}${classes.display}`
+          ? `${classes.alertMessage} ${classes.display}`
           : classes.alertMessage
       }
     >
       {" "}
-      <p>{message}</p>
+      <p style={{color: '#f9a109', fontSize:'24px'}}>{message}</p>
     </Box>
   );
 };

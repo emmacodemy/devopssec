@@ -27,7 +27,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const ItemDetails = ({ changeView }) => {
+const ItemDetails = ({ changeView, alertMessage }) => {
   const classes = useStyles();
 
   const details = useSelector((state) => state.items);
@@ -50,7 +50,7 @@ const ItemDetails = ({ changeView }) => {
             description={item_details.description}
             categoryName={cat_name}
           />
-          <ButtonControl change={changeView} cat_name={cat_name} id={item_details.id} load={loadingItems}/>
+          <ButtonControl change={changeView} cat_name={cat_name} id={item_details.id} load={loadingItems} displayAlert={alertMessage}/>
         </Box>
       )}
     </Box>

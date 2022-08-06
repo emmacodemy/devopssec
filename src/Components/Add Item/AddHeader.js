@@ -8,6 +8,7 @@ const useStyles = makeStyles(() => ({
     position: "relative",
     display: "flex",
     justifyContent: "flex-start",
+    paddingTop: 10,
   },
   title: {
     color: "#000",

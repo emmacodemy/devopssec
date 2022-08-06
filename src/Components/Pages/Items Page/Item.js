@@ -27,6 +27,7 @@ const Item = ({ itemList, changeView, category, sidecontrol }) => {
           itemName={item.name}
           unit={item.measurement_unit}
           control={sidecontrol}
+          catName={category}
         />
       ))}
     </Box>

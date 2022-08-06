@@ -40,7 +40,7 @@ export const deleteItemFromAPI = (category, id) => async (dispatch) => {
   });
   const response = await itemDetails.json();
   if (response.status === 200) {
-    dispatch(deleteItem(category, id));
+    dispatch(deleteItem(category, id, response.message));
   }
   dispatch(loadingDetails(false));
 };
@@ -61,8 +61,8 @@ export const addNewItem =
       },
     });
     const response = await postItem.json();
-    if (response.status === 201) {
-      dispatch(addItem(response.data));
+    if (response.status !== '') {
+      dispatch(addItem(response));
     }
     dispatch(loadingDetails(false));
   };

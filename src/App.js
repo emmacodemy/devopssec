@@ -22,7 +22,7 @@ function App() {
     itemDetails: false,
   });
 
-  const [alertDisplay, setAlertDisplay] = useState(false);
+  const [alertDisplay, setAlertDisplay] = useState(true);
 
   const [alertMessage, setAlertMessage] = useState("");
 
@@ -64,6 +64,7 @@ function App() {
                 changeView={handleSideBar}
                 signedIn={isSignedIn}
                 signedOut={isSignedOut}
+                alert={controlAlertMessage}
               />
             }
           >
