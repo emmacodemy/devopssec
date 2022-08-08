@@ -1,7 +1,10 @@
 import React from "react";
 import  { Box } from '@mui/material'
 import { makeStyles } from "@mui/styles"
+import { useSelector  } from "react-redux";
 import Add from "./Add";
+import NoItem from "./NoItem";
+import CartButton from "./CartButton";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -29,10 +32,18 @@ const useStyles = makeStyles(() => ({
 
 const Cart = ({ changeSideView }) => {
   const classes = useStyles()
+
+  const cart = useSelector((state) => state.cart)
+
+  const { cartItems } = cart
   return (
     <Box className ={classes.root}>
       <Box className={classes.mainCart}>
         <Add changeView={changeSideView} />
+        {
+          cartItems.length <=0 && <NoItem />
+        }
+        
       {/* <h1>CartPage rendered</h1>
       <button
         onClick={() =>
@@ -43,6 +54,7 @@ const Cart = ({ changeSideView }) => {
       </button> */}
       </Box>
       <Box className={classes.btnCont}>
+        <CartButton cart={cartItems} />
 
       </Box>
       
