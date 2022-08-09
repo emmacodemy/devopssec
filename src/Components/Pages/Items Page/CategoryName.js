@@ -10,7 +10,7 @@ const useStyles = makeStyles(() => ({
             fontFamily: 'QuickSand, sans-serif',
             fontWeight: 'bold',
             fontSize: '18px',
-            color: '#000000',
+            color: '#000',
             textTransform: 'capitalize'
         }
     },

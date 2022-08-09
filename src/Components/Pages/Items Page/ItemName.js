@@ -46,7 +46,7 @@ const ItemName = ({ itemName, unit, changeView, control, id, catName }) => {
   }
 
   const addToCart = () => {
-    dispatch(addItemToCart(catName, id, itemName))
+    dispatch(addItemToCart(catName, id, itemName, unit))
     changeView('cart')
   }
 

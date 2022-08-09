@@ -44,14 +44,7 @@ const Cart = ({ changeSideView }) => {
           cartItems.length <=0 && <NoItem />
         }
         
-      {/* <h1>CartPage rendered</h1>
-      <button
-        onClick={() =>
-          changeSideView('addItem')
-        }
-      >
-        addItem
-      </button> */}
+     
       </Box>
       <Box className={classes.btnCont}>
         <CartButton cart={cartItems} />
