@@ -9,7 +9,6 @@ const useStyles = makeStyles(() => ({
     width: "90%",
     margin: "0 auto",
     position: "relative",
-    
   },
   catContainer: {
     position: 'relative',

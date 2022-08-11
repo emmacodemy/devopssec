@@ -1,29 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import { Box } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { Delete } from "@mui/icons-material";
 import { useSelector } from "react-redux";
+import "./cart.css";
 
 const useStyles = makeStyles(() => ({
   container: {
-    width: "70%",
-    dispay: "flex",
+    width: "55%",
+    display: "flex",
     alignItems: "center",
-    justifyContent: "center",
-    height: 45,
+    justifyContent: "flex-end",
+    height: 35,
     position: "relative",
     borderRadius: 12,
-    backgroundColor: "#fff",
+    cursor: 'pointer'
   },
   delete: {
     width: "20%",
     position: "relative",
     backgroundColor: "#f9a109",
-    border: 12,
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 12,
     height: "100%",
-    display: 'none',
-    outline: 'none',
-    border: 'none',
+    display: "none",
+    outline: "none",
+    border: "none",
+    transition: "all 0.5s",
   },
   control: {
     width: "80%",
@@ -37,38 +41,64 @@ const useStyles = makeStyles(() => ({
     width: "20%",
     color: "#f9a109",
     height: "100%",
+    fontSize: "23px",
+    fontWeight: 800,
+    alignItems: "center",
+    justifyContent: "center",
     position: "relative",
-    display: 'none',
+    display: "none",
+    backgroundColor: 'transparent',
+    border: 'none',
+    outline: 'none',
+    transition: "all 0.5s",
   },
   quantity: {
-    width: "40%",
+    width: "50%",
     color: "#f9a109",
     height: "85%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
     position: "relative",
     backgroundColor: "transparent",
     border: "2px solid #f9a109",
+    borderRadius: 12,
   },
 }));
 
-const ItemControl = ({ quantity }) => {
+const ItemControl = ({ quantity, id }) => {
   const classes = useStyles();
 
-  const cart = useSelector((state) =>  state.cart)
-  
-  const { cartName } = cart
+  const cart = useSelector((state) => state.cart);
+
+  const { editingState } = cart;
+
+  const [itemId, setItemId] = useState("");
+
+  const showControl = () => {
+    setItemId(id);
+  };
+
   return (
-    <Box className={`${classes.container} display`}>
-      {cartName.length === 0 && (
+    <Box
+      onMouseOver={() => showControl()}
+      onMouseLeave={() => setItemId("")}
+      className={
+        itemId === id ? `${classes.container} display` : classes.container
+      }
+    >
+      {!editingState && (
         <button className={classes.delete}>
           {" "}
-          <Delete style={{ color: "#fff" }} />{" "}
+          <Delete style={{ color: "#fff", transform: "scale(0.5)", fontWeight: 400}} />{" "}
         </button>
       )}
 
       <Box className={classes.control}>
-        {cartName.length === 0 && <p className={classes.minus}> - </p>}
-        <h5 className={classes.quantity}>`${quantity} pcs`</h5>
-        {cartName.length === 0 && <p className={classes.minus}> + </p>}
+        { !editingState && <button className={classes.minus}> - </button>}
+        <h5 className={classes.quantity}>{`${quantity} pcs`}</h5>
+        { !editingState && <button className={classes.minus}> + </button>}
+        
       </Box>
     </Box>
   );

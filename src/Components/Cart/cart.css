@@ -1,6 +1,8 @@
-.display p {
-    display: flex;
+.display {
+    background-color: #fff;
 }
+
 .display button {
     display: flex;
+    cursor: pointer;
 }

@@ -5,6 +5,8 @@ import { useSelector  } from "react-redux";
 import Add from "./Add";
 import NoItem from "./NoItem";
 import CartButton from "./CartButton";
+import CartPage from "./CartPage";
+import Loading from "../Loading"
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -35,20 +37,20 @@ const Cart = ({ changeSideView }) => {
 
   const cart = useSelector((state) => state.cart)
 
-  const { cartItems } = cart
+  const { cartItems, isLoading } = cart
   return (
     <Box className ={classes.root}>
       <Box className={classes.mainCart}>
         <Add changeView={changeSideView} />
         {
-          cartItems.length <=0 && <NoItem />
+          cartItems.length > 0 ? <CartPage cartItems={cartItems} /> : <NoItem />
         }
         
-     
       </Box>
       <Box className={classes.btnCont}>
-        <CartButton cart={cartItems} />
-
+        {
+          isLoading ? <Loading /> : <CartButton cart={cartItems} />
+        }
       </Box>
       
     </Box>

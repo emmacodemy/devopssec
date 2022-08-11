@@ -11,6 +11,7 @@ const countItems = (items) => {
 };
 
 const initialState = {
+  editingState: false,
   isLoading: false,
   cartName: "",
   cartStatus: "",
