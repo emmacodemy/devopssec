@@ -91,7 +91,7 @@ const Main = ({ cart, details, changeView, addItem, signedIn, alert }) => {
           details={details}
           changeView={changeView}
           addItem={addItem}
-          message={alert}
+          alert={alert}
         />
       </aside>
     </Grid>

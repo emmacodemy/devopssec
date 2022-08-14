@@ -25,6 +25,7 @@ const CartList = ({ list, category }) => {
           unit={item.measurement_unit}
           catName={category}
           quantity={item.quantity}
+          selected={item.selected}
         />
       ))}
     </Box>

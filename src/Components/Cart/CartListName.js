@@ -1,48 +1,71 @@
 import React from "react";
 import { Box } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux";
 import ItemControl from "./ItemControl";
+import { editItem } from "../../Store/cartreducer/cartreducer";
 
 const useStyles = makeStyles(() => ({
   container: {
-    width: '100%',
-    position: 'relative',
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    width: "100%",
+    position: "relative",
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
   },
-  
+
   itemName: {
-    psoition: 'relative',
-    width: '40%',
-    overflowWrap: "break-word",
-    display: 'flex',
-    justifyContent: 'space-between'
+    position: "relative",
+    width: "43%",
+    display: "flex",
+    columnGap: "10px",
   },
   name: {
-    color: '#000', 
-    textTransform: 'capitalize', 
-    fontSize:'18px',
-    fontWeight: 500, 
-  }
+    color: "#000",
+    textTransform: "capitalize",
+    fontSize: "16px",
+    fontWeight: "normal",
+    width: "100%",
+    overflowWrap: "break-word",
+  },
+  edit: {
+    textDecoration: "line-through",
+  },
 }));
 
-const CartListName = ({ name, quantity, unit, catName, id  }) => {
+const CartListName = ({ name, quantity, unit, catName, id, selected }) => {
   const classes = useStyles();
 
-  const cart = useSelector((state) => state.cart)
+  const dispatch = useDispatch();
 
-  const { editingState } = cart
+  const cart = useSelector((state) => state.cart);
+
+  const handleInput = (e) => {
+    console.log(selected);
+    dispatch(editItem(catName, id, e.target.checked));
+  };
+
+  const { editingState } = cart;
   return (
     <Box className={classes.container}>
       <Box className={classes.itemName}>
-        {
-          editingState && <input type="checkbox" />
-        }
-        <p className={classes.name}>{name}</p>
+        {editingState && (
+          <input
+            type="checkbox"
+            className="input"
+            onChange={(e) => handleInput(e)}
+            value={selected}
+          />
+        )}
+        <p
+          className={
+            selected ? `${classes.name} ${classes.edit}` : classes.name
+          }
+        >
+          {name}
+        </p>
       </Box>
-      <ItemControl quantity={quantity} id={id}/>
+      <ItemControl quantity={quantity} id={id} category={catName} />
     </Box>
   );
 };

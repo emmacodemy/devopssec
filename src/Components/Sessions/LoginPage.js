@@ -75,7 +75,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const LoginPage = ({ loading, signedIn, message, alert }) => {
+const LoginPage = ({ loading, signedIn }) => {
   const classes = useStyles();
 
   const dispatch = useDispatch();

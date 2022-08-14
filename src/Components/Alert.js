@@ -1,46 +1,34 @@
 import React from "react";
-import { Box } from "@mui/material";
+import { Box, Alert, AlertTitle } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   alertMessage: {
-    position: "absolute",
-    bottom: "5%",
-    left: "5%",
-    height: "150px",
-    borderRadius: 8,
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    boxShadow: '0 2px 8px #f2f2f2',
-    width: "300px",
-    borderBottom: "2px solid #f9a109",
-    borderTop: "2px solid #f9a109",
-    transform: "translateX(-150%)",
-    transition: "all 1s",
-    backgroundColor: '#fff',
-    zIndex: 100
-  },
+    position: 'absolute',
+    width: "30vw",
+    height: '150px',
+    bottom: '2%',
+    left: '5%',
+    zIndex: 20,
+    [theme.breakpoints.down('md')]: {
+      width: '75vw'
+    }
+  }
+}))
 
-  display: {
-    transform: "translateX(5%)",
-  },
-}));
 
-const Alert = ({ message, display }) => {
+
+const AlertNotification = ({ message, display, severity }) => {
   const classes = useStyles();
   return (
-    <Box
-      className={
-        display
-          ? `${classes.alertMessage} ${classes.display}`
-          : classes.alertMessage
-      }
+    <Box className={classes.alertMessage}
     >
-      {" "}
-      <p style={{color: '#f9a109', fontSize:'24px'}}>{message}</p>
+      <Alert severity={severity}  onClose={() => display()}>
+        <AlertTitle>{severity === "success" ? "Success" : "Error"}</AlertTitle>
+        {message}
+      </Alert>
     </Box>
   );
 };
 
-export default Alert;
+export default AlertNotification;

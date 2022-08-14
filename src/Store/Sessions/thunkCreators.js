@@ -18,9 +18,9 @@ export const handleSignIn = (username, password) => async (dispatch) => {
   if (token) {
     localStorage.setItem("user-token", JSON.stringify(token));
     localStorage.setItem("session", true);
-    dispatch(userSignIn(response.message));
+    dispatch(userSignIn(response.message, response.status));
   } else {
-    dispatch(userSignIn(response.message));
+    dispatch(userSignIn(response.message, response.status));
   }
   dispatch(handleLoading(false));
 };
@@ -38,9 +38,9 @@ export const handleSignUp = (username, email, password) => async (dispatch) => {
   const serverResponse = await postDetails.json();
   const userToken = postDetails.headers.get("Authorization");
   if (userToken) {
-    dispatch(userSignUp(serverResponse.message, true));
+    dispatch(userSignUp(serverResponse.message, true, serverResponse.status));
   } else {
-    dispatch(userSignUp(serverResponse.message, false));
+    dispatch(userSignUp(serverResponse.message, false, serverResponse.status));
   }
   dispatch(handleLoading(false));
 };
@@ -57,7 +57,7 @@ export const handleSignOut = () => async (dispatch) => {
   });
   const response = await details.json()
   if (response.status === 200 ) {
-    dispatch(userSignOut(response.message))
+    dispatch(userSignOut(response.message, response.status))
     clearSession()
   }
   dispatch(handleLoading(false))

@@ -2,7 +2,12 @@ import React, { useState } from "react";
 import { Box } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { Delete } from "@mui/icons-material";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  increaseQuantity,
+  decreaseQuantity,
+  deleteFromCart,
+} from "../../Store/cartreducer/cartreducer";
 import "./cart.css";
 
 const useStyles = makeStyles(() => ({
@@ -14,7 +19,7 @@ const useStyles = makeStyles(() => ({
     height: 35,
     position: "relative",
     borderRadius: 12,
-    cursor: 'pointer'
+    cursor: "pointer",
   },
   delete: {
     width: "20%",
@@ -47,9 +52,9 @@ const useStyles = makeStyles(() => ({
     justifyContent: "center",
     position: "relative",
     display: "none",
-    backgroundColor: 'transparent',
-    border: 'none',
-    outline: 'none',
+    backgroundColor: "transparent",
+    border: "none",
+    outline: "none",
     transition: "all 0.5s",
   },
   quantity: {
@@ -66,8 +71,22 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const ItemControl = ({ quantity, id }) => {
+const ItemControl = ({ quantity, id, category }) => {
   const classes = useStyles();
+
+  const dispatch = useDispatch();
+
+  const increaseItemQuantity = () => {
+    dispatch(increaseQuantity(category, id));
+  };
+
+  const decreaseItemQuantity = () => {
+    dispatch(decreaseQuantity(category, id));
+  };
+
+  const deleteItem = () => {
+    dispatch(deleteFromCart(category, id));
+  };
 
   const cart = useSelector((state) => state.cart);
 
@@ -88,17 +107,34 @@ const ItemControl = ({ quantity, id }) => {
       }
     >
       {!editingState && (
-        <button className={classes.delete}>
+        <button className={classes.delete} onClick={() => deleteItem()}>
           {" "}
-          <Delete style={{ color: "#fff", transform: "scale(0.5)", fontWeight: 400}} />{" "}
+          <Delete
+            style={{ color: "#fff", transform: "scale(0.5)", fontWeight: 400 }}
+          />{" "}
         </button>
       )}
 
       <Box className={classes.control}>
-        { !editingState && <button className={classes.minus}> - </button>}
+        {!editingState && (
+          <button
+            onClick={() => decreaseItemQuantity()}
+            className={classes.minus}
+          >
+            {" "}
+            -{" "}
+          </button>
+        )}
         <h5 className={classes.quantity}>{`${quantity} pcs`}</h5>
-        { !editingState && <button className={classes.minus}> + </button>}
-        
+        {!editingState && (
+          <button
+            onClick={() => increaseItemQuantity()}
+            className={classes.minus}
+          >
+            {" "}
+            +{" "}
+          </button>
+        )}
       </Box>
     </Box>
   );

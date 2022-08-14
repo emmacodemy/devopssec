@@ -3,6 +3,7 @@ import { Box } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteItemFromAPI } from "../../Store/itemspagereducer/thunkCreators";
+import { addItemToCart } from "../../Store/cartreducer/cartreducer";
 
 const useStyles = makeStyles(() => ({
   btnCont: {
@@ -37,7 +38,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const ButtonControl = ({ cat_name, id, change, displayAlert }) => {
+const ButtonControl = ({ cat_name, id, change, name, unit }) => {
   const classes = useStyles();
 
   const dispatch = useDispatch();
@@ -49,7 +50,6 @@ const ButtonControl = ({ cat_name, id, change, displayAlert }) => {
   const handleDeleteItem = async (category, id) => {
     await dispatch(deleteItemFromAPI(category, id));
     change("cart");
-    displayAlert(message)
   };
   return (
     <Box className={classes.btnCont}>
@@ -59,7 +59,12 @@ const ButtonControl = ({ cat_name, id, change, displayAlert }) => {
       >
         delete
       </button>
-      <button className={classes.addBtn}>Add to list</button>
+      <button
+        onClick={() => dispatch(addItemToCart(cat_name, id, name, unit))}
+        className={classes.addBtn}
+      >
+        Add to list
+      </button>
     </Box>
   );
 };

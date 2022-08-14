@@ -5,13 +5,16 @@ const FETCHING_DETAILS = "store/itemsreducer/FETCHING_DETAILS";
 const DELETE_ITEM = "store/itemsreducer/DELETE_ITEM";
 const ADD_NEW_ITEM = "store/itemsreducer/ADD_NEW_ITEM";
 const FETCH_CATEGORY = "store/itemsreducer/FETCH_CATEGORY";
-const SEARCH_ITEM = "store/itemsreducer/SEARCH_ITEM"
+const SEARCH_ITEM = "store/itemsreducer/SEARCH_ITEM";
+
 const initialState = {
   isLoading: false,
   loadingItems: false,
   categories: [],
   list: [],
   itemDetails: {},
+  serverStatus: 200,
+  itemMessage: "Welcome to Shoppingify",
 };
 
 // const handleDeleteItem = (state, payload) => {
@@ -42,9 +45,9 @@ export const getItemDetails = (details) => ({
   payload: details,
 });
 
-export const deleteItem = (category, id, message) => ({
+export const deleteItem = (category, id, message, serverStatus) => ({
   type: DELETE_ITEM,
-  payload: { category, id, message },
+  payload: { category, id, message, serverStatus },
 });
 
 export const addItem = (data) => ({
@@ -79,7 +82,9 @@ const itemsReducer = (state = initialState, action) => {
     case GET_ITEMS:
       return {
         ...state,
-        list: action.payload.sort((a, b) => a.category.localeCompare(b.category)),
+        list: action.payload.sort((a, b) =>
+          a.category.localeCompare(b.category)
+        ),
       };
 
     case GET_ITEM_DETAILS:
@@ -99,37 +104,50 @@ const itemsReducer = (state = initialState, action) => {
       state.list[itemIndex].items = newItem;
       return {
         ...state,
-        message: action.payload.message
+        itemMessage: action.payload.message,
+        serverStatus: action.payload.serverStatus,
       };
 
     case ADD_NEW_ITEM:
-      const findCategoryIndex = state.list.findIndex(
-        (item) =>
-          item.category.toLowerCase() === action.payload.data.category.toLowerCase()
-      );
-      if (findCategoryIndex > 0) {
-        const existingItems = state.list[findCategoryIndex].items;
-        const newItems = [...existingItems, action.payload.data.items];
-        state.list[findCategoryIndex].items = newItems;
-        return {
-          ...state,
-          message: action.payload.message
-        };
+      if (action.payload.data) {
+        const findCategoryIndex = state.list.findIndex(
+          (item) =>
+            item.category.toLowerCase() ===
+            action.payload.data.category.toLowerCase()
+        );
+        if (findCategoryIndex > 0) {
+          const existingItems = state.list[findCategoryIndex].items;
+          const newItems = [...existingItems, action.payload.data.items];
+          state.list[findCategoryIndex].items = newItems;
+          return {
+            ...state,
+            itemMessage: action.payload.message,
+            serverStatus: action.payload.status,
+          };
+        } else {
+          const list = state.list;
+          const newList = [
+            ...list,
+            {
+              category: action.payload.data.category,
+              items: [action.payload.data.items],
+            },
+          ];
+          return {
+            ...state,
+            list: newList,
+            itemMessage: action.payload.message,
+            serverStatus: action.payload.status,
+          };
+        }
       } else {
-        const list = state.list;
-        const newList = [
-          ...list,
-          {
-            category: action.payload.data.category,
-            items: [action.payload.data.items],
-          },
-        ];
         return {
           ...state,
-          list: newList,
-          message: action.payload.message,
+          itemMessage: action.payload.message,
+          serverStatus: action.payload.status,
         };
       }
+
     case FETCH_CATEGORY:
       return {
         ...state,
@@ -137,16 +155,22 @@ const itemsReducer = (state = initialState, action) => {
       };
     case SEARCH_ITEM:
       const g = state.list.forEach((item) => {
-        const y = item.items.filter((el) => el.name.toLowerCase() === action.payload.toLowerCase())
-        if(y.length >=1) {
-          console.log(item)
+        const y = item.items.filter(
+          (el) => el.name.toLowerCase() === action.payload.toLowerCase()
+        );
+        if (y.length >= 1) {
+          console.log(item);
         }
-      })     
-       console.log(g)
-        return {
-          ...state,
-          list: state.list.filter((item)=> item.items.some((el) => el.name.toLowerCase() === action.payload.toLowerCase())),
-        };
+      });
+      console.log(g);
+      return {
+        ...state,
+        list: state.list.filter((item) =>
+          item.items.some(
+            (el) => el.name.toLowerCase() === action.payload.toLowerCase()
+          )
+        ),
+      };
     default:
       return state;
   }

@@ -40,7 +40,7 @@ export const deleteItemFromAPI = (category, id) => async (dispatch) => {
   });
   const response = await itemDetails.json();
   if (response.status === 200) {
-    dispatch(deleteItem(category, id, response.message));
+    dispatch(deleteItem(category, id, response.message, response.status));
   }
   dispatch(loadingDetails(false));
 };

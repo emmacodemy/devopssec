@@ -81,7 +81,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const RegisterPage = ({ loading, signedUp, alert, message }) => {
+const RegisterPage = ({ loading, signedUp }) => {
   const classes = useStyles();
   const [formErrorMessage, setFormErrorMessage] = useState({});
 
@@ -114,7 +114,6 @@ const RegisterPage = ({ loading, signedUp, alert, message }) => {
         userDetails.password
       )
     );
-    alert(message);
     signedUp && navigate("/login");
   };
 

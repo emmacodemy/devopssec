@@ -8,13 +8,23 @@ import ItemsPage from "./Components/Pages/Items Page/ItemsPage";
 import LoginPage from "./Components/Sessions/LoginPage";
 import RegisterPage from "./Components/Sessions/RegisterPage";
 import Main from "./Components/Pages/Main";
-import Alert from "./Components/Alert";
+import AlertNotification from "./Components/Alert";
 
 function App() {
   const sessionDetails = useSelector((state) => state.sessions);
 
-  const { isLoading, isSignedUp, isSignedIn, isSignedOut, message } =
-    sessionDetails;
+  const itemsDetails = useSelector((state) => state.items);
+
+  const {
+    isLoading,
+    isSignedUp,
+    isSignedIn,
+    isSignedOut,
+    sessionMessage,
+    status,
+  } = sessionDetails;
+
+  const { itemMessage, serverStatus } = itemsDetails;
 
   const [sideDisplay, setSideDisplay] = useState({
     cart: true,
@@ -22,9 +32,11 @@ function App() {
     itemDetails: false,
   });
 
-  const [alertDisplay, setAlertDisplay] = useState(true);
+  const [alertDisplay, setAlertDisplay] = useState(false);
 
   const [alertMessage, setAlertMessage] = useState("");
+
+  const [alertSeverity, setAlertSeverity] = useState("");
 
   const handleSideBar = (view) => {
     setSideDisplay((prevState) => {
@@ -36,21 +48,39 @@ function App() {
     });
   };
 
-  const controlAlertMessage = (message) => {
-    setAlertMessage(message);
+  const closeAlertMessage = () => {
+    setAlertDisplay(false);
   };
 
+  const controlAlertMessage = (message, severity) => {
+    setAlertMessage(message)
+    setAlertSeverity(severity)
+    setAlertDisplay(true)
+  }
+
   useEffect(() => {
+    serverStatus === 200 || 201
+      ? setAlertSeverity("success")
+      : setAlertSeverity("error");
     setAlertDisplay(true);
-    console.log(alertMessage)
-    setTimeout(() => {
-      setAlertDisplay(false);
-    }, 5000);
-  }, [alertMessage]);
+    setAlertMessage(itemMessage);
+  }, [itemMessage]);
+
+  useEffect(() => {
+    status === 200 ? setAlertSeverity("success") : setAlertSeverity("error");
+    setAlertDisplay(true);
+    setAlertMessage(sessionMessage);
+  }, [sessionMessage]);
 
   return (
     <div className="App">
-      <Alert message={alertMessage} display={alertDisplay} />
+      {alertDisplay && (
+        <AlertNotification
+          message={alertMessage}
+          display={closeAlertMessage}
+          severity={alertSeverity}
+        />
+      )}
       <div>
         <Routes>
           <Route
@@ -78,25 +108,11 @@ function App() {
           </Route>
           <Route
             path="/login"
-            element={
-              <LoginPage
-                loading={isLoading}
-                signedIn={isSignedIn}
-                alert={controlAlertMessage}
-                message={message}
-              />
-            }
+            element={<LoginPage loading={isLoading} signedIn={isSignedIn} />}
           />
           <Route
             path="/register"
-            element={
-              <RegisterPage
-                loading={isLoading}
-                signedUp={isSignedUp}
-                alert={controlAlertMessage}
-                message={message}
-              />
-            }
+            element={<RegisterPage loading={isLoading} signedUp={isSignedUp} />}
           />
         </Routes>
       </div>

@@ -14,13 +14,13 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const SideBar = ({ cart, addItem, details, changeView, message }) => {
+const SideBar = ({ cart, addItem, details, changeView, alert }) => {
   const classes = useStyles();
   return (
     <Box className={classes.sideBar}>
-      {cart && <Cart changeSideView={changeView} />}
-      {addItem && <AddItem changeView={changeView} alertMessage={message} />}
-      {details && <ItemDetails changeView={changeView} alertMessage={message} />}
+      {cart && <Cart changeSideView={changeView} alert={alert} />}
+      {addItem && <AddItem changeView={changeView} alert={alert} />}
+      {details && <ItemDetails changeView={changeView} />}
     </Box>
   );
 };

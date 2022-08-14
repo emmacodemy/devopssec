@@ -10,7 +10,8 @@ const initialState = {
   isSignedUp: false,
   isSignedIn: !!getToken(),
   isSignedOut: false,
-  message: "",
+  sessionMessage: "Welcome to Shoppingify",
+  status: 200
 };
 
 export const handleLoading = (status) => ({
@@ -18,19 +19,19 @@ export const handleLoading = (status) => ({
   payload: status,
 });
 
-export const userSignUp = (message, status) => ({
+export const userSignUp = (message, status, serverStatus) => ({
   type: SIGN_UP,
-  payload: { status, message },
+  payload: { status, message, serverStatus },
 });
 
-export const userSignIn = (message) => ({
+export const userSignIn = (message, serverStatus) => ({
   type: SIGN_IN,
-  payload: message,
+  payload: {message, serverStatus},
 });
 
-export const userSignOut = (message) => ({
+export const userSignOut = (message, serverStatus) => ({
   type: SIGN_OUT,
-  payload: message,
+  payload: {message, serverStatus},
 });
 
 const sessionReducer = (state = initialState, action) => {
@@ -43,22 +44,25 @@ const sessionReducer = (state = initialState, action) => {
     case SIGN_UP:
       return {
         ...state,
-        message: action.payload.message,
+        sessionMessage: action.payload.message,
         isSignedUp: action.payload.status,
+        status:action.payload.serverStatus
       };
     case SIGN_IN: {
       return {
         ...state,
-        message: action.payload,
+        sessionMessage: action.payload.message,
         isSignedIn: !!getToken(),
+        status: action.payload.serverStatus,
       };
     }
     case SIGN_OUT: {
       return {
         ...state,
-        message: action.payload,
+        sessionMessage: action.payload.message,
         isSignedOut: true,
         isSignedIn: false,
+        status:action.payload.serverStatus
       };
     }
     default:

@@ -32,24 +32,24 @@ const useStyles = makeStyles(() => ({
   }
 }))
 
-const Cart = ({ changeSideView }) => {
+const Cart = ({ changeSideView, alert }) => {
   const classes = useStyles()
 
   const cart = useSelector((state) => state.cart)
 
-  const { cartItems, isLoading } = cart
+  const { cartItems, isLoading, cartName } = cart
   return (
     <Box className ={classes.root}>
       <Box className={classes.mainCart}>
         <Add changeView={changeSideView} />
         {
-          cartItems.length > 0 ? <CartPage cartItems={cartItems} /> : <NoItem />
+          cartItems.length > 0 ? <CartPage cartItems={cartItems} name={cartName} /> : <NoItem />
         }
         
       </Box>
       <Box className={classes.btnCont}>
         {
-          isLoading ? <Loading /> : <CartButton cart={cartItems} />
+          isLoading ? <Loading /> : <CartButton cart={cartItems} alert={alert} />
         }
       </Box>
       

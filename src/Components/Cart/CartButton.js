@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@mui/styles";
+import { useNavigate } from "react-router-dom";
 import { Box } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import { createNewCart } from "../../Store/cartreducer/thunkCreator";
 
 const useStyles = makeStyles(() => ({
   buttonContainer: {
@@ -43,16 +46,38 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const CartButton = ({ cart }) => {
+const CartButton = ({ cart, alert }) => {
   const classes = useStyles()
+
+  const navigate = useNavigate()
+
+  const dispatch = useDispatch()
+
+  const sessions = useSelector((state) => state.sessions)
+
+  const { isSignedIn } = sessions
+
+  const [ cartName, setCartName] = useState('')
+
+  const handleSubmit = (e) => {
+    if(isSignedIn) {
+      e.preventDefault()
+      dispatch(createNewCart(cartName))
+    } else {
+      navigate("/login")
+      alert("Please sign in to continue", "info")
+    }
+    
+  }
   return (
     <Box className={classes.buttonContainer}>
-      <form className={classes.form}>
+      <form onSubmit={(e) => handleSubmit(e)} className={classes.form}>
         <input
           type="text"
           className={classes.input}
           required
           placeholder="Enter a name"
+          onInput={(e) => setCartName(e.target.value)}
         />
         <button
           disabled={cart.length > 0 ? false : true}

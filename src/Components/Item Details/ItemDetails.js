@@ -8,7 +8,6 @@ import Name from "./Name";
 import ButtonControl from "./ButtonControl";
 import Loading from "../Loading";
 
-
 const useStyles = makeStyles(() => ({
   container: {
     width: "80%",
@@ -27,7 +26,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const ItemDetails = ({ changeView, alertMessage }) => {
+const ItemDetails = ({ changeView }) => {
   const classes = useStyles();
 
   const details = useSelector((state) => state.items);
@@ -50,7 +49,14 @@ const ItemDetails = ({ changeView, alertMessage }) => {
             description={item_details.description}
             categoryName={cat_name}
           />
-          <ButtonControl change={changeView} cat_name={cat_name} id={item_details.id} load={loadingItems} displayAlert={alertMessage}/>
+          <ButtonControl
+            change={changeView}
+            cat_name={cat_name}
+            id={item_details.id}
+            unit={item_details.measurement_unit}
+            name={item_details.name}
+            load={loadingItems}
+          />
         </Box>
       )}
     </Box>

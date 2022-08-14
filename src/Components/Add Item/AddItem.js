@@ -8,7 +8,7 @@ import AddInput from "./AddInput";
 import AddItemButton from "./AddItemButton";
 import AddHeader from "./AddHeader";
 import { addNewItem } from "../../Store/itemspagereducer/thunkCreators";
-import Loading from "../Loading"
+import Loading from "../Loading";
 // import 'react-datalist-input/dist/styles.css';
 
 const useStyles = makeStyles(() => ({
@@ -34,16 +34,16 @@ const useStyles = makeStyles(() => ({
 
 const instance = axios.create();
 
-const AddItem = ({ changeView, alertMessage }) => {
+const AddItem = ({ changeView, alert }) => {
   const [image, setImage] = useState("");
 
   const dispatch = useDispatch();
 
-  const { setValue, value } = useComboboxControls({ initialValue: "Cereal" });
+  const { setValue, value } = useComboboxControls();
 
   const category = useSelector((state) => state.items);
 
-  const { categories, loadingItems, message, isLoading } = category;
+  const { categories, loadingItems, isLoading } = category;
 
   const onSelect = useCallback((selectedItem) => {
     setValue(selectedItem.value);
@@ -108,7 +108,7 @@ const AddItem = ({ changeView, alertMessage }) => {
     let img = images[0];
     const response = await uploadPicture(img);
     setImage(response.url);
-    response.url !== "" && alertMessage("Image successfully uploaded");
+    response.url !== "" && alert("Image successfully uploaded", "success");
   };
 
   const handleInput = (e) => {
@@ -118,17 +118,15 @@ const AddItem = ({ changeView, alertMessage }) => {
 
   const submitItemDetails = async () => {
     const { name, unit, note } = itemDetails;
-    if (name === "") {
-      alertMessage("Item name cannot be empty ");
+    if (name === "" || value === "") {
+      alert("Item name or category cannot be empty", "error");
       return;
     }
     await dispatch(addNewItem(name, image, note, unit, value));
     setItemDetails({ name: "", note: "", unit: "" });
     setImage("");
-    alertMessage(message);
     changeView("cart");
   };
-
 
   return (
     <Box className={classes.addItem}>
@@ -164,6 +162,7 @@ const AddItem = ({ changeView, alertMessage }) => {
             change={changeView}
             submit={submitItemDetails}
             loading={loadingItems}
+            alert={alert}
           />
         </Box>
       )}

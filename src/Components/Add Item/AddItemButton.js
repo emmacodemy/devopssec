@@ -1,6 +1,8 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { Box } from "@mui/material";
 import { makeStyles } from "@mui/styles";
+import { useSelector } from "react-redux";
 // import { useDispatch } from "react-redux"
 
 const useStyles = makeStyles(() => ({
@@ -36,8 +38,24 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const AddItemButton = ({ change, submit, loading }) => {
+const AddItemButton = ({ change, submit, loading, alert }) => {
   const classes = useStyles();
+
+  const navigate = useNavigate()
+  
+  const sessions = useSelector((state) => state.sessions)
+
+  const { isSignedIn } = sessions
+
+  const handleSubmit = () => {
+    if(isSignedIn) {
+      submit()
+    } else {
+      navigate("/login")
+      alert("Please sign in to continue", "info")
+    }
+  }
+
 
   // const dispatch = useDispatch()
 
@@ -51,7 +69,7 @@ const AddItemButton = ({ change, submit, loading }) => {
         cancel
       </button>
       <button
-        onClick={() => submit()}
+        onClick={() => handleSubmit()}
         className={classes.saveBtn}
         disabled={loading ? true : false}
       >
