@@ -111,17 +111,30 @@ const NavBar = ({ changeView, signedIn, sidecontrol }) => {
               changeView("cart");
               sidecontrol(false);
             }}
+            aria-label="shopping-cart"
+            aria-hidden="false"
+            title="shopping-cart"
           >
             <ShoppingCart style={{ color: "#fff" }} />
           </IconButton>
         </Box>
         <Box>
           {signedIn ? (
-            <IconButton onClick={() => signOut()}>
+            <IconButton
+              aria-label="sign out"
+              aria-hidden="false"
+              title="sign out"
+              onClick={() => signOut()}
+            >
               <PowerSettingsNew style={{ color: "#f9a109" }} />
             </IconButton>
           ) : (
-            <IconButton onClick={() => navigate("/login")}>
+            <IconButton
+              aria-label="login"
+              aria-hidden="false"
+              title="login"
+              onClick={() => navigate("/login")}
+            >
               <Login style={{ color: "#f9a109" }} />
             </IconButton>
           )}

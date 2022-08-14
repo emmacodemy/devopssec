@@ -8,7 +8,7 @@ const useStyles = makeStyles(() => ({
     width: "100%",
     position: "relative",
     display: "flex",
-    flexDirection: 'column',
+    flexDirection: "column",
     rowGap: 5,
   },
 }));

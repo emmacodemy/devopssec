@@ -24,7 +24,7 @@ const useStyles = makeStyles(() => ({
     position: "relative",
     padding: "12px",
     fontSize: 16,
-    color: "#000"
+    color: "#000",
   },
   submit: {
     position: "absolute",
@@ -34,41 +34,40 @@ const useStyles = makeStyles(() => ({
     fontWeight: 700,
     padding: "9px 23px 9px 23px",
     borderRadius: 13,
-    color: '#fff',
+    color: "#fff",
     backgroundColor: "#f9a109",
-    border: 'none',
-    outline: 'none',
-    cursor: 'pointer',
+    border: "none",
+    outline: "none",
+    cursor: "pointer",
     "&:disabled": {
-        backgroundColor: '#c1c1c4',
-        cursor: "not-allowed"
-    }
+      backgroundColor: "#c1c1c4",
+      cursor: "not-allowed",
+    },
   },
 }));
 
 const CartButton = ({ cart, alert }) => {
-  const classes = useStyles()
+  const classes = useStyles();
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const sessions = useSelector((state) => state.sessions)
+  const sessions = useSelector((state) => state.sessions);
 
-  const { isSignedIn } = sessions
+  const { isSignedIn } = sessions;
 
-  const [ cartName, setCartName] = useState('')
+  const [cartName, setCartName] = useState("");
 
   const handleSubmit = (e) => {
-    if(isSignedIn) {
-      e.preventDefault()
-      dispatch(createNewCart(cartName))
+    if (isSignedIn) {
+      e.preventDefault();
+      dispatch(createNewCart(cartName));
     } else {
-      navigate("/login")
-      alert("Please sign in to continue", "info")
+      navigate("/login");
+      alert("Please sign in to continue", "info");
     }
-    
-  }
+  };
   return (
     <Box className={classes.buttonContainer}>
       <form onSubmit={(e) => handleSubmit(e)} className={classes.form}>

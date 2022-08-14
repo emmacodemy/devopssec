@@ -29,17 +29,21 @@ const NavLinks = ({ path, icon, currentLink, index, display, control }) => {
     >
       <NavLink to={`/${path}`} onClick={() => control(true)}>
         {icon === "list" && (
-          <IconButton>
+          <IconButton title="items" aria-hidden="false" aria-label="items">
             <List />
           </IconButton>
         )}
         {icon === "history" && (
-          <IconButton>
+          <IconButton title="history" aria-hidden="false" aria-label="history">
             <Replay />
           </IconButton>
         )}
         {icon === "stat" && (
-          <IconButton>
+          <IconButton
+            title="statistics"
+            aria-hidden="false"
+            aria-label="statistics"
+          >
             <InsertChartOutlinedOutlined />
           </IconButton>
         )}

@@ -41,28 +41,21 @@ const useStyles = makeStyles(() => ({
 const AddItemButton = ({ change, submit, loading, alert }) => {
   const classes = useStyles();
 
-  const navigate = useNavigate()
-  
-  const sessions = useSelector((state) => state.sessions)
+  const navigate = useNavigate();
 
-  const { isSignedIn } = sessions
+  const sessions = useSelector((state) => state.sessions);
+
+  const { isSignedIn } = sessions;
 
   const handleSubmit = () => {
-    if(isSignedIn) {
-      submit()
+    if (isSignedIn) {
+      submit();
     } else {
-      navigate("/login")
-      alert("Please sign in to continue", "info")
+      navigate("/login");
+      alert("Please sign in to continue", "info");
     }
-  }
+  };
 
-
-  // const dispatch = useDispatch()
-
-  // const handleDeleteItem =  async (category, id) => {
-  //  await dispatch(deleteItemFromAPI(category, id))
-  //  change('cart')
-  // }
   return (
     <Box className={classes.btnCont}>
       <button onClick={() => change("cart")} className={classes.cancelBtn}>
