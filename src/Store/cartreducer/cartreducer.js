@@ -221,6 +221,7 @@ const cartReducer = (state = initialState, action) => {
       return {
         ...state,
         cartName: action.payload,
+        editingState: true,
   
       }
 

@@ -52,7 +52,7 @@ const Cart = ({ changeSideView, alert }) => {
         {isLoading ? (
           <Loading />
         ) : (
-          <CartButton cart={cartItems} alert={alert} />
+          <CartButton cart={cartItems} alert={alert} name={cartName} />
         )}
       </Box>
     </Box>

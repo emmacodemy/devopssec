@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Box } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { createNewCart } from "../../Store/cartreducer/thunkCreator";
+import CompleteButon from "./CompleteButon";
 
 const useStyles = makeStyles(() => ({
   buttonContainer: {
@@ -46,7 +47,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const CartButton = ({ cart, alert }) => {
+const CartButton = ({ cart, alert, name }) => {
   const classes = useStyles();
 
   const navigate = useNavigate();
@@ -70,7 +71,8 @@ const CartButton = ({ cart, alert }) => {
   };
   return (
     <Box className={classes.buttonContainer}>
-      <form onSubmit={(e) => handleSubmit(e)} className={classes.form}>
+      {
+        name === "" ? <form onSubmit={(e) => handleSubmit(e)} className={classes.form}>
         <input
           type="text"
           className={classes.input}
@@ -84,7 +86,8 @@ const CartButton = ({ cart, alert }) => {
         >
           Save
         </button>
-      </form>
+      </form> : <CompleteButon />
+      }
     </Box>
   );
 };

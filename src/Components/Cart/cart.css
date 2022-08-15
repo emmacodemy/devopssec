@@ -10,4 +10,5 @@
 .input {
     max-width: 15px;
     max-height: 15px;
+    outline: 1px solid #f9a109;
 }

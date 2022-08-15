@@ -39,7 +39,7 @@ const CartPage = ({ cartItems, name }) => {
   const dispatch = useDispatch();
 
   const toggleEdit = () => {
-    dispatch(editState());
+    name === "" && dispatch(editState());
   };
   return (
     <Box className={classes.container}>
