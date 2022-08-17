@@ -79,9 +79,9 @@ const ItemHeader = () => {
 
   const dispatch = useDispatch()
 
-  const handleSearch = (e) => {
-    e.target.value.length > 2 && dispatch(searchItem(e.target.value))
-  }
+  // const handleSearch = (e) => {
+  //   e.target.value.length > 2 && dispatch(searchItem(e.target.value))
+  // }
 
   return (
     <Box className={classes.header}>
@@ -99,7 +99,6 @@ const ItemHeader = () => {
           name="search"
           type="text"
           placeholder="search item"
-          onInput={(e) => handleSearch(e)}
         />
         <IconButton className={classes.searchIcon}>
           <Search />

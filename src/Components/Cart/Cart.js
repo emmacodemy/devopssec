@@ -37,7 +37,7 @@ const Cart = ({ changeSideView, alert }) => {
 
   const cart = useSelector((state) => state.cart);
 
-  const { cartItems, isLoading, cartName } = cart;
+  const { cartItems, isLoading, cartName, cartId } = cart;
   return (
     <Box className={classes.root}>
       <Box className={classes.mainCart}>
@@ -52,7 +52,7 @@ const Cart = ({ changeSideView, alert }) => {
         {isLoading ? (
           <Loading />
         ) : (
-          <CartButton cart={cartItems} alert={alert} name={cartName} />
+          <CartButton cart={cartItems} alert={alert} name={cartName} id={cartId} />
         )}
       </Box>
     </Box>

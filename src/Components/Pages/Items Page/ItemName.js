@@ -4,7 +4,7 @@ import { fetchItemDetails } from "../../../Store/itemspagereducer/thunkCreators"
 import { useDispatch } from "react-redux";
 import { IconButton, Box, Typography } from "@mui/material";
 import { Add } from "@mui/icons-material";
-import { addItemToCart } from "../../../Store/cartreducer/cartreducer";
+import { createNewCartItem } from "../../../Store/cartreducer/thunkCreator";
 
 const useStyles = makeStyles((theme) => ({
   itemCont: {
@@ -20,11 +20,11 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "flex-start",
     "& .MuiTypography-root": {
       width: "75%",
-      overflowWrap: 'break-word',
+      overflowWrap: "break-word",
       fontFamily: "QuickSand, sans-serif",
       fontSize: 16,
       fontWeight: "bold",
-      textTransform: 'capitalize',
+      textTransform: "capitalize",
       color: "#000",
       textAlign: "left",
     },
@@ -37,18 +37,18 @@ const useStyles = makeStyles((theme) => ({
 const ItemName = ({ itemName, unit, changeView, control, id, catName }) => {
   const classes = useStyles();
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const viewItemDetails = (id) => {
-    dispatch(fetchItemDetails(id))
+    dispatch(fetchItemDetails(id));
     changeView("itemDetails");
     control(false);
-  }
+  };
 
-  const addToCart = () => {
-    dispatch(addItemToCart(catName, id, itemName, unit))
-    changeView('cart')
-  }
+  const addToCart = async () => {
+    await dispatch(createNewCartItem(itemName, catName, unit));
+    changeView("cart");
+  };
 
   const useUnit = unit !== null ? unit : "";
   return (
@@ -58,7 +58,7 @@ const ItemName = ({ itemName, unit, changeView, control, id, catName }) => {
       >{`${itemName} ${useUnit}`}</Typography>
       <IconButton onClick={() => addToCart()}>
         {" "}
-        <Add  />
+        <Add />
       </IconButton>
     </Box>
   );

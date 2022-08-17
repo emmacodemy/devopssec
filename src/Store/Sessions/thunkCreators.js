@@ -1,7 +1,8 @@
-import { handleLoading, userSignIn, userSignUp, userSignOut } from "./sessionReducer";
-import { clearSession, getToken } from "../utils/session"
+import { handleLoading, userSignUp, userSignIn, userSignOut } from "./sessionReducer";
+import { clearSession, getToken } from "../utils/session";
+import { updateNotification } from "../Notification";
 
-const baseURL = "http://localhost:3000";
+const baseURL = "https://steve95-shoppingify.herokuapp.com/";
 
 export const handleSignIn = (username, password) => async (dispatch) => {
   const userDetails = { user: { username, password } };
@@ -18,9 +19,10 @@ export const handleSignIn = (username, password) => async (dispatch) => {
   if (token) {
     localStorage.setItem("user-token", JSON.stringify(token));
     localStorage.setItem("session", true);
-    dispatch(userSignIn(response.message, response.status));
+    dispatch(userSignIn())
+    dispatch(updateNotification(response.message, response.status));
   } else {
-    dispatch(userSignIn(response.message, response.status));
+    dispatch(updateNotification(response.message, response.status));
   }
   dispatch(handleLoading(false));
 };
@@ -46,19 +48,18 @@ export const handleSignUp = (username, email, password) => async (dispatch) => {
 };
 
 export const handleSignOut = () => async (dispatch) => {
-  const userToken = getToken()
-  dispatch(handleLoading(true))
+  const userToken = getToken();
+  dispatch(handleLoading(true));
   const details = await fetch(`${baseURL}/users/sign_out`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
-      Authorization: userToken
+      Authorization: userToken,
     },
   });
-  const response = await details.json()
-  if (response.status === 200 ) {
-    dispatch(userSignOut(response.message, response.status))
-    clearSession()
-  }
-  dispatch(handleLoading(false))
-}
+  const response = await details.json();
+  dispatch(userSignOut())
+  dispatch(updateNotification(response.message, response.status));
+  clearSession();
+  dispatch(handleLoading(false));
+};

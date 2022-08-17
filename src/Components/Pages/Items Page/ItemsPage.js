@@ -71,8 +71,8 @@ const ItemsPage = ({ changeView }) => {
           <Box className={classes.items}>
             {list.map((listItem) => (
               <CategoryItem
-                key={listItem.category}
-                name={listItem.category}
+                key={listItem.category.id}
+                name={listItem.category.name}
                 list={listItem.items}
                 changeView={changeView}
                 control={handleAside}

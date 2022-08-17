@@ -5,6 +5,7 @@ const FETCHING_DETAILS = "store/itemsreducer/FETCHING_DETAILS";
 const DELETE_ITEM = "store/itemsreducer/DELETE_ITEM";
 const ADD_NEW_ITEM = "store/itemsreducer/ADD_NEW_ITEM";
 const FETCH_CATEGORY = "store/itemsreducer/FETCH_CATEGORY";
+const ADD_NEW_CATEGORY = "store/itemsreducer/ADD_NEW_CATEGORY";
 const SEARCH_ITEM = "store/itemsreducer/SEARCH_ITEM";
 
 const initialState = {
@@ -13,8 +14,6 @@ const initialState = {
   categories: [],
   list: [],
   itemDetails: {},
-  serverStatus: 200,
-  itemMessage: "Welcome to Shoppingify",
 };
 
 // const handleDeleteItem = (state, payload) => {
@@ -45,9 +44,9 @@ export const getItemDetails = (details) => ({
   payload: details,
 });
 
-export const deleteItem = (category, id, message, serverStatus) => ({
+export const deleteItem = (category, id) => ({
   type: DELETE_ITEM,
-  payload: { category, id, message, serverStatus },
+  payload: { category, id },
 });
 
 export const addItem = (data) => ({
@@ -58,6 +57,11 @@ export const addItem = (data) => ({
 export const fetchCategories = (categories) => ({
   type: FETCH_CATEGORY,
   payload: categories,
+});
+
+export const addNewCategory = (categoryName) => ({
+  type: ADD_NEW_CATEGORY,
+  payload: categoryName,
 });
 
 export const searchItem = (itemName) => ({
@@ -83,7 +87,7 @@ const itemsReducer = (state = initialState, action) => {
       return {
         ...state,
         list: action.payload.sort((a, b) =>
-          a.category.localeCompare(b.category)
+          a.category.name.localeCompare(b.category.name)
         ),
       };
 
@@ -96,7 +100,7 @@ const itemsReducer = (state = initialState, action) => {
     case DELETE_ITEM:
       const itemIndex = state.list.findIndex(
         (item) =>
-          item.category.toLowerCase() === action.payload.category.toLowerCase()
+          item.category.name.toLowerCase() === action.payload.category.toLowerCase()
       );
       const newItem = state.list[itemIndex].items.filter(
         (item) => item.id !== action.payload.id
@@ -104,47 +108,33 @@ const itemsReducer = (state = initialState, action) => {
       state.list[itemIndex].items = newItem;
       return {
         ...state,
-        itemMessage: action.payload.message,
-        serverStatus: action.payload.serverStatus,
       };
 
     case ADD_NEW_ITEM:
-      if (action.payload.data) {
-        const findCategoryIndex = state.list.findIndex(
-          (item) =>
-            item.category.toLowerCase() ===
-            action.payload.data.category.toLowerCase()
-        );
-        if (findCategoryIndex > 0) {
-          const existingItems = state.list[findCategoryIndex].items;
-          const newItems = [...existingItems, action.payload.data.items];
-          state.list[findCategoryIndex].items = newItems;
-          return {
-            ...state,
-            itemMessage: action.payload.message,
-            serverStatus: action.payload.status,
-          };
-        } else {
-          const list = state.list;
-          const newList = [
-            ...list,
-            {
-              category: action.payload.data.category,
-              items: [action.payload.data.items],
-            },
-          ];
-          return {
-            ...state,
-            list: newList,
-            itemMessage: action.payload.message,
-            serverStatus: action.payload.status,
-          };
-        }
-      } else {
+      const findCategoryIndex = state.list.findIndex(
+        (item) =>
+          item.category.name.toLowerCase() ===
+          action.payload.data.category.name.toLowerCase()
+      );
+      if (findCategoryIndex >= 0) {
+        const existingItems = state.list[findCategoryIndex].items;
+        const newItems = [...existingItems, action.payload.data.items];
+        state.list[findCategoryIndex].items = newItems;
         return {
           ...state,
-          itemMessage: action.payload.message,
-          serverStatus: action.payload.status,
+        };
+      } else {
+        const list = state.list;
+        const newList = [
+          ...list,
+          {
+            category: action.payload.data.category,
+            items: [action.payload.data.items],
+          },
+        ];
+        return {
+          ...state,
+          list: newList,
         };
       }
 
@@ -153,6 +143,16 @@ const itemsReducer = (state = initialState, action) => {
         ...state,
         categories: action.payload.sort((a, b) => a.name.localeCompare(b.name)),
       };
+    case ADD_NEW_CATEGORY:
+      const checkCategory = state.categories.includes(action.payload);
+      if (!checkCategory) {
+        return {
+          ...state,
+          categories: [...state.categories, action.payload],
+        };
+      }
+      return state;
+
     case SEARCH_ITEM:
       const g = state.list.forEach((item) => {
         const y = item.items.filter(

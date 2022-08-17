@@ -13,18 +13,11 @@ import AlertNotification from "./Components/Alert";
 function App() {
   const sessionDetails = useSelector((state) => state.sessions);
 
-  const itemsDetails = useSelector((state) => state.items);
+  const notificationDetails = useSelector((state) => state.notification);
 
-  const {
-    isLoading,
-    isSignedUp,
-    isSignedIn,
-    isSignedOut,
-    sessionMessage,
-    status,
-  } = sessionDetails;
+  const { isLoading, isSignedUp, isSignedIn, isSignedOut } = sessionDetails;
 
-  const { itemMessage, serverStatus } = itemsDetails;
+  const { notification, notificationStatus } = notificationDetails;
 
   const [sideDisplay, setSideDisplay] = useState({
     cart: true,
@@ -53,24 +46,21 @@ function App() {
   };
 
   const controlAlertMessage = (message, severity) => {
-    setAlertMessage(message)
-    setAlertSeverity(severity)
-    setAlertDisplay(true)
-  }
+    setAlertMessage(message);
+    setAlertSeverity(severity);
+    setAlertDisplay(true);
+  };
 
   useEffect(() => {
-    serverStatus === 200 || 201
+    notificationStatus === 200 || 201
       ? setAlertSeverity("success")
       : setAlertSeverity("error");
     setAlertDisplay(true);
-    setAlertMessage(itemMessage);
-  }, [itemMessage]);
-
-  useEffect(() => {
-    status === 200 ? setAlertSeverity("success") : setAlertSeverity("error");
-    setAlertDisplay(true);
-    setAlertMessage(sessionMessage);
-  }, [sessionMessage]);
+    setAlertMessage(notification);
+    setTimeout(() => {
+      setAlertDisplay(false);
+    }, 5000);
+  }, [notification]);
 
   return (
     <div className="App">

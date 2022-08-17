@@ -5,7 +5,7 @@ const DECREASE_QUANTITY = "store/cartreducer/DECREASE_QUANTITY";
 const DELETE_FROM_CART = "store/cartreducer/DELETE_FROM_CART";
 const EDIT_ITEM = "store/cartreducer/EDIT_ITEM";
 const EDIT_STATE = "store/cartreducer/EDIT_STATE";
-const CREATE_CART = "store/cartreducer/CREATE_CART"
+const CREATE_CART = "store/cartreducer/CREATE_CART";
 
 const countItems = (items) => {
   let totalCount = 0;
@@ -27,9 +27,11 @@ const initialState = {
   editingState: false,
   isLoading: false,
   cartName: "",
+  cartId: "",
   cartStatus: "",
   cartItems: [],
   countCart: 0,
+  message: "",
 };
 
 export const loadingStatus = (payload) => ({
@@ -37,11 +39,19 @@ export const loadingStatus = (payload) => ({
   payload,
 });
 
-export const addItemToCart = (categoryName, id, name, unit) => ({
+export const addItemToCart = (
+  categoryName,
+  quantity,
+  itemName,
+  unit,
+  id,
+  cartId
+) => ({
   type: ADD_TO_CART,
   payload: {
     category: categoryName,
-    items: { name, id, unit },
+    items: { itemName, quantity, unit, id },
+    cartId
   },
 });
 
@@ -71,8 +81,8 @@ export const editState = () => ({
 
 export const createCart = (name) => ({
   type: CREATE_CART,
-  payload: name
-})
+  payload: name,
+});
 
 const cartReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -111,7 +121,6 @@ const cartReducer = (state = initialState, action) => {
             ...items,
             {
               ...action.payload.items,
-              quantity: 1,
               selected: false,
             },
           ];
@@ -120,6 +129,7 @@ const cartReducer = (state = initialState, action) => {
         return {
           ...state,
           countCart: countItems(state.cartItems),
+          cartId: action.payload.cartId
         };
       } else {
         const newList = [
@@ -129,7 +139,6 @@ const cartReducer = (state = initialState, action) => {
             items: [
               {
                 ...action.payload.items,
-                quantity: 1,
                 selected: false,
               },
             ],
@@ -139,6 +148,7 @@ const cartReducer = (state = initialState, action) => {
           ...state,
           cartItems: newList,
           countCart: countItems(state.cartItems),
+          cartId: action.payload.cartId,
         };
       }
     case INCREASE_QUANTITY:
@@ -222,8 +232,7 @@ const cartReducer = (state = initialState, action) => {
         ...state,
         cartName: action.payload,
         editingState: true,
-  
-      }
+      };
 
     default:
       return state;

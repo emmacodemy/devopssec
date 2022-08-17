@@ -1,3 +1,4 @@
+import { updateNotification } from "../Notification";
 import { getToken } from "../utils/session";
 import {
   getItems,
@@ -7,9 +8,10 @@ import {
   loadingDetails,
   addItem,
   fetchCategories,
+  addNewCategory,
 } from "./pageReducer";
 
-const baseURL = "http://localhost:3000";
+const baseURL = "https://steve95-shoppingify.herokuapp.com/";
 
 export const fetchItems = () => async (dispatch) => {
   const token = getToken();
@@ -40,8 +42,9 @@ export const deleteItemFromAPI = (category, id) => async (dispatch) => {
   });
   const response = await itemDetails.json();
   if (response.status === 200) {
-    dispatch(deleteItem(category, id, response.message, response.status));
+    dispatch(deleteItem(category, id));
   }
+  dispatch(updateNotification(response.message, response.status));
   dispatch(loadingDetails(false));
 };
 
@@ -49,6 +52,10 @@ export const addNewItem =
   (name, image, description, measurement_unit, category_name) =>
   async (dispatch) => {
     dispatch(loadingDetails(true));
+    if (image === "") {
+      image =
+        "https://res.cloudinary.com/duj88gras/image/upload/v1660563933/default_nnor2h.png";
+    }
     const userToken = getToken();
     const new_item = { name, image, description, measurement_unit };
     const newItemParams = { category_name, new_item };
@@ -61,9 +68,11 @@ export const addNewItem =
       },
     });
     const response = await postItem.json();
-    if (response.status !== '') {
+    if (response.data) {
       dispatch(addItem(response));
+      dispatch(addNewCategory(response.data.category));
     }
+    dispatch(updateNotification(response.message, response.status));
     dispatch(loadingDetails(false));
   };
 

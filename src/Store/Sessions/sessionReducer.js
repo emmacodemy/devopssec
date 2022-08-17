@@ -19,19 +19,17 @@ export const handleLoading = (status) => ({
   payload: status,
 });
 
-export const userSignUp = (message, status, serverStatus) => ({
+export const userSignUp = (status) => ({
   type: SIGN_UP,
-  payload: { status, message, serverStatus },
+  payload: status,
 });
 
-export const userSignIn = (message, serverStatus) => ({
+export const userSignIn = () => ({
   type: SIGN_IN,
-  payload: {message, serverStatus},
 });
 
-export const userSignOut = (message, serverStatus) => ({
+export const userSignOut = () => ({
   type: SIGN_OUT,
-  payload: {message, serverStatus},
 });
 
 const sessionReducer = (state = initialState, action) => {
@@ -44,25 +42,19 @@ const sessionReducer = (state = initialState, action) => {
     case SIGN_UP:
       return {
         ...state,
-        sessionMessage: action.payload.message,
-        isSignedUp: action.payload.status,
-        status:action.payload.serverStatus
+        isSignedUp: action.payload,
       };
     case SIGN_IN: {
       return {
         ...state,
-        sessionMessage: action.payload.message,
         isSignedIn: !!getToken(),
-        status: action.payload.serverStatus,
       };
     }
     case SIGN_OUT: {
       return {
         ...state,
-        sessionMessage: action.payload.message,
         isSignedOut: true,
         isSignedIn: false,
-        status:action.payload.serverStatus
       };
     }
     default:

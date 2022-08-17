@@ -21,7 +21,7 @@ const CartList = ({ list, category }) => {
         <CartListName
           id={item.id}
           key={item.id}
-          name={item.name}
+          name={item.itemName}
           unit={item.measurement_unit}
           catName={category}
           quantity={item.quantity}

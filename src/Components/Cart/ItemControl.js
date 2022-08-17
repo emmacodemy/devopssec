@@ -6,8 +6,8 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   increaseQuantity,
   decreaseQuantity,
-  deleteFromCart,
 } from "../../Store/cartreducer/cartreducer";
+import { deleteItemFromCart } from "../../Store/cartreducer/thunkCreator";
 import "./cart.css";
 
 const useStyles = makeStyles(() => ({
@@ -85,7 +85,7 @@ const ItemControl = ({ quantity, id, category }) => {
   };
 
   const deleteItem = () => {
-    dispatch(deleteFromCart(category, id));
+    dispatch(deleteItemFromCart(category, id));
   };
 
   const cart = useSelector((state) => state.cart);
