@@ -1,7 +1,7 @@
 import React from "react";
 import { makeStyles } from "@mui/styles";
 import { fetchItemDetails } from "../../../Store/itemspagereducer/thunkCreators";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { IconButton, Box, Typography } from "@mui/material";
 import { Add } from "@mui/icons-material";
 import { createNewCartItem } from "../../../Store/cartreducer/thunkCreator";
@@ -34,10 +34,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ItemName = ({ itemName, unit, changeView, control, id, catName }) => {
+const ItemName = ({ itemName, unit, changeView, control, id, catName, alert }) => {
   const classes = useStyles();
 
   const dispatch = useDispatch();
+
+  const sessions = useSelector((state) => state.sessions) 
+
+  const { isSignedIn } = sessions
 
   const viewItemDetails = (id) => {
     dispatch(fetchItemDetails(id));
@@ -46,6 +50,10 @@ const ItemName = ({ itemName, unit, changeView, control, id, catName }) => {
   };
 
   const addToCart = async () => {
+    if(!isSignedIn) {
+      alert('Please sign in to add item to cart', 'info')
+      return;
+    }
     await dispatch(createNewCartItem(itemName, catName, unit));
     changeView("cart");
   };

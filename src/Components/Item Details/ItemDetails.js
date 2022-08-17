@@ -26,7 +26,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const ItemDetails = ({ changeView }) => {
+const ItemDetails = ({ changeView, alert }) => {
   const classes = useStyles();
 
   const details = useSelector((state) => state.items);
@@ -56,6 +56,7 @@ const ItemDetails = ({ changeView }) => {
             unit={item_details.measurement_unit}
             name={item_details.name}
             load={loadingItems}
+            alert={alert}
           />
         </Box>
       )}

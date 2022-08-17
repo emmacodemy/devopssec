@@ -49,6 +49,9 @@ function App() {
     setAlertMessage(message);
     setAlertSeverity(severity);
     setAlertDisplay(true);
+    setTimeout(() => {
+      setAlertDisplay(false);
+    }, 5000);
   };
 
   useEffect(() => {
@@ -88,10 +91,23 @@ function App() {
               />
             }
           >
-            <Route index element={<ItemsPage changeView={handleSideBar} />} />
+            <Route
+              index
+              element={
+                <ItemsPage
+                  changeView={handleSideBar}
+                  alert={controlAlertMessage}
+                />
+              }
+            />
             <Route
               path="items"
-              element={<ItemsPage changeView={handleSideBar} />}
+              element={
+                <ItemsPage
+                  changeView={handleSideBar}
+                  alert={controlAlertMessage}
+                />
+              }
             />
             <Route path="history" element={<HistoryPage />} />
             <Route path="statistics" element={<StatisticsPage />} />

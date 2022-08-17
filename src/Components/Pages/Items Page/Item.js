@@ -15,7 +15,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const Item = ({ itemList, changeView, category, sidecontrol }) => {
+const Item = ({ itemList, changeView, category, sidecontrol, alert }) => {
   const classes = useStyles();
   return (
     <Box className={classes.listCont}>
@@ -28,6 +28,7 @@ const Item = ({ itemList, changeView, category, sidecontrol }) => {
           unit={item.measurement_unit}
           control={sidecontrol}
           catName={category}
+          alert={alert}
         />
       ))}
     </Box>

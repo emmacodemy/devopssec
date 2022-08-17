@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ItemsPage = ({ changeView }) => {
+const ItemsPage = ({ changeView, alert }) => {
   const classes = useStyles();
 
   const all_items = useSelector((state) => state.items);
@@ -76,6 +76,7 @@ const ItemsPage = ({ changeView }) => {
                 list={listItem.items}
                 changeView={changeView}
                 control={handleAside}
+                alert={alert}
               />
             ))}
           </Box>

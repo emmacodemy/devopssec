@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Box } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import AddItem from "./Add Item/AddItem";
@@ -20,7 +20,7 @@ const SideBar = ({ cart, addItem, details, changeView, alert }) => {
     <Box className={classes.sideBar}>
       {cart && <Cart changeSideView={changeView} alert={alert} />}
       {addItem && <AddItem changeView={changeView} alert={alert} />}
-      {details && <ItemDetails changeView={changeView} />}
+      {details && <ItemDetails changeView={changeView} alert={alert} />}
     </Box>
   );
 };

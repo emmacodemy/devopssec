@@ -19,7 +19,7 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const CategoryItem = ({ name, list, changeView, control }) => {
+const CategoryItem = ({ name, list, changeView, control, alert }) => {
   const classes = useStyles();
   return (
     <Box className={classes.container}>
@@ -31,6 +31,7 @@ const CategoryItem = ({ name, list, changeView, control }) => {
             changeView={changeView}
             category={name}
             sidecontrol={control}
+            alert={alert}
           />
         </Box>
       )}

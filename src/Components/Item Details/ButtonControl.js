@@ -3,7 +3,7 @@ import { Box } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteItemFromAPI } from "../../Store/itemspagereducer/thunkCreators";
-import { addItemToCart } from "../../Store/cartreducer/cartreducer";
+import { createNewCartItem } from "../../Store/cartreducer/thunkCreator";
 
 const useStyles = makeStyles(() => ({
   btnCont: {
@@ -38,19 +38,29 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const ButtonControl = ({ cat_name, id, change, name, unit }) => {
+const ButtonControl = ({ cat_name, id, change, name, unit, alert }) => {
   const classes = useStyles();
 
   const dispatch = useDispatch();
 
-  const details = useSelector((state) => state.items);
+  const sessions = useSelector((state) => state.sessions)
 
-  const { message } = details;
+  const { isSignedIn } = sessions 
 
   const handleDeleteItem = async (category, id) => {
     await dispatch(deleteItemFromAPI(category, id));
     change("cart");
   };
+
+  const addItem = () => {
+    if(!isSignedIn) {
+      alert('Please sign in to add item to cart', 'info')
+      return;
+    }
+    dispatch(createNewCartItem(name, cat_name, unit))
+  }
+
+
   return (
     <Box className={classes.btnCont}>
       <button
@@ -60,7 +70,7 @@ const ButtonControl = ({ cat_name, id, change, name, unit }) => {
         delete
       </button>
       <button
-        onClick={() => dispatch(addItemToCart(cat_name, id, name, unit))}
+        onClick={() => addItem() }
         className={classes.addBtn}
       >
         Add to list
