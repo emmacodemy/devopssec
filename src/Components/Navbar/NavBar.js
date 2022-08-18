@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Box } from "@mui/material";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { makeStyles } from "@mui/styles";
 import { IconButton } from "@mui/material";
 import { Login, ShoppingCart, PowerSettingsNew } from "@mui/icons-material";
@@ -43,7 +43,22 @@ const useStyles = makeStyles(() => ({
     borderRadius: "100%",
     width: 42,
     height: 42,
+    position: "relative",
   },
+
+  count: {
+    color: "#fff",
+    backgroundColor:"#eb5757",
+    width: 20.72,
+    height: 19.97,
+    borderRadius: 4,
+    position: "absolute",
+    top: -5,
+    right: 0,
+    fontSize: 15,
+    textAlign: 'center',
+    fontWeight: "normal",
+  }
 }));
 
 const NavBar = ({ changeView, signedIn, sidecontrol }) => {
@@ -53,6 +68,22 @@ const NavBar = ({ changeView, signedIn, sidecontrol }) => {
 
   const navigate = useNavigate();
 
+  const items = useSelector((state) => state.cart)
+
+  const { cartItems } = items
+
+  const calculateQuantity = (items) => {
+    const categoryItems = items.map((value) => value.items);
+    const allItems = categoryItems.reduce((acc, value) => {
+      return [...acc, ...value];
+    }, []);
+    const quantity = allItems.reduce((acc, el) => {
+      acc += el.quantity;
+      return acc;
+    }, 0);
+    return quantity;
+  };
+  
   const [borderLink, setBorderLink] = useState(0);
 
   const handleLink = (index) => {
@@ -106,6 +137,7 @@ const NavBar = ({ changeView, signedIn, sidecontrol }) => {
       </Box>
       <Box className={classes.cartCont}>
         <Box className={classes.cart}>
+          <p className={classes.count}>{calculateQuantity(cartItems)}</p>
           <IconButton
             onClick={() => {
               changeView("cart");

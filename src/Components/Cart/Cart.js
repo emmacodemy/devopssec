@@ -38,6 +38,15 @@ const Cart = ({ changeSideView, alert }) => {
   const cart = useSelector((state) => state.cart);
 
   const { cartItems, isLoading, cartName, cartId } = cart;
+
+  if(cartItems.length > 0) {
+    const tope = cartItems.map((value) => value.items)
+    const ife = tope.reduce((acc, value) => [...acc, ...value])
+    console.log(ife)
+  }
+
+  
+
   return (
     <Box className={classes.root}>
       <Box className={classes.mainCart}>

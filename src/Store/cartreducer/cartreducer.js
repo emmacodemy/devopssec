@@ -7,15 +7,6 @@ const EDIT_ITEM = "store/cartreducer/EDIT_ITEM";
 const EDIT_STATE = "store/cartreducer/EDIT_STATE";
 const CREATE_CART = "store/cartreducer/CREATE_CART";
 
-const countItems = (items) => {
-  let totalCount = 0;
-  items.length > 0 &&
-    items.forEach((item) => {
-      totalCount += item.items.length;
-    });
-  return totalCount;
-};
-
 const getCategoryIndex = (list, payload) => {
   const index = list.findIndex(
     (item) => item.category.toLowerCase() === payload.category.toLowerCase()
@@ -30,7 +21,6 @@ const initialState = {
   cartId: "",
   cartStatus: "",
   cartItems: [],
-  countCart: 0,
   message: "",
 };
 
@@ -51,7 +41,7 @@ export const addItemToCart = (
   payload: {
     category: categoryName,
     items: { itemName, quantity, unit, id },
-    cartId
+    cartId,
   },
 });
 
@@ -128,8 +118,7 @@ const cartReducer = (state = initialState, action) => {
         }
         return {
           ...state,
-          countCart: countItems(state.cartItems),
-          cartId: action.payload.cartId
+          cartId: action.payload.cartId,
         };
       } else {
         const newList = [
@@ -147,7 +136,6 @@ const cartReducer = (state = initialState, action) => {
         return {
           ...state,
           cartItems: newList,
-          countCart: countItems(state.cartItems),
           cartId: action.payload.cartId,
         };
       }
