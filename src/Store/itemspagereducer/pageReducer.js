@@ -100,7 +100,8 @@ const itemsReducer = (state = initialState, action) => {
     case DELETE_ITEM:
       const itemIndex = state.list.findIndex(
         (item) =>
-          item.category.name.toLowerCase() === action.payload.category.toLowerCase()
+          item.category.name.toLowerCase() ===
+          action.payload.category.toLowerCase()
       );
       const newItem = state.list[itemIndex].items.filter(
         (item) => item.id !== action.payload.id
@@ -144,8 +145,10 @@ const itemsReducer = (state = initialState, action) => {
         categories: action.payload.sort((a, b) => a.name.localeCompare(b.name)),
       };
     case ADD_NEW_CATEGORY:
-      const checkCategory = state.categories.includes(action.payload);
-      if (!checkCategory) {
+      const checkCategory = state.categories.filter(
+        (el) => el.name.toLowerCase() === action.payload.name.toLowerCase()
+      );
+      if (checkCategory.length <= 0) {
         return {
           ...state,
           categories: [...state.categories, action.payload],
