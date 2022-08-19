@@ -43,9 +43,13 @@ const ButtonControl = ({ cat_name, id, change, name, unit, alert }) => {
 
   const dispatch = useDispatch();
 
-  const sessions = useSelector((state) => state.sessions)
+  const sessions = useSelector((state) => state.sessions);
 
-  const { isSignedIn } = sessions 
+  const cart = useSelector((state) => state.cart);
+
+  const { isSignedIn } = sessions;
+
+  const { cartName } = cart;
 
   const handleDeleteItem = async (category, id) => {
     await dispatch(deleteItemFromAPI(category, id));
@@ -53,13 +57,14 @@ const ButtonControl = ({ cat_name, id, change, name, unit, alert }) => {
   };
 
   const addItem = () => {
-    if(!isSignedIn) {
-      alert('Please sign in to add item to cart', 'info')
+    if (!isSignedIn) {
+      alert("Please sign in to add item to cart", "info");
       return;
     }
-    dispatch(createNewCartItem(name, cat_name, unit))
-  }
-
+    if (cartName.length === 0) {
+      dispatch(createNewCartItem(name, cat_name, unit));
+    }
+  };
 
   return (
     <Box className={classes.btnCont}>
@@ -69,10 +74,7 @@ const ButtonControl = ({ cat_name, id, change, name, unit, alert }) => {
       >
         delete
       </button>
-      <button
-        onClick={() => addItem() }
-        className={classes.addBtn}
-      >
+      <button onClick={() => addItem()} className={classes.addBtn}>
         Add to list
       </button>
     </Box>

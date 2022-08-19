@@ -3,7 +3,7 @@ import { makeStyles } from "@mui/styles";
 import { useNavigate } from "react-router-dom";
 import { Box } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { updateCartName } from "../../Store/cartreducer/thunkCreator";
+import { updateCartItems, updateCartName } from "../../Store/cartreducer/thunkCreator";
 import CompleteButon from "./CompleteButon";
 
 const useStyles = makeStyles(() => ({
@@ -60,10 +60,11 @@ const CartButton = ({ cart, alert, name, id }) => {
 
   const [cartName, setCartName] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     if (isSignedIn) {
       e.preventDefault();
-      dispatch(updateCartName(cartName, id));
+      await dispatch(updateCartName(cartName, "",  true, id));
+      await dispatch(updateCartItems(cart))
     } else {
       navigate("/login");
       alert("Please sign in to continue", "info");
@@ -86,7 +87,7 @@ const CartButton = ({ cart, alert, name, id }) => {
         >
           Save
         </button>
-      </form> : <CompleteButon />
+      </form> : <CompleteButon cart={cart} />
       }
     </Box>
   );

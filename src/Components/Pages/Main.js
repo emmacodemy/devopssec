@@ -17,7 +17,6 @@ const useStyles = makeStyles((theme) => ({
     width: "100vw",
     height: "100vh",
     display: "flex",
-    border: "2px solid blue",
   },
 
   main: {

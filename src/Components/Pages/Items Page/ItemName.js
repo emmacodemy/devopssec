@@ -39,9 +39,13 @@ const ItemName = ({ itemName, unit, changeView, control, id, catName, alert }) =
 
   const dispatch = useDispatch();
 
-  const sessions = useSelector((state) => state.sessions) 
+  const sessions = useSelector((state) => state.sessions)
+
+  const cart = useSelector((state) => state.cart) 
 
   const { isSignedIn } = sessions
+
+  const { cartName } = cart
 
   const viewItemDetails = (id) => {
     dispatch(fetchItemDetails(id));
@@ -54,8 +58,10 @@ const ItemName = ({ itemName, unit, changeView, control, id, catName, alert }) =
       alert('Please sign in to add item to cart', 'info')
       return;
     }
-    await dispatch(createNewCartItem(itemName, catName, unit));
-    changeView("cart");
+    if(cartName.length === 0) {
+      await dispatch(createNewCartItem(itemName, catName, unit));
+      changeView("cart");
+    }
   };
 
   const useUnit = unit !== null ? unit : "";

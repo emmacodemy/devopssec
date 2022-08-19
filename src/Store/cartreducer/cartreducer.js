@@ -6,6 +6,7 @@ const DELETE_FROM_CART = "store/cartreducer/DELETE_FROM_CART";
 const EDIT_ITEM = "store/cartreducer/EDIT_ITEM";
 const EDIT_STATE = "store/cartreducer/EDIT_STATE";
 const CREATE_CART = "store/cartreducer/CREATE_CART";
+const COMPLETE_CART =  "store/cartreducer/COMPLETE_CART"
 
 const getCategoryIndex = (list, payload) => {
   const index = list.findIndex(
@@ -19,9 +20,7 @@ const initialState = {
   isLoading: false,
   cartName: "",
   cartId: "",
-  cartStatus: "",
   cartItems: [],
-  message: "",
 };
 
 export const loadingStatus = (payload) => ({
@@ -74,6 +73,10 @@ export const createCart = (name) => ({
   payload: name,
 });
 
+export const completeCart = () => ({
+  type: COMPLETE_CART
+})
+
 const cartReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOADING:
@@ -89,10 +92,6 @@ const cartReducer = (state = initialState, action) => {
     case ADD_TO_CART:
       const list = state.cartItems;
       const getIndex = getCategoryIndex(state.cartItems, action.payload);
-      // const getIndex = list.findIndex(
-      //   (item) =>
-      //     item.category.toLowerCase() === action.payload.category.toLowerCase()
-      // );
       if (getIndex >= 0) {
         let items = list[getIndex].items;
         let newItems = [];
@@ -141,9 +140,6 @@ const cartReducer = (state = initialState, action) => {
       }
     case INCREASE_QUANTITY:
       const categoryIndex = getCategoryIndex(state.cartItems, action.payload);
-      // const categoryIndex = state.cartItems.findIndex(
-      //   (item) => item.category.toLowerCase() === action.payload.category.toLowerCase()
-      // );
       state.cartItems[categoryIndex].items.map((item) => {
         if (item.id === action.payload.id) {
           return {
@@ -163,9 +159,6 @@ const cartReducer = (state = initialState, action) => {
         state.cartItems,
         action.payload
       );
-      // const itemCategoryIndex = state.cartItems.findIndex(
-      //   (item) => item.category.toLowerCase() === action.payload.tolowerCase()
-      // );
       state.cartItems[itemCategoryIndex].items.map((item) => {
         if (item.id === action.payload.id) {
           item.quantity--;
@@ -181,9 +174,6 @@ const cartReducer = (state = initialState, action) => {
       };
     case DELETE_FROM_CART:
       const index = getCategoryIndex(state.cartItems, action.payload);
-      // const index = state.cartItems.findIndex(
-      //   (item) => item.category.toLowerCase() === action.payload.tolowerCase()
-      // );
       const updatedItem = state.cartItems[index].items.filter(
         (item) => item.id !== action.payload.id
       );
@@ -221,6 +211,14 @@ const cartReducer = (state = initialState, action) => {
         cartName: action.payload,
         editingState: true,
       };
+    case COMPLETE_CART:
+      return {
+        ...state,
+        cartName: "",
+        cartId: "",
+        cartItems: [],
+        editingState: false,
+      }
 
     default:
       return state;

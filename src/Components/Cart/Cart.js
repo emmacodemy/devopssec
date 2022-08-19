@@ -39,13 +39,11 @@ const Cart = ({ changeSideView, alert }) => {
 
   const { cartItems, isLoading, cartName, cartId } = cart;
 
-  if(cartItems.length > 0) {
-    const tope = cartItems.map((value) => value.items)
-    const ife = tope.reduce((acc, value) => [...acc, ...value])
-    console.log(ife)
-  }
-
-  
+  // if(cartItems.length > 0) {
+  //   const tope = cartItems.map((value) => value.items)
+  //   const ife = tope.reduce((acc, value) => [...acc, ...value])
+  //   console.log(ife)
+  // }
 
   return (
     <Box className={classes.root}>
@@ -61,7 +59,12 @@ const Cart = ({ changeSideView, alert }) => {
         {isLoading ? (
           <Loading />
         ) : (
-          <CartButton cart={cartItems} alert={alert} name={cartName} id={cartId} />
+          <CartButton
+            cart={cartItems}
+            alert={alert}
+            name={cartName}
+            id={cartId}
+          />
         )}
       </Box>
     </Box>
