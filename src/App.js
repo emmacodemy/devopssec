@@ -9,6 +9,7 @@ import LoginPage from "./Components/Sessions/LoginPage";
 import RegisterPage from "./Components/Sessions/RegisterPage";
 import Main from "./Components/Pages/Main";
 import AlertNotification from "./Components/Alert";
+import HistoryCart from "./Components/Pages/History Page/HistoryCart";
 
 function App() {
   const sessionDetails = useSelector((state) => state.sessions);
@@ -109,7 +110,10 @@ function App() {
                 />
               }
             />
-            <Route path="history" element={<HistoryPage />} />
+            <Route path="history" element={<HistoryPage />}>
+              <Route index element={<HistoryCart />} />
+              <Route path="/history/cart" element={<HistoryCart />} />
+            </Route>
             <Route path="statistics" element={<StatisticsPage />} />
           </Route>
           <Route

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Box, IconButton } from "@mui/material"
-import { ArrowBack  } from "@mui/icons-material"
+import { KeyboardBackspace  } from "@mui/icons-material"
 import { makeStyles } from "@mui/styles"
 
 const useStyles = makeStyles(() => ({
@@ -26,7 +26,7 @@ const ItemControl = ({ control }) => {
   return (
     <Box className={classes.control}>
         <IconButton onClick={() => control('cart')}>
-            <ArrowBack style={{color: '#f9a109'}} />
+            <KeyboardBackspace style={{color: '#f9a109'}} />
         </IconButton>
         <p className={classes.backText}>back</p>
     </Box>

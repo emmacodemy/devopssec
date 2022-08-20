@@ -2,7 +2,7 @@ const GET_CARTS = "store/historyPage/historyReducer/GET_CARTS"
 const LOADING = "store/historyPage/historyReducer/LOADING"
 
 const initialState = {
-    carts: [],
+    history: {},
     isLoading: false,
 }
 
@@ -21,7 +21,16 @@ const historyReducer = (state=initialState, action) => {
         case GET_CARTS:
             return {
                 ...state,
-                carts: action.payload
+                history: action.payload
             }
+        case LOADING:
+            return {
+                ...state,
+                isLoading: action.payload
+            }
+        default:
+            return state
     }
 }
+
+export default historyReducer

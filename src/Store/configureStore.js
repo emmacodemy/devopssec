@@ -5,12 +5,14 @@ import itemsReducer from "./itemspagereducer/pageReducer";
 import sessionReducer from "./Sessions/sessionReducer";
 import cartReducer from "./cartreducer/cartreducer"
 import notificationReducer from "./Notification";
+import historyReducer from "./historyPage/historyreducer";
 
 const reducer = combineReducers({
   sessions: sessionReducer,
   items: itemsReducer,
   cart: cartReducer,
-  notification: notificationReducer
+  notification: notificationReducer,
+  history: historyReducer,
 });
 
 const store = createStore(reducer, applyMiddleware(thunk, logger));
