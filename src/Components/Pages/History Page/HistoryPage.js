@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Box } from "@mui/material";
 import { Outlet } from "react-router-dom";
 import { makeStyles } from "@mui/styles";
-import { getCarts } from "../../../Store/historyPage/thunkCreator";
+import { getCarts, getCartDetails } from "../../../Store/historyPage/thunkCreator";
 
 const useStyles = makeStyles(() => ({
   historyPage: {
@@ -27,7 +27,7 @@ const HistoryPage = () => {
 
   useEffect(() => {
     dispatch(getCarts())
-  })
+  }, [])
 
   const { isSignedIn } = session;
   return (

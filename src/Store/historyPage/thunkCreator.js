@@ -1,4 +1,4 @@
-import { fetchCarts, loading } from "./historyreducer";
+import { fetchCarts, loading, showCartDetails } from "./historyreducer";
 import { getToken } from "../utils/session";
 
 const baseURL = "http://steve95-shoppingify.herokuapp.com/";
@@ -39,6 +39,19 @@ export const getCarts = () => async (dispatch) => {
   if (response.status === 200) {
     const data = reducerFunction(response.data);
     dispatch(fetchCarts(data));
+  }
+  dispatch(loading(false));
+};
+
+export const getCartDetails = (id) => async (dispatch) => {
+  const token = getToken();
+  dispatch(loading(true));
+  const cartDetails = await fetch(`${baseURL}/api/v1/carts/${id}`, {
+    headers: { Authorization: token },
+  });
+  const response = await cartDetails.json();
+  if(response.status === 200) {
+    dispatch(showCartDetails(response.data));
   }
   dispatch(loading(false));
 };
