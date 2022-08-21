@@ -6,6 +6,7 @@ import List from "./List";
 const useStyles = makeStyles(() => ({
   container: {
     width: "90%",
+    height: "100%",
     margin: "0 auto",
     position: "relative",
   },
@@ -20,8 +21,9 @@ const useStyles = makeStyles(() => ({
     width: "100%",
     textAlign: "left",
     color: "#000",
-    fontSize: 12,
+    fontSize: 16,
     fontWeight: 500,
+    position: "relative"
   },
 }));
 

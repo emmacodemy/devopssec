@@ -7,10 +7,13 @@ import { getCarts } from "../../../Store/historyPage/thunkCreator";
 
 const useStyles = makeStyles(() => ({
   historyPage: {
+    position: "relative",
     width: "100%",
     height: "100%",
     display: "flex",
     flexDirection: "column",
+    justifyContent: 'center',
+    alignItems: 'center',
     rowGap: 50,
   },
 }));

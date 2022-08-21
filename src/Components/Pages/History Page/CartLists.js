@@ -21,18 +21,18 @@ const useStyles = makeStyles((theme) => ({
       rowGap: 10
     }
   },
-  name: {
+  titleHeader: {
     position: "relative",
     width: "50%",
     textAlign: "left",
-    color: "#fff",
-    fontSize: 16,
-    fontWeight: 500,
+    marginLeft: 10,
+    color: "#000",
+    fontSize: 17,
+    fontWeight: 600,
     textTransform: "capitalize",
     [theme.breakpoints.down("md")]: {
-      width: '40%',
+      width: '80%',
       margin: "0 auto",
-      textAlign: "center"
     }
   },
   details: {
@@ -54,17 +54,17 @@ const useStyles = makeStyles((theme) => ({
     border: "1px solid #56ccf2",
     borderRadius: 8,
     fontSize: 12,
-    fontWeight: 500,
+    fontWeight: "bold",
     color: "#56ccf2",
-    padding: "8px 0",
+    padding: "8px 5px",
   },
   other: {
     border: "1px solid #eb5757",
     borderRadius: 8,
     fontSize: 12,
-    fontWeight: 500,
+    fontWeight: "bold",
     color: "#eb5757",
-    padding: "8px 0",
+    padding: "8px 5px",
   },
 }));
 
@@ -76,13 +76,13 @@ const CartLists = ({ title, date, status, id }) => {
     const days = ["Sun", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"];
     const day = days[d.getDay()];
     const p = d.getDate();
-    const month = d.getMonth();
+    const month = d.getMonth() + 1;
     const year = d.getFullYear();
     return `${day} ${p}.${month}.${year}`;
   };
   return (
     <Box className={classes.container}>
-      <p className={classes.name}> {title} </p>
+      <p className={classes.titleHeader}> {title} </p>
       <Box className={classes.details}>
         <EventNote style={{ color: "#c1c1c4" }} />
         <p className={classes.date}>{dateFormatter()}</p>

@@ -23,6 +23,7 @@ const useStyles = makeStyles((theme) => ({
       overflowWrap: "break-word",
       fontFamily: "QuickSand, sans-serif",
       fontSize: 16,
+      marginLeft: 10,
       fontWeight: "bold",
       textTransform: "capitalize",
       color: "#000",
@@ -72,7 +73,7 @@ const ItemName = ({ itemName, unit, changeView, control, id, catName, alert }) =
       >{`${itemName} ${useUnit}`}</Typography>
       <IconButton onClick={() => addToCart()}>
         {" "}
-        <Add />
+        <Add style={{transform: "scale(0.7)", fontWeight:"normal"}} />
       </IconButton>
     </Box>
   );

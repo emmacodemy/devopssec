@@ -22,7 +22,7 @@ const CartList = ({ list, category }) => {
           id={item.id}
           key={item.id}
           name={item.itemName}
-          unit={item.measurement_unit}
+          unit={item.unit}
           catName={category}
           quantity={item.quantity}
           selected={item.selected}

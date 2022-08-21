@@ -2,7 +2,7 @@ import { handleLoading, userSignUp, userSignIn, userSignOut } from "./sessionRed
 import { clearSession, getToken } from "../utils/session";
 import { updateNotification } from "../Notification";
 
-const baseURL = "https://steve95-shoppingify.herokuapp.com/";
+const baseURL = "http://steve95-shoppingify.herokuapp.com/";
 
 export const handleSignIn = (username, password) => async (dispatch) => {
   const userDetails = { user: { username, password } };

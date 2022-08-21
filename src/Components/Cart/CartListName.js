@@ -24,7 +24,7 @@ const useStyles = makeStyles(() => ({
     color: "#000",
     textTransform: "capitalize",
     fontSize: "16px",
-    fontWeight: "normal",
+    fontWeight: "bold",
     width: "100%",
     overflowWrap: "break-word",
   },
@@ -62,7 +62,7 @@ const CartListName = ({ name, quantity, unit, catName, id, selected }) => {
             selected ? `${classes.name} ${classes.edit}` : classes.name
           }
         >
-          {name}
+         {`${name} ${unit}`}
         </p>
       </Box>
       <ItemControl quantity={quantity} id={id} category={catName} />

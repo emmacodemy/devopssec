@@ -5,9 +5,11 @@ import { makeStyles } from "@mui/styles";
 const useStyles = makeStyles((theme) => ({
   header: {
     width: "90%",
-    marginTop: 30,
+    position: "relative",
     display: "flex",
-    height: "10%",
+    justifyContent: "center",
+    alignItems: "center",
+    height: "5%",
     margin: "0 auto",
     [theme.breakpoints.down("md")]: {
       height: "5%",
@@ -19,11 +21,12 @@ const useStyles = makeStyles((theme) => ({
     height: "100%",
     display: "flex",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "flex-start",
     "& .MuiTypography-root": {
       fontSize: 26,
       color: "#34333a",
-      fontWeight: 500,
+      fontWeight: 700,
+      marginTop: 10,
       fontFamily: "QuickSand, sans-serif",
     },
   },

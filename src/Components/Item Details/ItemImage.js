@@ -5,14 +5,14 @@ import { makeStyles } from "@mui/styles";
 const useStyles = makeStyles(() => ({
   imageCont: {
     position: "relative",
-    width: "100%",
-    height: "25vh",
+    width: 300.43,
+    height: 219.69,
   },
   img: {
     position: "relative",
     width: "100%",
     height: "100%",
-    objectFit: "center",
+    objectFit: "cover",
     borderRadius: 25,
   },
 }));

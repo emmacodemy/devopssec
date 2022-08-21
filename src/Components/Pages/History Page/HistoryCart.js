@@ -9,22 +9,30 @@ import Loading from "../../Loading";
 const useStyles = makeStyles(() => ({
   container: {
     width: "100%",
-    position: "relative"
+    position: "relative",
     display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
     height: "100%",
     flexDirection: "column",
     rowGap: 25,
   },
 
-  list: {
-    width: "100%",
-    display: 'flex',
+  listCont: {
     position: "relative",
-    overflowY:"scroll",
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: "80%"
-  }
+    height: "90%",
+    width: "100%",
+    overflow: "scroll",
+  },
+
+  list: {
+    position: "relative",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    height: "100%",
+    weight: "100%",
+  },
 }));
 
 const HistoryCart = () => {
@@ -39,14 +47,16 @@ const HistoryCart = () => {
       {isLoading ? (
         <Loading />
       ) : (
-        <Box className={classes.list}>
-          {Object.keys(history).length === 0 ? (
-            <h1>No Completed cart, Please shop with us</h1>
-          ) : (
-            Object.keys(history).map((key) => (
-              <DatedList key={key} date={key} cartList={history[key]} />
-            ))
-          )}
+        <Box className={classes.listCont}>
+          <Box className={classes.list}>
+            {Object.keys(history).length === 0 ? (
+              <h1>No Completed cart, Please shop with us</h1>
+            ) : (
+              Object.keys(history).map((key) => (
+                <DatedList key={key} date={key} cartList={history[key]} />
+              ))
+            )}
+          </Box>
         </Box>
       )}
     </Box>
