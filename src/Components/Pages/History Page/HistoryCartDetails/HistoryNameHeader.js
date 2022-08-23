@@ -36,7 +36,7 @@ const useStyles = makeStyles(() => ({
   date: {
     width: "100%",
     display: "flex",
-    alignItem:"center",
+    alignItems:"center",
     columnGap: 17,
     justifyContent: "flex-start",
   },

@@ -88,7 +88,7 @@ const CartLists = ({ title, date, status, id }) => {
     <Box className={classes.container}>
       <p className={classes.titleHeader}> {title} </p>
       <Box className={classes.details}>
-        <EventNote style={{ color: "#c1c1c4" }} />
+        <EventNote style={{ color: "#c1c1c4", transform: "scale(0.7)" }} />
         <p className={classes.date}>{dateFormatter()}</p>
         <h3
           className={status === "completed" ? classes.completed : classes.other}
