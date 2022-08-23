@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { Box } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { makeStyles } from "@mui/styles";
+import AlertDialogSide from "../Dialog";
 import {
   completeCartShopping,
   updateCartName,
@@ -45,6 +46,12 @@ const useStyles = makeStyles(() => ({
 const CompleteButon = ({ cart }) => {
   const classes = useStyles();
 
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
   const dispatch = useDispatch();
 
   const carts = useSelector((state) => state.cart);
@@ -54,15 +61,16 @@ const CompleteButon = ({ cart }) => {
   const completeShopping = async (action) => {
     await dispatch(updateCartName(cartName, action, false));
     dispatch(completeCartShopping(cart));
-    
   };
 
   return (
     <Box className={classes.buttonContainer}>
-      <button
-        className={classes.cancelBtn}
-        onClick={() => completeShopping("cancelled")}
-      >
+      <AlertDialogSide
+        close={() => setOpen(false)}
+        open={open}
+        complete={completeShopping}
+      />
+      <button className={classes.cancelBtn} onClick={() => handleClickOpen()}>
         cancel
       </button>
       <button

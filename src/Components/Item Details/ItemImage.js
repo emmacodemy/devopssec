@@ -5,8 +5,8 @@ import { makeStyles } from "@mui/styles";
 const useStyles = makeStyles(() => ({
   imageCont: {
     position: "relative",
-    width: 300.43,
-    height: 219.69,
+    width: 250.43,
+    height: 169.69,
   },
   img: {
     position: "relative",

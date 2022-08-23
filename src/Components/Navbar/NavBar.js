@@ -48,7 +48,7 @@ const useStyles = makeStyles(() => ({
 
   count: {
     color: "#fff",
-    backgroundColor:"#eb5757",
+    backgroundColor: "#eb5757",
     width: 20.72,
     height: 19.97,
     borderRadius: 4,
@@ -56,9 +56,9 @@ const useStyles = makeStyles(() => ({
     top: -5,
     right: 0,
     fontSize: 15,
-    textAlign: 'center',
+    textAlign: "center",
     fontWeight: "normal",
-  }
+  },
 }));
 
 const NavBar = ({ changeView, signedIn, sidecontrol }) => {
@@ -68,9 +68,9 @@ const NavBar = ({ changeView, signedIn, sidecontrol }) => {
 
   const navigate = useNavigate();
 
-  const items = useSelector((state) => state.cart)
+  const items = useSelector((state) => state.cart);
 
-  const { cartItems } = items
+  const { cartItems } = items;
 
   const calculateQuantity = (items) => {
     const categoryItems = items.map((value) => value.items);
@@ -83,7 +83,7 @@ const NavBar = ({ changeView, signedIn, sidecontrol }) => {
     }, 0);
     return quantity;
   };
-  
+
   const [borderLink, setBorderLink] = useState(0);
 
   const handleLink = (index) => {

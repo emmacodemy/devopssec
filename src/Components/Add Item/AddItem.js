@@ -9,7 +9,6 @@ import AddItemButton from "./AddItemButton";
 import AddHeader from "./AddHeader";
 import { addNewItem } from "../../Store/itemspagereducer/thunkCreators";
 import Loading from "../Loading";
-// import 'react-datalist-input/dist/styles.css';
 
 const useStyles = makeStyles(() => ({
   addItem: {

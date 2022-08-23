@@ -30,11 +30,11 @@ export const updateCartName =
   };
 
 export const createNewCartItem =
-  (product_name, product_category, unit) => async (dispatch) => {
+  (product_name, product_category, measurement_unit) => async (dispatch) => {
     const userToken = getToken();
     dispatch(loadingStatus(true));
     const cart_list = {
-      new_cart_list: { product_name, product_category, unit, quantity: 1 },
+      new_cart_list: { product_name, product_category, measurement_unit, quantity: 1 },
     };
     const postItem = await fetch(`${baseURL}/api/v1/cart_lists`, {
       method: "POST",
@@ -51,7 +51,7 @@ export const createNewCartItem =
           product_category,
           response.data.quantity,
           product_name,
-          unit,
+          measurement_unit,
           response.data.id,
           response.data.cart_id
         )
@@ -106,7 +106,7 @@ export const updateCartItems = (cartItems) => async (dispatch) => {
     updateQuantity(item.id, item.quantity)
   );
   dispatch(loadingStatus(true));
-  const postItems = await Promise.all(updateItems);
+  await Promise.all(updateItems);
   dispatch(loadingStatus(false));
 };
 

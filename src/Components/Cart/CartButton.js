@@ -3,7 +3,10 @@ import { makeStyles } from "@mui/styles";
 import { useNavigate } from "react-router-dom";
 import { Box } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { updateCartItems, updateCartName } from "../../Store/cartreducer/thunkCreator";
+import {
+  updateCartItems,
+  updateCartName,
+} from "../../Store/cartreducer/thunkCreator";
 import CompleteButon from "./CompleteButon";
 
 const useStyles = makeStyles(() => ({
@@ -60,11 +63,11 @@ const CartButton = ({ cart, alert, name, id }) => {
 
   const [cartName, setCartName] = useState("");
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     if (isSignedIn) {
       e.preventDefault();
-      await dispatch(updateCartName(cartName, "",  true, id));
-      await dispatch(updateCartItems(cart))
+      await dispatch(updateCartName(cartName, "", true, id));
+      await dispatch(updateCartItems(cart));
     } else {
       navigate("/login");
       alert("Please sign in to continue", "info");
@@ -72,23 +75,25 @@ const CartButton = ({ cart, alert, name, id }) => {
   };
   return (
     <Box className={classes.buttonContainer}>
-      {
-        name === "" ? <form onSubmit={(e) => handleSubmit(e)} className={classes.form}>
-        <input
-          type="text"
-          className={classes.input}
-          required
-          placeholder="Enter a name"
-          onInput={(e) => setCartName(e.target.value)}
-        />
-        <button
-          disabled={cart.length > 0 ? false : true}
-          className={classes.submit}
-        >
-          Save
-        </button>
-      </form> : <CompleteButon cart={cart} />
-      }
+      {name === "" ? (
+        <form onSubmit={(e) => handleSubmit(e)} className={classes.form}>
+          <input
+            type="text"
+            className={classes.input}
+            required
+            placeholder="Enter a name"
+            onInput={(e) => setCartName(e.target.value)}
+          />
+          <button
+            disabled={cart.length > 0 ? false : true}
+            className={classes.submit}
+          >
+            Save
+          </button>
+        </form>
+      ) : (
+        <CompleteButon cart={cart} />
+      )}
     </Box>
   );
 };

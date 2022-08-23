@@ -5,7 +5,8 @@ const GET_CART_DETAILS = "store/historyPage/historyReducer/GET_CART_DETAILS"
 const initialState = {
     history: {},
     isLoading: false,
-    cartDetails: {}
+    cartName: {},
+    cartDetails: [],
 }
 
 export const loading = (payload) => ({
@@ -19,7 +20,7 @@ export const fetchCarts = (data) => ({
 })
 
 export const showCartDetails = (data) => ({
-    type: GET_CARTS,
+    type: GET_CART_DETAILS,
     payload: data
 })
 
@@ -33,7 +34,8 @@ const historyReducer = (state=initialState, action) => {
         case GET_CART_DETAILS:
             return {
                 ...state,
-                cartDetails: action.payload
+                cartDetails: action.payload.cartDetails,
+                cartName: action.payload.cartName
             }
         case LOADING:
             return {

@@ -5,10 +5,10 @@ import img from "../../assests/source.svg";
 
 const useStyles = makeStyles(() => ({
   addContainer: {
-    position: 'relative',
+    position: "relative",
     width: "80%",
     height: "22.5%",
-    margin: '25px auto 0 auto',
+    margin: "25px auto 0 auto",
     display: "flex",
     backgroundColor: "#80485b",
     borderRadius: 24,
@@ -16,7 +16,7 @@ const useStyles = makeStyles(() => ({
   imgContainer: {
     width: "20%",
     position: "absolute",
-    left: '5%',
+    left: "5%",
     top: "-13.5%",
     height: "100%",
   },
@@ -27,32 +27,32 @@ const useStyles = makeStyles(() => ({
     objectFit: "cover",
   },
   addBtn: {
-    position: 'absolute',
-    width: '70%',
+    position: "absolute",
+    width: "70%",
     right: 0,
-    height: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'space-around',
-    alignItems: 'flex-start'
+    height: "100%",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-around",
+    alignItems: "flex-start",
   },
   btn: {
     padding: 10,
-    width: '60%',
+    width: "60%",
     borderRadius: 12,
-    backgroundColor: '#fff',
-    color: '#000',
-    border: 'none',
-    outline: 'none',
-    fontWeight: '600',
-    cursor: 'pointer'
+    backgroundColor: "#fff",
+    color: "#000",
+    border: "none",
+    outline: "none",
+    fontWeight: "600",
+    cursor: "pointer",
   },
 
   text: {
-    color: '#fff',
+    color: "#fff",
     fontSize: 16,
-    fontWeight: 'normal',
-  }
+    fontWeight: "normal",
+  },
 }));
 
 const Add = ({ changeView }) => {
@@ -64,7 +64,9 @@ const Add = ({ changeView }) => {
       </Box>
       <Box className={classes.addBtn}>
         <h3 className={classes.text}>Didn't find what you need?</h3>
-        <button onClick={() => changeView('addItem')} className={classes.btn}>Add Item</button>
+        <button onClick={() => changeView("addItem")} className={classes.btn}>
+          Add Item
+        </button>
       </Box>
     </Box>
   );

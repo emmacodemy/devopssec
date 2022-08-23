@@ -12,12 +12,12 @@ const useStyles = makeStyles(() => ({
     flexDirection: "column",
     rowGap: 5,
     "& .MuiTypography-root": {
-      fontFamily: 'QuickSand, sans-serif',
-      fontWeight: 'bold',
-      fontSize: '14px',
-      color: '#828282',
-      textTransform: 'capitalize'
-  }
+      fontFamily: "QuickSand, sans-serif",
+      fontWeight: "bold",
+      fontSize: "14px",
+      color: "#828282",
+      textTransform: "capitalize",
+    },
   },
 
   container: {

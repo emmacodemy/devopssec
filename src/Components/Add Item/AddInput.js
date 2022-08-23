@@ -16,7 +16,7 @@ const useStyles = makeStyles(() => ({
   inputText: {
     position: "relative",
     display: "flex",
-    flexDirection: "column"
+    flexDirection: "column",
   },
 }));
 
@@ -54,7 +54,7 @@ const AddInput = ({ name, type, placeholder, handle, id, imgUpload }) => {
               onChange={(e) => imgUpload(e.target.files)}
             />
             <label htmlFor="imgop">
-                <Upload style={{ color: "#f9a109", cursor: "pointer" }} />
+              <Upload style={{ color: "#f9a109", cursor: "pointer" }} />
             </label>
           </Box>
         )}

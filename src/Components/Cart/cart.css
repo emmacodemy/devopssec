@@ -1,13 +1,13 @@
 .display {
-    background-color: #fff;
+  background-color: #fff;
 }
 
 .display button {
-    display: flex;
-    cursor: pointer;
+  display: flex;
+  cursor: pointer;
 }
 
 .input {
-    max-width: 15px;
-    max-height: 15px;
+  max-width: 15px;
+  max-height: 15px;
 }

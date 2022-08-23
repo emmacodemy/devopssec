@@ -2,7 +2,9 @@ import React from "react";
 import { Box } from "@mui/material";
 import { Link } from "react-router-dom";
 import { makeStyles } from "@mui/styles";
+import { useDispatch } from "react-redux";
 import { EventNote, ChevronRight } from "@mui/icons-material";
+import { getCartDetails } from "../../../Store/historyPage/thunkCreator";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -71,6 +73,8 @@ const useStyles = makeStyles((theme) => ({
 const CartLists = ({ title, date, status, id }) => {
   const classes = useStyles();
 
+  const dispatch = useDispatch()
+
   const dateFormatter = () => {
     const d = new Date(date);
     const days = ["Sun", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"];
@@ -91,7 +95,7 @@ const CartLists = ({ title, date, status, id }) => {
         >
           {status}
         </h3>
-        <Link to={`/history/cart/${id}`}>
+        <Link to={`/history/cart/${id}`} onClick={() => dispatch(getCartDetails(id))}>
           <ChevronRight style={{ color: "#f9a109" }} />
         </Link>
       </Box>

@@ -3,14 +3,13 @@ import { useNavigate } from "react-router-dom";
 import { Box } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useSelector } from "react-redux";
-// import { useDispatch } from "react-redux"
 
 const useStyles = makeStyles(() => ({
   btnCont: {
     position: "absolute",
     bottom: 0,
     width: "100%",
-    height: "12vh",
+    height: "10vh",
     backgroundColor: "#fafafe",
     display: "flex",
     justifyContent: "space-around",

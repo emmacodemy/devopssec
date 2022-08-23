@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Box } from "@mui/material";
 import { Outlet } from "react-router-dom";
 import { makeStyles } from "@mui/styles";
-import { getCarts, getCartDetails } from "../../../Store/historyPage/thunkCreator";
+import { getCarts } from "../../../Store/historyPage/thunkCreator";
 
 const useStyles = makeStyles(() => ({
   historyPage: {
@@ -23,13 +23,13 @@ const HistoryPage = () => {
 
   const session = useSelector((state) => state.sessions);
 
+  const { isSignedIn } = session;
+
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(getCarts())
+    isSignedIn && dispatch(getCarts())
   }, [])
-
-  const { isSignedIn } = session;
   return (
     <Box className={classes.historyPage}>
       {isSignedIn ? (

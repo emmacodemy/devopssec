@@ -41,7 +41,6 @@ const CartListName = ({ name, quantity, unit, catName, id, selected }) => {
   const cart = useSelector((state) => state.cart);
 
   const handleInput = (e) => {
-    console.log(selected);
     dispatch(editItem(catName, id, e.target.checked));
   };
 
@@ -62,7 +61,7 @@ const CartListName = ({ name, quantity, unit, catName, id, selected }) => {
             selected ? `${classes.name} ${classes.edit}` : classes.name
           }
         >
-         {`${name} ${unit}`}
+          {`${name} ${unit}`}
         </p>
       </Box>
       <ItemControl quantity={quantity} id={id} category={catName} />

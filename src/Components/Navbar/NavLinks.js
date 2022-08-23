@@ -30,12 +30,12 @@ const NavLinks = ({ path, icon, currentLink, index, display, control }) => {
       <NavLink to={`/${path}`} onClick={() => control(true)}>
         {icon === "list" && (
           <IconButton title="items" aria-hidden="false" aria-label="items">
-            <List />
+            <List style={{ transform: "scale(0.7)" }} />
           </IconButton>
         )}
         {icon === "history" && (
           <IconButton title="history" aria-hidden="false" aria-label="history">
-            <Replay />
+            <Replay style={{ transform: "scale(0.7)" }} />
           </IconButton>
         )}
         {icon === "stat" && (
@@ -44,7 +44,7 @@ const NavLinks = ({ path, icon, currentLink, index, display, control }) => {
             aria-hidden="false"
             aria-label="statistics"
           >
-            <InsertChartOutlinedOutlined />
+            <InsertChartOutlinedOutlined style={{ transform: "scale(0.7)" }} />
           </IconButton>
         )}
       </NavLink>
