@@ -23,7 +23,7 @@ const useStyles = makeStyles(() => ({
     color: "#000",
     fontSize: 16,
     fontWeight: 500,
-    position: "relative"
+    position: "relative",
   },
 }));
 

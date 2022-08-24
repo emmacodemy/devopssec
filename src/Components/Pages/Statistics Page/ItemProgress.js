@@ -19,9 +19,9 @@ const useStyles = makeStyles((theme) => ({
     height: "90%",
     rowGap: 10,
     [theme.breakpoints.down("md")]: {
-      width: "100%"
-    }
-  }
+      width: "100%",
+    },
+  },
 }));
 
 const ItemProgress = ({ itemList, total, header, color }) => {

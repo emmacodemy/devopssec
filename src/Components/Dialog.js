@@ -1,10 +1,10 @@
-import * as React from 'react';
-import { Box, DialogTitle } from "@mui/material"
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import { makeStyles } from "@mui/styles"
+import * as React from "react";
+import { Box, DialogTitle } from "@mui/material";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import { makeStyles } from "@mui/styles";
 // import Slide from '@mui/material/Slide';
 // import { TransitionProps } from '@mui/material/transitions';
 
@@ -41,17 +41,15 @@ const useStyles = makeStyles(() => ({
     outline: "none",
     cursor: "pointer",
   },
-}))
-
-
+}));
 
 export default function AlertDialogSlide({ open, close, complete }) {
-  const classes = useStyles()
+  const classes = useStyles();
 
   const handleClose = () => {
-    close(false)
-  }
- 
+    close(false);
+  };
+
   return (
     <Box className={classes.modalCont}>
       <Dialog
@@ -61,19 +59,26 @@ export default function AlertDialogSlide({ open, close, complete }) {
         aria-describedby="alert-dialog-slide-description"
         PaperProps={{
           style: {
-            borderRadius: '12px',
+            borderRadius: "12px",
           },
         }}
       >
         <DialogContent>
-        <DialogTitle>{"Cancel List?"}</DialogTitle>
+          <DialogTitle>{"Cancel List?"}</DialogTitle>
           <DialogContentText id="alert-dialog-slide-description">
-           Are you sure you want to cancel this shopping List?
+            Are you sure you want to cancel this shopping List?
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <button className={classes.cancelBtn} onClick={handleClose}>Cancel</button>
-          <button className={classes.completeBtn} onClick={() => complete("cancelled")}>Yes</button>
+          <button className={classes.cancelBtn} onClick={handleClose}>
+            Cancel
+          </button>
+          <button
+            className={classes.completeBtn}
+            onClick={() => complete("cancelled")}
+          >
+            Yes
+          </button>
         </DialogActions>
       </Dialog>
     </Box>

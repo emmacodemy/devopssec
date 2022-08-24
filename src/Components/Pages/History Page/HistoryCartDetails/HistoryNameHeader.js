@@ -36,7 +36,7 @@ const useStyles = makeStyles(() => ({
   date: {
     width: "100%",
     display: "flex",
-    alignItems:"center",
+    alignItems: "center",
     columnGap: 17,
     justifyContent: "flex-start",
   },
@@ -44,7 +44,7 @@ const useStyles = makeStyles(() => ({
     fontSize: 26,
     fontWeight: 700,
     color: "#34333a",
-    textTransform: "capitalize"
+    textTransform: "capitalize",
   },
   completed: {
     border: "1px solid #56ccf2",
@@ -88,14 +88,14 @@ const HistoryNameHeader = ({ name, date, status }) => {
       <Box className={classes.back}>
         <KeyboardBackspace
           onClick={() => navigate("/history")}
-          style={{ color: "#f9a109", cursor:  "pointer" }}
+          style={{ color: "#f9a109", cursor: "pointer" }}
         />
         <p style={{ color: "#f9a109" }}>back</p>
       </Box>
       <Box className={classes.itemNameDate}>
         <h1 className={classes.itemName}>{name}</h1>
         <Box className={classes.date}>
-          <EventNote style={{ color: "#c1c1c4", transform: 'scale(0.7)'}} />
+          <EventNote style={{ color: "#c1c1c4", transform: "scale(0.7)" }} />
           <p className={classes.event}>{dateFormatter()}</p>
           <h3
             className={

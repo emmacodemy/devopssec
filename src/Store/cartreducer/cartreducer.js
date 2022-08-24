@@ -6,7 +6,7 @@ const DELETE_FROM_CART = "store/cartreducer/DELETE_FROM_CART";
 const EDIT_ITEM = "store/cartreducer/EDIT_ITEM";
 const EDIT_STATE = "store/cartreducer/EDIT_STATE";
 const CREATE_CART = "store/cartreducer/CREATE_CART";
-const COMPLETE_CART =  "store/cartreducer/COMPLETE_CART"
+const COMPLETE_CART = "store/cartreducer/COMPLETE_CART";
 
 const getCategoryIndex = (list, payload) => {
   const index = list.findIndex(
@@ -74,8 +74,8 @@ export const createCart = (name) => ({
 });
 
 export const completeCart = () => ({
-  type: COMPLETE_CART
-})
+  type: COMPLETE_CART,
+});
 
 const cartReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -218,7 +218,7 @@ const cartReducer = (state = initialState, action) => {
         cartId: "",
         cartItems: [],
         editingState: false,
-      }
+      };
 
     default:
       return state;

@@ -11,7 +11,7 @@ const initialState = {
   isSignedIn: !!getToken(),
   isSignedOut: false,
   sessionMessage: "Welcome to Shoppingify",
-  status: 200
+  status: 200,
 };
 
 export const handleLoading = (status) => ({

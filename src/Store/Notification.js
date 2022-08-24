@@ -2,7 +2,7 @@ const NEW_NOTIFICATION = "store/Notification/NEW_NOTIFICATION";
 
 const initialState = {
   notification: "Welcome to Shoppingify",
-  notificationStatus: 200
+  notificationStatus: 200,
 };
 
 export const updateNotification = (message, status) => ({
@@ -15,11 +15,11 @@ const notificationReducer = (state = initialState, action) => {
     case NEW_NOTIFICATION:
       return {
         notification: action.payload.message,
-        notificationStatus: action.payload.status
+        notificationStatus: action.payload.status,
       };
     default:
-      return state
+      return state;
   }
 };
 
-export default notificationReducer
+export default notificationReducer;

@@ -11,12 +11,12 @@ const useStyles = makeStyles(() => ({
     position: "relative",
   },
   catContainer: {
-    position: 'relative',
-    width: '100%',
+    position: "relative",
+    width: "100%",
     display: "flex",
     flexDirection: "column",
     rowGap: 15,
-  }
+  },
 }));
 
 const CategoryItem = ({ name, list, changeView, control, alert }) => {

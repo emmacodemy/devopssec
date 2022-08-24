@@ -5,7 +5,7 @@ import ItemHeader from "./ItemHeader";
 import CategoryItem from "./CategoryItem";
 import { useSelector, useDispatch } from "react-redux";
 import { useOutletContext } from "react-router-dom";
-import { getAllCategory } from "../../../Store/itemspagereducer/thunkCreators"
+import { getAllCategory } from "../../../Store/itemspagereducer/thunkCreators";
 
 const useStyles = makeStyles((theme) => ({
   itemsPage: {

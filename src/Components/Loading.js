@@ -14,7 +14,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 const Loading = () => {
-  const classes = useStyles()
+  const classes = useStyles();
   return (
     <Box className={classes.loading}>
       {" "}

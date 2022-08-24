@@ -114,7 +114,10 @@ function App() {
             <Route path="history" element={<HistoryPage />}>
               <Route index element={<HistoryCart />} />
               <Route path="/history/cart" element={<HistoryCart />} />
-              <Route path="/history/cart/:id" element={<HistoryCartDetails />} />
+              <Route
+                path="/history/cart/:id"
+                element={<HistoryCartDetails />}
+              />
             </Route>
             <Route path="statistics" element={<StatisticsPage />} />
           </Route>

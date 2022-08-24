@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import NavBar from "../Navbar/NavBar";
 import { useTheme, useMediaQuery, Grid } from "@mui/material";
-import { fetchItems } from "../../Store/itemspagereducer/thunkCreators"
+import { fetchItems } from "../../Store/itemspagereducer/thunkCreators";
 import { makeStyles } from "@mui/styles";
 import { useDispatch } from "react-redux";
 import { Outlet } from "react-router-dom";
@@ -53,17 +53,17 @@ const Main = ({ cart, details, changeView, addItem, signedIn, alert }) => {
 
   const theme = useTheme();
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const [displayMain, setDisplayMain] = useState(true);
 
   const handleAside = (status) => {
-    setDisplayMain(status)
-  }
+    setDisplayMain(status);
+  };
 
   useEffect(() => {
-    dispatch(fetchItems())
-  }, [])
+    dispatch(fetchItems());
+  }, []);
 
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
@@ -79,7 +79,11 @@ const Main = ({ cart, details, changeView, addItem, signedIn, alert }) => {
       }
     >
       <nav className={classes.nav}>
-        <NavBar changeView={changeView} signedIn={signedIn} sidecontrol={handleAside} />
+        <NavBar
+          changeView={changeView}
+          signedIn={signedIn}
+          sidecontrol={handleAside}
+        />
       </nav>
       <main className={classes.main}>
         <Outlet context={handleAside} />

@@ -35,18 +35,26 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ItemName = ({ itemName, unit, changeView, control, id, catName, alert }) => {
+const ItemName = ({
+  itemName,
+  unit,
+  changeView,
+  control,
+  id,
+  catName,
+  alert,
+}) => {
   const classes = useStyles();
 
   const dispatch = useDispatch();
 
-  const sessions = useSelector((state) => state.sessions)
+  const sessions = useSelector((state) => state.sessions);
 
-  const cart = useSelector((state) => state.cart) 
+  const cart = useSelector((state) => state.cart);
 
-  const { isSignedIn } = sessions
+  const { isSignedIn } = sessions;
 
-  const { cartName } = cart
+  const { cartName } = cart;
 
   const viewItemDetails = (id) => {
     dispatch(fetchItemDetails(id));
@@ -55,11 +63,11 @@ const ItemName = ({ itemName, unit, changeView, control, id, catName, alert }) =
   };
 
   const addToCart = async () => {
-    if(!isSignedIn) {
-      alert('Please sign in to add item to cart', 'info')
+    if (!isSignedIn) {
+      alert("Please sign in to add item to cart", "info");
       return;
     }
-    if(cartName.length === 0) {
+    if (cartName.length === 0) {
       await dispatch(createNewCartItem(itemName, catName, unit));
       changeView("cart");
     }
@@ -73,7 +81,7 @@ const ItemName = ({ itemName, unit, changeView, control, id, catName, alert }) =
       >{`${itemName} ${useUnit}`}</Typography>
       <IconButton onClick={() => addToCart()}>
         {" "}
-        <Add style={{transform: "scale(0.7)", fontWeight:"normal"}} />
+        <Add style={{ transform: "scale(0.7)", fontWeight: "normal" }} />
       </IconButton>
     </Box>
   );

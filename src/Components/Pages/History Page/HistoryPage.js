@@ -12,8 +12,8 @@ const useStyles = makeStyles(() => ({
     height: "100%",
     display: "flex",
     flexDirection: "column",
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     rowGap: 50,
   },
 }));
@@ -25,17 +25,19 @@ const HistoryPage = () => {
 
   const { isSignedIn } = session;
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    isSignedIn && dispatch(getCarts())
-  }, [])
+    isSignedIn && dispatch(getCarts());
+  }, []);
   return (
     <Box className={classes.historyPage}>
       {isSignedIn ? (
         <Outlet />
       ) : (
-        <h2 style={{width: "90%", margin:"0 auto", textAlign:"center"}}>Please sign in so view your shopping history </h2>
+        <h2 style={{ width: "90%", margin: "0 auto", textAlign: "center" }}>
+          Please sign in so view your shopping history{" "}
+        </h2>
       )}
     </Box>
   );

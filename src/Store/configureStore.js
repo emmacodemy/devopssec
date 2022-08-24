@@ -3,7 +3,7 @@ import logger from "redux-logger";
 import thunk from "redux-thunk";
 import itemsReducer from "./itemspagereducer/pageReducer";
 import sessionReducer from "./Sessions/sessionReducer";
-import cartReducer from "./cartreducer/cartreducer"
+import cartReducer from "./cartreducer/cartreducer";
 import notificationReducer from "./Notification";
 import historyReducer from "./historyPage/historyreducer";
 import statisticsReducer from "./StatPage/Statisticsreducer";

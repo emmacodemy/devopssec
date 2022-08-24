@@ -11,7 +11,7 @@ const useStyles = makeStyles(() => ({
     rowGap: 5,
     "& .MuiLinearProgress-barColorPrimary": {
       backgroundColor: "#f9a109",
-      borderRadius: "4px"
+      borderRadius: "4px",
     },
   },
 
@@ -23,26 +23,26 @@ const useStyles = makeStyles(() => ({
     rowGap: 5,
     "& .MuiLinearProgress-barColorPrimary": {
       backgroundColor: "#56ccf2",
-      borderRadius: "4px"
+      borderRadius: "4px",
     },
   },
 
   nameCont: {
-    width:"100%",
+    width: "100%",
     position: "relative",
     display: "flex",
     justifyContent: "space-between",
-  }
+  },
 }));
 
 const ProgressBar = ({ value, total, name, color }) => {
   const progress = Math.round((value / total) * 100);
 
-  const classes = useStyles()
+  const classes = useStyles();
   return (
-    <Box className={color === "#f9a109"? classes.root : classes.root2}>
+    <Box className={color === "#f9a109" ? classes.root : classes.root2}>
       <Box className={classes.nameCont}>
-        <h4 style={{textTransform: "capitalize"}}>{name}</h4>
+        <h4 style={{ textTransform: "capitalize" }}>{name}</h4>
         <h4>{`${progress}%`}</h4>
       </Box>
       <LinearProgress

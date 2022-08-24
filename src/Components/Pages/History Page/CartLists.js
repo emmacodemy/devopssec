@@ -20,8 +20,8 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("md")]: {
       flexDirection: "column",
       justifyContent: "center",
-      rowGap: 10
-    }
+      rowGap: 10,
+    },
   },
   titleHeader: {
     position: "relative",
@@ -33,9 +33,9 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 600,
     textTransform: "capitalize",
     [theme.breakpoints.down("md")]: {
-      width: '80%',
+      width: "80%",
       margin: "0 auto",
-    }
+    },
   },
   details: {
     width: "45%",
@@ -43,9 +43,9 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "space-around",
     [theme.breakpoints.down("md")]: {
-      width: '100%',
+      width: "100%",
       margin: "0 auto",
-    }
+    },
   },
   date: {
     color: "#c1c1c4",
@@ -73,7 +73,7 @@ const useStyles = makeStyles((theme) => ({
 const CartLists = ({ title, date, status, id }) => {
   const classes = useStyles();
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const dateFormatter = () => {
     const d = new Date(date);
@@ -95,7 +95,10 @@ const CartLists = ({ title, date, status, id }) => {
         >
           {status}
         </h3>
-        <Link to={`/history/cart/${id}`} onClick={() => dispatch(getCartDetails(id))}>
+        <Link
+          to={`/history/cart/${id}`}
+          onClick={() => dispatch(getCartDetails(id))}
+        >
           <ChevronRight style={{ color: "#f9a109" }} />
         </Link>
       </Box>

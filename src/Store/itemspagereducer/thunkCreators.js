@@ -18,7 +18,6 @@ export const fetchItems = () => async (dispatch) => {
   dispatch(handleLoading(true));
   const allItems = await fetch(`${baseURL}/api/v1/item_category`, {
     headers: { Authorization: token },
-    
   });
   const response = await allItems.json();
   dispatch(getItems(response.data));
@@ -40,7 +39,6 @@ export const deleteItemFromAPI = (category, id) => async (dispatch) => {
     headers: {
       "Content-Type": "application/json",
     },
-
   });
   const response = await itemDetails.json();
   if (response.status === 200) {

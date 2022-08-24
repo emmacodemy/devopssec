@@ -6,18 +6,18 @@ export const theme = createTheme({
     button: {
       textTransform: "none",
       letterSpacing: 0,
-      fontWeight: "bold"
-    }
+      fontWeight: "bold",
+    },
   },
   overrides: {
     MuiBaseInput: {
       input: {
         fontWeight: "normal",
-      }
-    }
+      },
+    },
   },
   palette: {
     primary: { main: "#f9a109" },
-    secondary: { main: "#fff0de" }
-  }
+    secondary: { main: "#fff0de" },
+  },
 });

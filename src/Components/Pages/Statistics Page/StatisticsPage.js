@@ -57,7 +57,10 @@ const StatisticsPage = () => {
   return (
     <Box className={classes.root}>
       {!isSignedIn ? (
-        <h2 style={{width: "90%", margin:"0 auto", textAlign:"center"}}> Please sign in to view your shopping statistics</h2>
+        <h2 style={{ width: "90%", margin: "0 auto", textAlign: "center" }}>
+          {" "}
+          Please sign in to view your shopping statistics
+        </h2>
       ) : (
         <Box className={classes.statPage}>
           {loading ? (

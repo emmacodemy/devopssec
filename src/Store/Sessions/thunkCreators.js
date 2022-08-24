@@ -1,4 +1,9 @@
-import { handleLoading, userSignUp, userSignIn, userSignOut } from "./sessionReducer";
+import {
+  handleLoading,
+  userSignUp,
+  userSignIn,
+  userSignOut,
+} from "./sessionReducer";
 import { clearSession, getToken } from "../utils/session";
 import { updateNotification } from "../Notification";
 
@@ -19,7 +24,7 @@ export const handleSignIn = (username, password) => async (dispatch) => {
   if (token) {
     localStorage.setItem("user-token", JSON.stringify(token));
     localStorage.setItem("session", true);
-    dispatch(userSignIn())
+    dispatch(userSignIn());
     dispatch(updateNotification(response.message, response.status));
   } else {
     dispatch(updateNotification(response.message, response.status));
@@ -58,7 +63,7 @@ export const handleSignOut = () => async (dispatch) => {
     },
   });
   const response = await details.json();
-  dispatch(userSignOut())
+  dispatch(userSignOut());
   dispatch(updateNotification(response.message, response.status));
   clearSession();
   dispatch(handleLoading(false));

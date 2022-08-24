@@ -34,7 +34,12 @@ export const createNewCartItem =
     const userToken = getToken();
     dispatch(loadingStatus(true));
     const cart_list = {
-      new_cart_list: { product_name, product_category, measurement_unit, quantity: 1 },
+      new_cart_list: {
+        product_name,
+        product_category,
+        measurement_unit,
+        quantity: 1,
+      },
     };
     const postItem = await fetch(`${baseURL}/api/v1/cart_lists`, {
       method: "POST",
@@ -93,7 +98,6 @@ const updateQuantity = async (id, quantity) => {
   return postCart;
 };
 
-
 const flattenCart = (cart) => {
   const items = cart.map((value) => value.items);
   const allItems = items.reduce((acc, value) => [...acc, ...value]);
@@ -129,7 +133,7 @@ export const completeCartShopping = (cartItems) => async (dispatch) => {
     dispatch(loadingStatus(true));
     const deleteSelected = editedItems.map((item) => deleteItem(item.id));
     const deleted = await Promise.all(deleteSelected);
-    console.log(deleted)
+    console.log(deleted);
   }
   dispatch(completeCart());
   dispatch(loadingStatus(false));
