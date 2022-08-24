@@ -1,5 +1,6 @@
-input {
+.inputs {
   width: 100%;
+  position: relative;
   padding: 10px;
   border-radius: 12px;
   border: 1px solid black;
@@ -7,7 +8,17 @@ input {
   margin-top: 5px;
 }
 
-textarea {
+.react-datalist-input__textbox {
+  width: 100%;
+  position: relative;
+  padding: 10px;
+  border-radius: 12px;
+  border: 1px solid black;
+  transition: ease-in-out 1s;
+  margin-top: 5px;
+}
+
+.textarea {
   width: 100%;
   padding: 10px;
   border-radius: 12px;
@@ -18,16 +29,22 @@ textarea {
   max-height: 10vh;
 }
 
-textarea:focus {
+.textarea:focus {
   border: 2px solid #f9a109;
   outline: none !important;
   margin-top: 5px;
 }
 
-input:focus {
+.inputs:focus {
   border: 2px solid #f9a109;
   outline: none !important;
 }
+
+.react-datalist-input__textbox:focus {
+  border: 2px solid #f9a109;
+  outline: none !important;
+}
+
 
 .react-datalist-input__listbox {
   width: 100%;

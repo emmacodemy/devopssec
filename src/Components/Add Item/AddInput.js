@@ -33,6 +33,7 @@ const AddInput = ({ name, type, placeholder, handle, id, imgUpload }) => {
             type={type}
             placeholder={placeholder}
             onInput={(e) => handle(e)}
+            className= "textarea"
           />
         ) : (
           <input
@@ -41,13 +42,14 @@ const AddInput = ({ name, type, placeholder, handle, id, imgUpload }) => {
             type={type}
             placeholder={placeholder}
             onInput={(e) => handle(e)}
+            className="inputs"
           />
         )}
         {id === "img" && (
           <Box className={classes.imgCont}>
             <input
               accept="image/*"
-              className="img-input"
+              className="inputs"
               style={{ display: "none" }}
               id="imgop"
               type="file"

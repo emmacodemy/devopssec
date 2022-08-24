@@ -50,7 +50,7 @@ const HistoryCart = () => {
         <Box className={classes.listCont}>
           <Box className={classes.list}>
             {Object.keys(history).length === 0 ? (
-              <h1>No Completed cart, Please shop with us</h1>
+              <h1 style={{width: "90%", margin:"0 auto", textAlign: "center"}}>No Completed cart, Please shop with us</h1>
             ) : (
               Object.keys(history).map((key) => (
                 <DatedList key={key} date={key} cartList={history[key]} />

@@ -147,7 +147,7 @@ const NavBar = ({ changeView, signedIn, sidecontrol }) => {
             aria-hidden="false"
             title="shopping-cart"
           >
-            <ShoppingCart style={{ color: "#fff" }} />
+            <ShoppingCart style={{ color: "#fff", transform: "scale(0.7)" }} />
           </IconButton>
         </Box>
         <Box>

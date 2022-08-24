@@ -26,17 +26,24 @@ const useStyles = makeStyles(() => ({
   input: {
     width: "100%",
     position: "relative",
+    outline: "none",
+    border: "1px solid #000",
     padding: "12px",
     fontSize: 16,
     color: "#000",
+    borderRadius: 12,
+    "&:focus": {
+      border: "2px solid #f9a109",
+      outline: "none !important",
+    }
   },
   submit: {
     position: "absolute",
     right: 1,
-    top: 6,
+    top: 0,
     bottom: 0,
     fontWeight: 700,
-    padding: "9px 23px 9px 23px",
+    padding: "12px 23px 12px 23px",
     borderRadius: 13,
     color: "#fff",
     backgroundColor: "#f9a109",

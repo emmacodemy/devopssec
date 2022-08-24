@@ -35,7 +35,7 @@ const HistoryPage = () => {
       {isSignedIn ? (
         <Outlet />
       ) : (
-        <h1>Please sign in so view your shopping history </h1>
+        <h2 style={{width: "90%", margin:"0 auto", textAlign:"center"}}>Please sign in so view your shopping history </h2>
       )}
     </Box>
   );

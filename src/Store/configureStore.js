@@ -6,6 +6,7 @@ import sessionReducer from "./Sessions/sessionReducer";
 import cartReducer from "./cartreducer/cartreducer"
 import notificationReducer from "./Notification";
 import historyReducer from "./historyPage/historyreducer";
+import statisticsReducer from "./StatPage/Statisticsreducer";
 
 const reducer = combineReducers({
   sessions: sessionReducer,
@@ -13,6 +14,7 @@ const reducer = combineReducers({
   cart: cartReducer,
   notification: notificationReducer,
   history: historyReducer,
+  statistics: statisticsReducer,
 });
 
 const store = createStore(reducer, applyMiddleware(thunk, logger));
