@@ -5,6 +5,7 @@ const initialState = {
   itemStats: [],
   categoryStats: [],
   loading: false,
+  graphData: [],
   totalCount: 0,
 };
 
@@ -13,6 +14,30 @@ const sortStatistics = (object) => {
     .sort((a, b) => object[b] - object[a])
     .map((key) => ({ name: key, value: object[key] }));
   return sortedArray.slice(0, 3);
+};
+
+const rechartData = (object) => {
+  const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+  const array = months.map((value) => {
+    if (object[value] === undefined) {
+      object[value] = 0;
+    }
+    return { month: value, itemCount: object[value] };
+  });
+  return array;
 };
 
 export const getStatistics = (data) => ({
@@ -37,6 +62,7 @@ const statisticsReducer = (state = initialState, action) => {
         ...state,
         itemStats: sortStatistics(action.payload.items),
         categoryStats: sortStatistics(action.payload.category),
+        graphData: rechartData(action.payload.created_at),
         totalCount: action.payload.total,
       };
     default:
