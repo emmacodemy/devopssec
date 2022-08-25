@@ -121,7 +121,7 @@ const AddItem = ({ changeView, alert }) => {
       alert("Item name or category cannot be empty", "error");
       return;
     }
-    await dispatch(addNewItem(name.toLowerCase(), image, note, unit, value.toUpperCase()));
+    await dispatch(addNewItem(name.toLowerCase(), image, note, unit, value));
     setItemDetails({ name: "", note: "", unit: "" });
     setImage("");
     changeView("cart");
