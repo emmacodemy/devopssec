@@ -11,9 +11,9 @@
 
 - This application was built using Ruby and rails on the back end, JavaScript and React on the front end.
 
-- This project was built to complete one ofthe challenges on the [dev challenges](https://devchallenges.io/) website.
+- This project was built to complete one of the challenges on the [dev challenges](https://devchallenges.io/) website.
 
-- You can check for the business requirements forthis project [here](https://devchallenges.io/challenges/mGd5VpbO4JnzU6I9l96x).
+- You can check for the business requirements for this project [here](https://devchallenges.io/challenges/mGd5VpbO4JnzU6I9l96x).
 
 ![Item Page](https://user-images.githubusercontent.com/73607512/186982784-68f9ae57-0bed-47f8-9910-32a69ff4b414.PNG)
 ![Statistics Page](https://user-images.githubusercontent.com/73607512/186985663-61b2ce83-6227-4e37-86c2-da0044205b55.PNG)
