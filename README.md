@@ -1,70 +1,86 @@
-# Getting Started with Create React App
+![](https://img.shields.io/badge/Microverse-blueviolet)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Shoppingify
 
-## Available Scripts
+## About
 
-In the project directory, you can run:
+- Shoppingify is a simple web app that enables users take their shopping list everywhere they go. 
+- Users can add items to their list amidst many other things.
+- Users are also allowed to add new items, if they cant find ay of their favorite items. 
+- Users can also view all the lists created and view statistics to check for your favorite items and category.
 
-### `npm start`
+- This application was built using Ruby and rails on the back end, JavaScript and React on the front end.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- This project was built to complete one ofthe challenges on the [dev challenges](https://devchallenges.io/) website.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- You can check for the business requirements forthis project [here](https://devchallenges.io/challenges/mGd5VpbO4JnzU6I9l96x).
 
-### `npm test`
+![Item Page](https://user-images.githubusercontent.com/73607512/186982784-68f9ae57-0bed-47f8-9910-32a69ff4b414.PNG)
+![Statistics Page](https://user-images.githubusercontent.com/73607512/186985663-61b2ce83-6227-4e37-86c2-da0044205b55.PNG)
+![empty cart Page](https://user-images.githubusercontent.com/73607512/186982827-f6e7430c-6a11-4aa4-b7b7-44e4d3ff0c62.PNG)![add new item](https://user-images.githubusercontent.com/73607512/186986628-bd7df946-16fc-4603-aa76-f454b15fc88c.PNG) ![cart page](https://user-images.githubusercontent.com/73607512/186986911-bf735f95-00f0-4ec9-bdf5-63456b2c6b2e.PNG)
+![History Page](https://user-images.githubusercontent.com/73607512/186982817-e9ad72ae-054f-4632-92ca-9ee38283f76e.PNG)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Live Demo
+[👉 Please check](https://steve-shoppingify-app.netlify.app/)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Back-end Repo
+[👉 Here](https://github.com/mckent05/shoppingify)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Kanban Board 
+[Link](https://github.com/mckent05/shoppingfy/projects/1)
+  
+## Built With
 
-### `npm run eject`
+- React js
+- Redux
+- Bootstrap 
+- Javascript
+- CSS
+- JSX
+- React data list
+- Ruby
+- Rails
+- Rechart
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Getting Started
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+To get a local copy up and running follow these simple example steps
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- From your terminal enter in sequence
+  - `git clone https://github.com/mckent05/shoppingify-frontend.git`
+- Enter into the project directory using
+  - `cd shoppingify-frontend`
+- Run the npm in your terminal using
+  - `npm start`
+ - Wait for he project to open on `localhost:3000` or `localhost:30001` if the backend server is aleady running
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
+## Coders
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+👤 **Akinlade Tope**
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- GitHub: [@mckent05](https://github.com/mckent05)
+- LinkedIn: [Akinlade Temitope](https://www.linkedin.com/in/akinladetemitope/)
 
-### Code Splitting
+## 🤝 Contributing
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Contributions, issues, and feature requests are welcome!![snap1]
 
-### Analyzing the Bundle Size
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Feel free to check the [issues page](../../issues/).
 
-### Making a Progressive Web App
+## Show your support
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Give a ⭐️ if you like this project!!
 
-### Advanced Configuration
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## Acknowledgments 
+- [Thu Nghiem](https://devchallenges.io/)
+- [Thu Nghiem](https://www.youtube.com/channel/UCmSmLukBF--YrKZ2g4akYAQ)
 
-### Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## License
 
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This project is [MIT](./MIT.md) licensed.
