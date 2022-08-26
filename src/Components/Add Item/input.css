@@ -78,7 +78,7 @@
   cursor: pointer;
   margin: 0;
   padding: 5px;
-  text-transform: "capitalize";
+  text-transform: capitalize;
 }
 
 .react-datalist-input__listbox-option:hover {

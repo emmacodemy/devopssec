@@ -6,7 +6,6 @@ const DELETE_ITEM = "store/itemsreducer/DELETE_ITEM";
 const ADD_NEW_ITEM = "store/itemsreducer/ADD_NEW_ITEM";
 const FETCH_CATEGORY = "store/itemsreducer/FETCH_CATEGORY";
 const ADD_NEW_CATEGORY = "store/itemsreducer/ADD_NEW_CATEGORY";
-const SEARCH_ITEM = "store/itemsreducer/SEARCH_ITEM";
 
 const initialState = {
   isLoading: false,
@@ -62,11 +61,6 @@ export const fetchCategories = (categories) => ({
 export const addNewCategory = (categoryName) => ({
   type: ADD_NEW_CATEGORY,
   payload: categoryName,
-});
-
-export const searchItem = (itemName) => ({
-  type: SEARCH_ITEM,
-  payload: itemName,
 });
 
 const itemsReducer = (state = initialState, action) => {
@@ -156,24 +150,6 @@ const itemsReducer = (state = initialState, action) => {
       }
       return state;
 
-    case SEARCH_ITEM:
-      const g = state.list.forEach((item) => {
-        const y = item.items.filter(
-          (el) => el.name.toLowerCase() === action.payload.toLowerCase()
-        );
-        if (y.length >= 1) {
-          console.log(item);
-        }
-      });
-      console.log(g);
-      return {
-        ...state,
-        list: state.list.filter((item) =>
-          item.items.some(
-            (el) => el.name.toLowerCase() === action.payload.toLowerCase()
-          )
-        ),
-      };
     default:
       return state;
   }
