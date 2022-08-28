@@ -3,7 +3,6 @@ import { Box, IconButton, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { Search } from "@mui/icons-material";
 
-
 const useStyles = makeStyles((theme) => ({
   header: {
     width: "90%",
@@ -77,8 +76,8 @@ const ItemHeader = ({ handleSearch }) => {
   const classes = useStyles();
 
   const handleSearchItem = (e) => {
-    handleSearch(e.target.value)
-  }
+    handleSearch(e.target.value);
+  };
 
   return (
     <Box className={classes.header}>
