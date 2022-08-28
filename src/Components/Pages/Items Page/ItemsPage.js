@@ -66,7 +66,7 @@ const ItemsPage = ({ changeView, alert }) => {
 
   const handleSearch = (itemName) => {
     const filteredList = list.filter((item) =>
-      item.items.some((el) => el.name.toLowerCase().includes(itemName))
+      item.items.some((el) => el.name.toLowerCase().includes(itemName.toLowerCase()))
     );
     if (itemName === "") {
       setItemList(list);
