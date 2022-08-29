@@ -45,10 +45,11 @@ export const handleSignUp = (username, email, password) => async (dispatch) => {
   const serverResponse = await postDetails.json();
   const userToken = postDetails.headers.get("Authorization");
   if (userToken) {
-    dispatch(userSignUp(serverResponse.message, true, serverResponse.status));
+    dispatch(userSignUp(true));
   } else {
-    dispatch(userSignUp(serverResponse.message, false, serverResponse.status));
+    dispatch(userSignUp(false));
   }
+  dispatch(updateNotification(serverResponse.message, serverResponse.status))
   dispatch(handleLoading(false));
 };
 
