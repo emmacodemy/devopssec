@@ -9,6 +9,7 @@ import Title from "./Title";
 import { Grid, Box, Typography } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { handleSignIn } from "../../Store/Sessions/thunkCreators";
+import DemoAccount from "./DemoAccount";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -72,6 +73,12 @@ const useStyles = makeStyles((theme) => ({
       fontWeight: 600,
       fontSize: 12,
     },
+    account: {
+      width: "100%",
+      display: "flex",
+      flexDirection: "column",
+      position: "relative",
+    },
   },
 }));
 
@@ -108,11 +115,14 @@ const LoginPage = ({ loading, signedIn }) => {
     <Grid container className={classes.root}>
       <SideBanner />
       <Box className={classes.formCont}>
-        <Navigation
-          text="Dont have an account yet?"
-          push="register"
-          btnText="Create an account"
-        />
+        <Box className={classes.account}>
+          <Navigation
+            text="Dont have an account yet?"
+            push="register"
+            btnText="Create an account"
+          />
+          <DemoAccount signedIn={signedIn} loading={loading} />
+        </Box>
         <form onSubmit={signIn} className={classes.form}>
           <Title text="Welcome!" />
           <Grid>

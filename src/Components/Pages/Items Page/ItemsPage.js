@@ -3,9 +3,8 @@ import { Box, CircularProgress } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import ItemHeader from "./ItemHeader";
 import CategoryItem from "./CategoryItem";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { useOutletContext } from "react-router-dom";
-import { getAllCategory } from "../../../Store/itemspagereducer/thunkCreators";
 
 const useStyles = makeStyles((theme) => ({
   itemsPage: {
@@ -62,8 +61,6 @@ const ItemsPage = ({ changeView, alert }) => {
 
   const [itemList, setItemList] = useState(list);
 
-  const dispatch = useDispatch();
-
   const handleSearch = (itemName) => {
     const filteredList = list.filter((item) =>
       item.items.some((el) =>
@@ -80,7 +77,6 @@ const ItemsPage = ({ changeView, alert }) => {
   const handleAside = useOutletContext();
 
   useEffect(() => {
-    dispatch(getAllCategory());
     setItemList(list);
   }, [list]);
 

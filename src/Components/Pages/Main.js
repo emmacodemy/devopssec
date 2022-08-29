@@ -6,6 +6,7 @@ import { makeStyles } from "@mui/styles";
 import { useDispatch } from "react-redux";
 import { Outlet } from "react-router-dom";
 import SideBar from "../SideBar";
+import { getAllCategory } from "../../Store/itemspagereducer/thunkCreators";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -63,6 +64,7 @@ const Main = ({ cart, details, changeView, addItem, signedIn, alert }) => {
 
   useEffect(() => {
     dispatch(fetchItems());
+    dispatch(getAllCategory());
   }, []);
 
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
