@@ -7,7 +7,36 @@
   cursor: pointer;
 }
 
-.input {
-  max-width: 15px;
-  max-height: 15px;
+/* .input {
+  max-width: 28px;
+  max-height: 28px;
+  border: 2px solid #f9a109;
+} */
+
+input[type="checkbox"] {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  -o-appearance: none;
+  outline: none;
+  content: none;
+}
+
+input[type="checkbox"]:before {
+  content: "✓";
+  font-size: 15px;
+  color: transparent !important;
+  background: transparent;
+  display: block;
+  width: 17px;
+  height: 17px;
+  font-weight: 800;
+  max-width: 18px;
+  max-height: 18px;
+  border: 2px solid #f9a109;
+  border-radius: 4px;
+}
+
+input[type="checkbox"]:checked:before {
+  color: #f9a109 !important;
+  text-align: center;
 }

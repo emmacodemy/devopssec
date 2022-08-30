@@ -151,7 +151,7 @@ const AddItem = ({ changeView, alert }) => {
               ))}
               <DatalistInput
                 label="Category"
-                placeholder="Select or choose a category"
+                placeholder="Select or add a new category"
                 items={items}
                 onSelect={onSelect}
                 value={value}

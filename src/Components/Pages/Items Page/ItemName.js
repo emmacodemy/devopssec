@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
       fontFamily: "QuickSand, sans-serif",
       fontSize: 16,
       marginLeft: 10,
-      fontWeight: "bold",
+      fontWeight: 600,
       textTransform: "capitalize",
       color: "#000",
       textAlign: "left",
