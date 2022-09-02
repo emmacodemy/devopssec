@@ -13,7 +13,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const CartList = ({ list, category }) => {
+const CartList = ({ list, category, alert }) => {
   const classes = useStyles();
   return (
     <Box className={classes.listCont}>
@@ -26,6 +26,7 @@ const CartList = ({ list, category }) => {
           catName={category}
           quantity={item.quantity}
           selected={item.selected}
+          alert={alert}
         />
       ))}
     </Box>

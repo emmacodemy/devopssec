@@ -27,7 +27,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const CartCategoryItem = ({ catName, list }) => {
+const CartCategoryItem = ({ catName, list, alert }) => {
   const classes = useStyles();
 
   return (
@@ -35,7 +35,7 @@ const CartCategoryItem = ({ catName, list }) => {
       {list.length > 0 && (
         <Box className={classes.catItems}>
           <CategoryName name={catName} />
-          <CartList list={list} category={catName} />
+          <CartList list={list} category={catName} alert={alert} />
         </Box>
       )}
     </Box>

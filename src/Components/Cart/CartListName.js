@@ -33,7 +33,15 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const CartListName = ({ name, quantity, unit, catName, id, selected }) => {
+const CartListName = ({
+  name,
+  quantity,
+  unit,
+  catName,
+  id,
+  selected,
+  alert,
+}) => {
   const classes = useStyles();
 
   const dispatch = useDispatch();
@@ -42,6 +50,7 @@ const CartListName = ({ name, quantity, unit, catName, id, selected }) => {
 
   const handleInput = (e) => {
     dispatch(editItem(catName, id, e.target.checked));
+    alert(`${name} will be removed from shopping List`, "info");
   };
 
   const { editingState } = cart;

@@ -33,7 +33,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const CartPage = ({ cartItems, name }) => {
+const CartPage = ({ cartItems, name, alert }) => {
   const classes = useStyles();
 
   const dispatch = useDispatch();
@@ -56,6 +56,7 @@ const CartPage = ({ cartItems, name }) => {
             catName={el.category}
             list={el.items}
             key={el.category}
+            alert={alert}
           />
         ))}
       </Box>

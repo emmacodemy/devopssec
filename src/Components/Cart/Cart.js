@@ -39,18 +39,12 @@ const Cart = ({ changeSideView, alert }) => {
 
   const { cartItems, isLoading, cartName, cartId } = cart;
 
-  // if(cartItems.length > 0) {
-  //   const tope = cartItems.map((value) => value.items)
-  //   const ife = tope.reduce((acc, value) => [...acc, ...value])
-  //   console.log(ife)
-  // }
-
   return (
     <Box className={classes.root}>
       <Box className={classes.mainCart}>
         <Add changeView={changeSideView} />
         {cartItems.length > 0 ? (
-          <CartPage cartItems={cartItems} name={cartName} />
+          <CartPage cartItems={cartItems} name={cartName} alert={alert} />
         ) : (
           <NoItem />
         )}
