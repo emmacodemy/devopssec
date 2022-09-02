@@ -50,7 +50,9 @@ const CartListName = ({
 
   const handleInput = (e) => {
     dispatch(editItem(catName, id, e.target.checked));
-    alert(`${name} will be removed from shopping List`, "info");
+    if (e.target.checked) {
+      alert(`${name} will be removed from shopping List`, "success");
+    }
   };
 
   const { editingState } = cart;
