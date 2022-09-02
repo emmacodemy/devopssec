@@ -39,10 +39,10 @@
 - Javascript
 - CSS
 - JSX
-- React data list
+- React datalist-input
 - Ruby
 - Rails
-- Rechart
+- Recharts
 
 ## Getting Started
 
