@@ -6,7 +6,6 @@ import List from "./List";
 const useStyles = makeStyles(() => ({
   container: {
     width: "90%",
-    height: "100%",
     margin: "0 auto",
     position: "relative",
   },

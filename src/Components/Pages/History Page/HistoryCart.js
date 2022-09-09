@@ -28,8 +28,9 @@ const useStyles = makeStyles(() => ({
   list: {
     position: "relative",
     display: "flex",
+    flexDirection: "column",
+    rowGap: 25,
     alignItems: "center",
-    justifyContent: "center",
     height: "100%",
     weight: "100%",
   },

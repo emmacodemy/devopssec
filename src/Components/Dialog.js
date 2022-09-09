@@ -5,17 +5,6 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import { makeStyles } from "@mui/styles";
-// import Slide from '@mui/material/Slide';
-// import { TransitionProps } from '@mui/material/transitions';
-
-// const Transition = React.forwardRef(function Transition(
-//   props: TransitionProps & {
-//     children: React.ReactElement<any, any>;
-//   },
-//   ref: React.Ref<unknown>,
-// ) {
-//   return <Slide direction="up" ref={ref} {...props} />;
-// });
 
 const useStyles = makeStyles(() => ({
   cancelBtn: {

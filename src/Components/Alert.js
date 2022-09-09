@@ -21,7 +21,11 @@ const AlertNotification = ({ message, display, severity }) => {
   return (
     <Box className={classes.alertMessage}>
       <Alert severity={severity} onClose={() => display()}>
-        <AlertTitle>{severity === "success" ? "Success" : "Error"}</AlertTitle>
+        <AlertTitle>
+          {severity === "success" && "Success"}
+          {severity === "info" && "Info"}
+          {severity === "error" && "Error"}
+        </AlertTitle>
         {message}
       </Alert>
     </Box>
