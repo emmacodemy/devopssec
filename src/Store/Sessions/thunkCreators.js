@@ -7,7 +7,7 @@ import {
 import { clearSession, getToken } from "../utils/session";
 import { updateNotification } from "../Notification";
 
-const baseURL = "https://steve95-shoppingify.herokuapp.com/";
+const baseURL = "https://shoppingify-backend.onrender.com";
 
 export const handleSignIn = (username, password) => async (dispatch) => {
   const userDetails = { user: { username, password } };
@@ -49,7 +49,7 @@ export const handleSignUp = (username, email, password) => async (dispatch) => {
   } else {
     dispatch(userSignUp(false));
   }
-  dispatch(updateNotification(serverResponse.message, serverResponse.status))
+  dispatch(updateNotification(serverResponse.message, serverResponse.status));
   dispatch(handleLoading(false));
 };
 

@@ -1,7 +1,7 @@
 import { fetchCarts, loading, showCartDetails } from "./historyreducer";
 import { getToken } from "../utils/session";
 
-const baseURL = "https://steve95-shoppingify.herokuapp.com/";
+const baseURL = "https://shoppingify-backend.onrender.com";
 
 const reducerFunction = (data) => {
   const steven = data.reduce((acc, value) => {
@@ -50,7 +50,7 @@ export const getCartDetails = (id) => async (dispatch) => {
     headers: { Authorization: token },
   });
   const response = await cartDetails.json();
-  if(response.status === 200) {
+  if (response.status === 200) {
     dispatch(showCartDetails(response.data));
   }
   dispatch(loading(false));
