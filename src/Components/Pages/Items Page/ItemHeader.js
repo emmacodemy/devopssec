@@ -83,8 +83,7 @@ const ItemHeader = ({ handleSearch }) => {
     <Box className={classes.header}>
       <Box className={classes.titleCont}>
         <Typography>
-          <span className={classes.title}>Shoppingify</span> allows you take
-          your shopping list wherever you go
+          <span className={classes.title}>Naveed ask change</span>
         </Typography>
       </Box>
       <Box className={classes.searchBar}>
