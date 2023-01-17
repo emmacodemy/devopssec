@@ -83,7 +83,7 @@ const ItemHeader = ({ handleSearch }) => {
     <Box className={classes.header}>
       <Box className={classes.titleCont}>
         <Typography>
-          <span className={classes.title}>Naveed ask change
+          <span className={classes.title}>Naveed ask change</span>
         </Typography>
       </Box>
       <Box className={classes.searchBar}>
